@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="5" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseListagem.screen#/"/>
+    <overrides>
+      <widgets ref="4">
+        <items ref="@items.0" link="CadastroFuncionario.screen"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Label" id="6" x="133" y="200" text="Filtrar" measuredWidth="54" measuredHeight="31">
+    <font size="13" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Table" id="7" x="130" y="352" width="769" height="215" text="Nome,CPF, Cargo, Ação&#xA;Peter José da Silva,050.444.567-69,Gerente, {edit}{find}{delete}&#xA;Maria Aparecida Cavalcante,012.223.456-90,Funcionário,{edit}{find}{delete}&#xA;José Edson Lima,015.343.322-80,Funcionário,{edit}{find}{delete}" measuredWidth="769" measuredHeight="215" alternative="#eeeeee">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="8" x="783" y="374" text="{edit}" measuredWidth="19" measuredHeight="24" link="EditarFuncionario.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="9" x="800" y="374" text="{find}" measuredWidth="19" measuredHeight="24">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="10" x="815" y="374" text="{delete}" measuredWidth="19" measuredHeight="24">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="11" x="130" y="254" text="Nome&#xD;&#xA;CPF&#xD;&#xA;Cargo" measuredWidth="57" measuredHeight="65">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="12" x="202" y="254" width="321" measuredWidth="321" measuredHeight="23">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

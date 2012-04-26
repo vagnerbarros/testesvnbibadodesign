@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="entidades.Endereco" table="endereco">
+	
+	  <id name="id_pessoa" type="long" column="id_pessoa" >
+	   <generator class="assigned"/>
+	  </id>
+	  
+	  <property name="rotulo" type="string" column="rotulo" length="50"/>
+
+	  <property name="rua" type="string" column="rua" length="100"/>
+	  
+	  <property name="numero" type="string" column="numero" length="5"/>
+	  
+	  <property name="bairro" type="string" column="bairro" length="50"/>
+	  
+	  <property name="complemento" type="string" column="complemento" length="50"/>
+	  
+	  <property name="cep" type="string" column="cep" length="10"/>
+	  
+	  <property name="cidade" type="string" column="cidade" length="50"/>
+	  
+	  <property name="estado" type="string" column="estado" length="2"/>
+	  
+	  <property name="ativo" type="string" column="ativo" length="1"/>
+	  
+   </class>
+
+</hibernate-mapping>

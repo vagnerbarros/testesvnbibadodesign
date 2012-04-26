@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../Base.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="2" x="40" y="80" width="944" height="624" text="Venda" measuredWidth="944" measuredHeight="624"/>
+  <widgets xsi:type="model:Group" id="14" x="112" y="131" width="816" height="173" text="Cliente" measuredWidth="816" measuredHeight="173">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="3" x="152" y="184" text="CPF/CNPJ:" measuredWidth="62" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="4" x="256" y="184" width="208" measuredWidth="208" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="7" x="481" y="184" text="{find}" measuredWidth="19" measuredHeight="24" link="BuscarClienteVenda.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="15" x="152" y="232" text="Nome do Cliente:" measuredWidth="98" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="17" x="256" y="232" width="624" measuredWidth="624" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Group" id="18" x="112" y="342" width="817" height="186" text="Serviço" measuredWidth="817" measuredHeight="186">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="8" x="152" y="384" text="Nome do Serviço:" measuredWidth="99" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="10" x="256" y="384" width="208" measuredWidth="208" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="11" x="481" y="384" text="{find}" measuredWidth="19" measuredHeight="24" link="BuscarServicoVenda.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Group" id="23" x="552" y="375" width="328" height="120" text="Contrato" measuredWidth="328" measuredHeight="120">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Spinner" id="21" x="808" y="423" width="41" text="3" measuredWidth="41" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="22" x="768" y="423" text="Meses:" measuredWidth="41" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="13" x="576" y="423" text="Valor:" measuredWidth="35" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="19" x="625" y="423" width="89" measuredWidth="89" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="24" x="787" y="568" width="93" height="41" text="OK" measuredWidth="93" measuredHeight="41">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="25" x="676" y="568" width="93" height="41" text="Cancelar" measuredWidth="93" measuredHeight="41" link="../Base.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Panel" id="1" width="801" height="337" measuredWidth="801" measuredHeight="337" border="none"/>
+  <widgets xsi:type="model:Table" id="2" x="16" y="128" width="759" height="182" text="Nome,CPF, Situação, Ação&#xA;Peter José da Silva,050.444.567-69,Regular, {edit}{find}{delete}&#xA;Maria Aparecida Cavalcante,012.223.456-90,Inadimplente,{edit}{find}{delete}&#xA;José Edson Lima,015.343.322-80,Regular,{edit}{find}{delete}" measuredWidth="759" measuredHeight="182" alternative="#eeeeee">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="3" x="16" y="24" text="Nome&#xD;&#xA;Endereço&#xD;&#xA;Telefone&#xD;&#xA;CPF" measuredWidth="57" measuredHeight="86">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="4" x="88" y="24" width="321" measuredWidth="321" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="5" x="662" y="149" text="{edit}" measuredWidth="19" measuredHeight="24" link="EditarClientePF.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="6" x="679" y="149" text="{find}" measuredWidth="19" measuredHeight="24">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="7" x="694" y="149" text="{delete}" measuredWidth="19" measuredHeight="24">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseListagem.screen#/"/>
+    <overrides>
+      <widgets ref="4">
+        <items ref="@items.0" link="CadastroEmpresa.screen"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Label" id="2" x="108" y="184" text="Filtrar" measuredWidth="54" measuredHeight="31">
+    <font size="13" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Table" id="3" x="108" y="293" width="790" height="286" text="Nome da Empresa,Data de Cadastro, Ação&#xA;Tim,10/02/11,{edit}{find}{delete}&#xA;Oi,07/08/10,{edit}{find}{delete}&#xA;Claro,05/06/09,{edit}{find}{delete}&#xA;Nextel,08/07/08,{edit}{find}{delete}&#xA;Vivo,05/08/07,{edit}{find}{delete}&#xA;Embratel,01/11/06,{edit}{find}{delete}" measuredWidth="790" measuredHeight="286" alternative="#eeeeee">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="4" x="729" y="314" text="{edit}" measuredWidth="19" measuredHeight="24" link="EditarEmpresa.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="5" x="746" y="314" text="{find}" measuredWidth="19" measuredHeight="24">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="6" x="761" y="314" text="{delete}" measuredWidth="19" measuredHeight="24">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="7" x="108" y="240" text="Nome:" measuredWidth="41" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="8" x="148" y="240" width="276" measuredWidth="276" measuredHeight="23">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

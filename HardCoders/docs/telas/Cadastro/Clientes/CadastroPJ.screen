@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" x="10" y="10" measuredWidth="1023" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseCadastro.screen#/"/>
+    <overrides>
+      <widgets ref="3">
+        <items ref="@items.1" link="ListagemPJ.screen"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="3" x="155" y="182" measuredWidth="20" measuredHeight="23" link="CadastroPF.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="4" x="264" y="182" measuredWidth="20" measuredHeight="23" selected="true">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="5" x="181" y="182" text="Pessoa Física" measuredWidth="73" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="6" x="283" y="182" text="Pessoa Jurídica" measuredWidth="84" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="9" x="120" y="214" width="769" measuredWidth="769" measuredHeight="353" dimmed="true">
+    <screen xsi:type="model:Screen" href="FormCadastroPJ.screen#/"/>
+    <overrides>
+      <widgets ref="1" y="-2" width="769"/>
+      <widgets ref="30" x="39" y="9" width="54"/>
+      <widgets ref="31" x="101" y="9" width="306"/>
+      <widgets ref="32" x="506" y="9" width="233"/>
+      <widgets ref="33" x="200" y="262" width="206"/>
+      <widgets ref="34" x="663" y="301" width="74"/>
+      <widgets ref="35" x="561" y="301" width="77"/>
+      <widgets ref="36" x="437" y="13" width="38"/>
+      <widgets ref="37" x="100" y="261" width="71"/>
+      <widgets ref="38" x="437" y="257" width="44"/>
+      <widgets ref="39" x="506" y="257" width="233"/>
+      <widgets ref="41" x="35" y="54" width="704"/>
+      <widgets ref="42" x="39" y="109" width="59"/>
+      <widgets ref="43" x="101" y="109" width="306"/>
+      <widgets ref="44" x="437" y="109" width="23"/>
+      <widgets ref="45" x="506" y="109" width="55"/>
+      <widgets ref="46" x="39" y="152" width="54"/>
+      <widgets ref="47" x="101" y="152" width="306"/>
+      <widgets ref="48" x="437" y="152" width="54"/>
+      <widgets ref="49" x="506" y="152" width="197"/>
+      <widgets ref="50" x="39" y="192" width="54"/>
+      <widgets ref="51" x="101" y="192" width="306"/>
+      <widgets ref="52" x="437" y="192" width="54"/>
+      <widgets ref="53" x="506" y="192" width="60"/>
+      <widgets ref="54" x="35" y="257" width="57"/>
+      <widgets ref="55" x="101" y="70" width="100"/>
+      <widgets ref="40" x="39" y="70" width="60"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

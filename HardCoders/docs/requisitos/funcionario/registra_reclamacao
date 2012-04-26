@@ -1,0 +1,6 @@
+registra uma reclamação de um cliente
+sobre um serviço da empresa selecionada
+inicialmente.
+
+Na primeira versão deve permitir que uma reclamação possa relacionar somente
+um serviço e que este serviço esteja cadastrado.

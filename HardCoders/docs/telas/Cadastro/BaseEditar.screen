@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="BaseListagem.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="2" x="105" y="171" width="800" height="417" text="Editar" measuredWidth="800" measuredHeight="417"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

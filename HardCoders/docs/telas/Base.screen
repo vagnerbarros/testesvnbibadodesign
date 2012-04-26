@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Window" id="1" x="16" y="8" width="1024" height="762" measuredWidth="1024" measuredHeight="762"/>
+  <widgets xsi:type="model:Menu" id="3" x="16" y="27" width="1024" text="&amp;Cadastros,&amp;Contratos,&amp;Vendas,&amp;Reclamações" measuredWidth="1024" measuredHeight="27">
+    <items link="Cadastro/CliqueMenuCadastro.screen" x="5" y="0" width="62" height="27" text="&amp;Cadastros"/>
+    <items link="Contratos/CliqueMenuContrato.screen" x="67" y="0" width="62" height="27" text="&amp;Contratos"/>
+    <items link="Vendas/CliqueMenuVendas.screen" x="129" y="0" width="48" height="27" text="&amp;Vendas"/>
+    <items link="Reclamacao/CliqueMenuReclamacao.screen" x="177" y="0" width="79" height="27" text="&amp;Reclamações"/>
+  </widgets>
+  <widgets xsi:type="model:Image" id="11" x="26" y="80" width="1004" height="672" measuredWidth="1004" measuredHeight="672" src="../../src/img/logotipoHard.png"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

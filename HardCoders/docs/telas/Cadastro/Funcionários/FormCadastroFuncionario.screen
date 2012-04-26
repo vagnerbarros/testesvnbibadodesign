@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Panel" id="2" width="657" height="305" measuredWidth="657" measuredHeight="305" border="none"/>
+  <widgets xsi:type="model:Label" id="3" x="26" y="19" width="72" text="Nome:" measuredWidth="72" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="4" x="82" y="19" width="542" measuredWidth="542" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="5" x="26" y="59" width="51" text="CPF:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="6" x="82" y="59" width="215" measuredWidth="215" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="7" x="318" y="59" width="51" text="Endereço:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="8" x="380" y="59" width="240" measuredWidth="240" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="9" x="26" y="99" width="51" text="Bairro:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="10" x="82" y="99" width="215" measuredWidth="215" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="11" x="318" y="143" width="51" text="Estado:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="12" x="318" y="99" width="51" text="CEP:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="13" x="380" y="99" width="240" measuredWidth="240" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="14" x="318" y="191" width="51" text="Cargo:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="15" x="550" y="255" text="Cadastrar" measuredWidth="70" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="16" x="464" y="255" width="73" text="Limpar" measuredWidth="73" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="17" x="380" y="143" width="49" text="PE" measuredWidth="49" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="18" x="380" y="191" text="Funcionário&#xD;&#xA;Gerente" measuredWidth="87" measuredHeight="44">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="19" x="26" y="191" text="Login:" measuredWidth="38" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="20" x="26" y="256" text="Senha:" measuredWidth="40" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="21" x="152" y="143" width="145" measuredWidth="145" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="22" x="82" y="191" width="215" measuredWidth="215" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="23" x="82" y="248" width="215" measuredWidth="215" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="24" x="26" y="141" text="Telefone:" measuredWidth="54" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="25" x="82" y="141" text="Celular&#xD;&#xA;Residencial" measuredWidth="67" measuredHeight="44">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

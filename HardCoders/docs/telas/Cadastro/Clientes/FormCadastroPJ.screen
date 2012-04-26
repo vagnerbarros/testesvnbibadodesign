@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Panel" id="1" width="705" height="353" measuredWidth="705" measuredHeight="353" border="none"/>
+  <widgets xsi:type="model:Label" id="30" x="37" y="11" width="51" text="Nome:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="31" x="93" y="11" width="281" measuredWidth="281" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="32" x="465" y="11" width="215" measuredWidth="215" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="33" x="184" y="264" width="190" measuredWidth="190" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="34" x="610" y="303" text="Cadastrar" measuredWidth="70" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="35" x="516" y="303" width="73" text="Limpar" measuredWidth="73" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="36" x="402" y="15" text="CNPJ:" measuredWidth="36" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="37" x="92" y="263" text="Contato&#xD;&#xA;Comercial&#xD;&#xA;Celular" measuredWidth="67" measuredHeight="65">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="38" x="402" y="259" text="E-mail:" measuredWidth="42" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="39" x="465" y="259" width="215" measuredWidth="215" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Rectangle" id="41" x="33" y="56" width="647" height="179" measuredWidth="647" measuredHeight="179">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="42" x="37" y="111" width="56" text="Rua:" measuredWidth="56" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="43" x="93" y="111" width="281" measuredWidth="281" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="44" x="402" y="111" text="N°:" measuredWidth="22" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="45" x="465" y="111" width="52" measuredWidth="52" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="46" x="37" y="154" width="51" text="Bairro:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="47" x="93" y="154" width="281" measuredWidth="281" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="48" x="402" y="154" width="51" text="Cidade:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="49" x="465" y="154" width="181" measuredWidth="181" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="50" x="37" y="194" width="51" text="CEP:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="51" x="93" y="194" width="281" measuredWidth="281" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="52" x="402" y="194" width="51" text="Estado:" measuredWidth="51" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="53" x="465" y="194" width="57" text="PE&#xD;&#xA;" measuredWidth="57" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="54" x="33" y="259" text="Telefone:" measuredWidth="54" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="55" x="93" y="72" width="92" text="Comercial1" measuredWidth="92" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="40" x="37" y="72" text="Endereço:" measuredWidth="57" measuredHeight="23">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

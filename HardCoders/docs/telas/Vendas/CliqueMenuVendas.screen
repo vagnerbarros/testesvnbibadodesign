@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../Base.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:List" id="2" x="127" y="45" text="Realizar Venda" measuredWidth="86" measuredHeight="25">
+    <font/>
+    <items link="RealizarVenda.screen" x="0" y="2" width="86" height="21" text="Realizar Venda"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

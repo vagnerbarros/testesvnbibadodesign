@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1023" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseCadastro.screen#/"/>
+    <overrides>
+      <widgets ref="3">
+        <items ref="@items.1" link="ListagemServico.screen"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="3" x="112" y="159" width="761" measuredWidth="761" measuredHeight="168" dimmed="true">
+    <screen xsi:type="model:Screen" href="FormCadastroServico.screen#/"/>
+    <overrides>
+      <widgets ref="1" width="760" height="168"/>
+      <widgets ref="2" x="40" width="123"/>
+      <widgets ref="4" x="166" width="538"/>
+      <widgets ref="5" x="525" width="70" height="24"/>
+      <widgets ref="6" x="618" width="86" height="24"/>
+      <widgets ref="7" x="40" y="72" width="93"/>
+      <widgets ref="8" x="166" y="72" width="113"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

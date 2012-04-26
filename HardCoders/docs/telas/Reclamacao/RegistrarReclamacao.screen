@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:WidgetGroup" id="2" measuredWidth="1024" measuredHeight="762" name="RealizarVenda">
+    <widgets xsi:type="model:WidgetGroup" id="27" measuredWidth="1024" measuredHeight="762" name="Base">
+      <widgets xsi:type="model:Window" id="28" width="1024" height="762" measuredWidth="1024" measuredHeight="762"/>
+      <widgets xsi:type="model:Menu" id="29" y="19" width="1024" text="&amp;Cadastros,&amp;Contratos,&amp;Vendas,&amp;Reclamações" measuredWidth="1024" measuredHeight="27">
+        <items link="../Cadastro/CliqueMenuCadastro.screen" x="5" y="0" width="62" height="27" text="&amp;Cadastros"/>
+        <items link="../Contratos/CliqueMenuContrato.screen" x="67" y="0" width="62" height="27" text="&amp;Contratos"/>
+        <items link="../Vendas/CliqueMenuVendas.screen" x="129" y="0" width="48" height="27" text="&amp;Vendas"/>
+        <items link="CliqueMenuReclamacao.screen" x="177" y="0" width="79" height="27" text="&amp;Reclamações"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="30" x="948" y="456" text="Equipe" measuredWidth="45" measuredHeight="25">
+        <font size="10"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="31" x="840" y="472" text="HardCoders" measuredWidth="153" measuredHeight="38" icon="wifi (large)" iconRotation="270">
+        <font size="16" bold="true" italic="false"/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Window" id="4" x="40" y="80" width="944" height="624" text="Reclamação" measuredWidth="944" measuredHeight="624"/>
+    <widgets xsi:type="model:Group" id="5" x="112" y="131" width="816" height="173" text="Cliente" measuredWidth="816" measuredHeight="173">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="6" x="152" y="184" text="CPF/CNPJ:" measuredWidth="62" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="7" x="256" y="184" width="208" measuredWidth="208" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Link" id="8" x="481" y="184" text="{find}" measuredWidth="19" measuredHeight="24" link="BuscarClienteReclamacao.screen">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="9" x="152" y="232" text="Nome do Cliente:" measuredWidth="98" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="10" x="256" y="232" width="624" measuredWidth="624" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Group" id="11" x="112" y="320" width="817" height="91" text="Serviço" measuredWidth="817" measuredHeight="91">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="12" x="152" y="361" text="Nome do Serviço:" measuredWidth="99" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="13" x="256" y="361" width="208" measuredWidth="208" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Link" id="14" x="481" y="361" text="{find}" measuredWidth="19" measuredHeight="24" link="BuscarServicoReclamacao.screen">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="20" x="787" y="568" width="93" height="41" text="Registrar" measuredWidth="93" measuredHeight="41">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="21" x="676" y="568" width="93" height="41" text="Cancelar" measuredWidth="93" measuredHeight="41" link="../Base.screen">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Group" id="22" x="112" y="440" width="816" text="Tipo de Reclamação" measuredWidth="816" measuredHeight="100">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="24" x="152" y="487" text="Código:" measuredWidth="47" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="25" x="256" y="487" width="80" measuredWidth="80" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Link" id="26" x="357" y="487" text="{find}" measuredWidth="19" measuredHeight="24" link="BuscarReclamacao.screen">
+      <font/>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

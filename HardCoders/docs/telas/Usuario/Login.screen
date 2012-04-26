@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Window" id="11" x="10" y="64" width="800" height="600" text="HardCoders - Bem Vindo(a)" measuredWidth="800" measuredHeight="600"/>
+  <widgets xsi:type="model:Window" id="1" x="176" y="184" width="385" height="257" text="Hardcoders - Formulario de Login" measuredWidth="385" measuredHeight="257"/>
+  <widgets xsi:type="model:TextField" id="3" x="312" y="296" width="143" text="plinio" measuredWidth="143" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="4" x="256" y="296" text="Login:" measuredWidth="38" measuredHeight="23" foreground="#0b5394">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="5" x="264" y="248" text="Formulário de Login" measuredWidth="187" measuredHeight="33" foreground="#073763">
+    <font size="14" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="6" x="312" y="328" width="143" text="***********" measuredWidth="143" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="7" x="256" y="328" text="Senha:" measuredWidth="40" measuredHeight="23" foreground="#0b5394">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="8" x="411" y="397" width="44" text="OK" measuredWidth="44" measuredHeight="25" background="#d0e0e3" link="SelecaoEmpresa.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="9" x="336" y="397" text="Cancelar" measuredWidth="66" measuredHeight="25" background="#cfe2f3">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="13" x="383" y="352" text="alterar senha" measuredWidth="70" measuredHeight="23" link="AlterarSenha.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" id="14" x="370" y="370" text="sobre o sistema" measuredWidth="85" measuredHeight="23" link="Sobre.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

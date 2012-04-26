@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Panel" id="1" width="489" height="177" measuredWidth="489" measuredHeight="177" border="none"/>
+  <widgets xsi:type="model:Label" id="2" x="24" y="69" width="47" text="Tipo:" measuredWidth="47" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="3" x="83" y="69" width="374" measuredWidth="374" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="4" x="399" y="120" width="58" text="Cadastrar" measuredWidth="58" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="5" x="320" y="120" width="61" text="Limpar" measuredWidth="61" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="6" x="24" y="24" text="Código:" measuredWidth="47" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="7" x="83" y="24" width="94" measuredWidth="94" measuredHeight="23">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>
