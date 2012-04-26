@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="entidades.Contrato" table="contrato">
+	
+	  <id name="id" type="long" column="id" >
+	   <generator class="increment"/>
+	  </id>
+	  
+	  <property name="id_servico" type="long" column="id_servico"/>
+	  
+	  <property name="nome" type="string" column="nome" length="50"/>
+	  
+	  <property name="data_inicial" type="date" column="data_inicial"/>
+	  
+	  <property name="data_final" type="date" column="data_final"/>
+	  
+	  <property name="ativo" type="string" column="ativo" length="1"/>
+
+   </class>
+
+</hibernate-mapping>

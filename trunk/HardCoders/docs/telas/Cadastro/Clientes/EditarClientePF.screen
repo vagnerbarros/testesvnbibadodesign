@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides" theme="clean">
+  <widgets xsi:type="model:Master" id="2" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="ListagemPF.screen#/"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Insert" newIndex="5">
+        <object xsi:type="model:WidgetGroup" x="170" y="227" name="FormCadastroPF">
+          <widgets xsi:type="model:Panel" width="697" height="353" border="none"/>
+          <widgets xsi:type="model:Label" x="32" y="12" width="72" text="Nome:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="12" width="281" text="Peter José da Silva">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="460" y="12" width="215" text="050.444.567-69">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="179" y="265" width="190" text="(81)3721-0000">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Button" x="605" y="304" text="Cadastrar">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Button" x="511" y="304" width="73" text="Limpar">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="397" y="16" text="CPF:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Combo" x="87" y="264" text="Residencial&#xD;&#xA;Comercial&#xD;&#xA;Celular">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="397" y="260" text="E-mail:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="460" y="260" width="215" text="peter@gmail.com">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Rectangle" x="28" y="59" width="647" height="177">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="32" y="112" width="56" text="Rua:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="112" width="281" text="Rua do norte">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="397" y="112" text="N°:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="460" y="112" width="52" text="222">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="32" y="155" width="51" text="Bairro:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="155" width="281" text="Centro">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="397" y="155" width="51" text="Cidade:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="460" y="155" width="181" text="Caruaru">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="32" y="195" width="51" text="CEP:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="195" width="281" text="55.024-110">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="397" y="195" width="51" text="Estado:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Combo" x="460" y="195" width="57" text="PE&#xD;&#xA;">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="28" y="260" text="Telefone:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Combo" x="88" y="72" text="Comercial">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="32" y="72" text="Endereço:">
+            <font/>
+          </widgets>
+        </object>
+      </widgetChanges>
+      <widgetChanges xsi:type="o:Insert" newIndex="5">
+        <object xsi:type="model:Master" x="10" y="10" dimmed="true">
+          <screen xsi:type="model:Screen" href="../BaseEditar.screen#/"/>
+        </object>
+      </widgetChanges>
+      <widgetChanges xsi:type="o:Insert" newIndex="5">
+        <object xsi:type="model:Label" x="162" y="218" text="Cliente Pessoa Física">
+          <font size="20"/>
+        </object>
+      </widgetChanges>
+      <widgetChanges xsi:type="o:Insert" newIndex="5">
+        <object xsi:type="model:WidgetGroup" x="162" y="262" name="FormCadastroPF">
+          <widgets xsi:type="model:Panel" width="703" height="298"/>
+          <widgets xsi:type="model:Label" x="31" y="7" width="71" text="Nome:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="7" width="282">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="463" y="7" width="215">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="180" y="221" width="191">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Button" x="609" y="255" height="20" text="Atualizar">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="400" y="11" width="28" text="CPF:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Combo" x="86" y="217" width="82" text="Residencial&#xD;&#xA;Comercial&#xD;&#xA;Celular">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="400" y="217" width="41" text="E-mail:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="463" y="217" width="215">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Rectangle" x="15" y="48" width="664" height="148">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="31" y="92" width="56" text="Rua:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="92" width="282">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="400" y="92" width="21" text="N°:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="463" y="92" width="52">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="31" y="129" width="51" text="Bairro:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="129" width="282">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="400" y="129" width="51" text="Cidade:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="463" y="129" width="182">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="31" y="161" width="51" text="CEP:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:TextField" x="88" y="161" width="282">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="400" y="161" width="51" text="Estado:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Combo" x="463" y="161" width="57" text="PE&#xD;&#xA;">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="27" y="217" text="Telefone:">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Combo" x="88" y="58" width="77" text="Comercial">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" x="31" y="58" text="Endereço:">
+            <font/>
+          </widgets>
+        </object>
+      </widgetChanges>
+      <widgetChanges xsi:type="o:Delete" ref="14"/>
+      <widgetChanges xsi:type="o:Delete" ref="13"/>
+      <widgetChanges xsi:type="o:Delete" ref="2"/>
+      <widgetChanges xsi:type="o:Delete" ref="1"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

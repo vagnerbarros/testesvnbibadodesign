@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1023" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseCadastro.screen#/"/>
+    <overrides>
+      <widgets ref="3">
+        <items ref="@items.1" link="ListagemFucionario.screen"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="5" x="104" y="160" width="777" height="409" measuredWidth="777" measuredHeight="409" dimmed="true">
+    <screen xsi:type="model:Screen" href="FormCadastroFuncionario.screen#/"/>
+    <overrides>
+      <widgets ref="2" x="56" y="72" width="776" height="408"/>
+      <widgets ref="3" x="85" y="100" width="85"/>
+      <widgets ref="4" x="152" y="100" width="640"/>
+      <widgets ref="5" x="85" y="154" width="59"/>
+      <widgets ref="6" x="152" y="154" width="253"/>
+      <widgets ref="7" x="431" y="154" width="59"/>
+      <widgets ref="8" x="505" y="154" width="283"/>
+      <widgets ref="9" x="85" y="208" width="59"/>
+      <widgets ref="10" x="152" y="208" width="253"/>
+      <widgets ref="11" x="431" y="267" width="59"/>
+      <widgets ref="12" x="431" y="208" width="59"/>
+      <widgets ref="13" x="505" y="208" width="283"/>
+      <widgets ref="14" x="431" y="331" width="59"/>
+      <widgets ref="15" x="705" y="413" width="82" height="32"/>
+      <widgets ref="16" x="604" y="413" width="85" height="32"/>
+      <widgets ref="17" x="505" y="267" width="56"/>
+      <widgets ref="18" x="505" y="335" width="102"/>
+      <widgets ref="19" x="85" y="331" width="44"/>
+      <widgets ref="20" x="85" y="419" width="47"/>
+      <widgets ref="21" x="235" y="267" width="170"/>
+      <widgets ref="22" x="152" y="331" width="253"/>
+      <widgets ref="23" x="152" y="408" width="253"/>
+      <widgets ref="24" x="85" y="263" width="63"/>
+      <widgets ref="25" x="152" y="267" width="78"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

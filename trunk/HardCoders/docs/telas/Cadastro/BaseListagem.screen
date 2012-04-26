@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../Base.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="3" x="56" y="80" width="900" height="600" text="Cadastro" measuredWidth="900" measuredHeight="600"/>
+  <widgets xsi:type="model:TabbedPane" id="4" x="80" y="112" width="850" height="500" text="Cadastro,Listagem" measuredWidth="850" measuredHeight="500" selection="1">
+    <items x="10" y="0" width="67" height="27" text="Cadastro"/>
+    <items x="77" y="0" width="68" height="27" text="Listagem"/>
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

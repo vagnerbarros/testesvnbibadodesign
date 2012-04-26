@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="3" x="10" y="10" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="DetalhesContrato.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" id="34" x="128" y="179" width="752" height="453" text="Cliente, Serviço" measuredWidth="752" measuredHeight="453" selection="1">
+    <items link="DetalhesContratoCliente.screen" x="10" y="0" width="57" height="27" text="Cliente"/>
+    <items x="67" y="0" width="58" height="27" text="Serviço"/>
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="41" x="170" y="259" measuredWidth="671" measuredHeight="238" name="FormCadastroServico">
+    <widgets xsi:type="model:Panel" id="42" width="671" height="238" measuredWidth="671" measuredHeight="238" border="none"/>
+    <widgets xsi:type="model:Label" id="43" y="12" text="Nome do Serviço:" measuredWidth="99" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="44" x="104" y="12" width="541" text="Oi conta total" measuredWidth="541" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="46" x="582" y="189" text="Renovar" measuredWidth="63" measuredHeight="25">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="48" x="104" y="57" width="91" text="50,00" measuredWidth="91" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="49" y="57" text="Valor Atual:" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Group" id="52" x="230" y="53" width="415" text="Renovação de Contrato" measuredWidth="415" measuredHeight="100">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="51" x="286" y="101" text="Meses:" measuredWidth="41" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Spinner" id="54" x="326" y="101" width="47" text="3" measuredWidth="47" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="55" x="446" y="101" text="Valor:" measuredWidth="35" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="56" x="480" y="101" width="71" text="60,00" measuredWidth="71" measuredHeight="23">
+      <font/>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

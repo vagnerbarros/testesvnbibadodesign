@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="5" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseEditar.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="6" x="146" y="200" text="Cliente Pessoa Jurídica" measuredWidth="273" measuredHeight="45">
+    <font size="20"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="10" x="146" y="248" measuredWidth="719" measuredHeight="303" name="FormCadastroPJ">
+    <widgets xsi:type="model:Panel" id="11" width="719" height="303" measuredWidth="719" measuredHeight="303" border="none"/>
+    <widgets xsi:type="model:Label" id="12" x="37" y="7" width="52" text="Nome:" measuredWidth="52" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="13" x="94" y="7" width="286" text="R.M. Financeira" measuredWidth="286" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="14" x="474" y="7" width="219" text="12.005.908/0001-90" measuredWidth="219" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="15" x="187" y="224" width="193" text="(81)9996-0999" measuredWidth="193" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="16" x="622" y="259" width="71" height="21" text="Atualizar" measuredWidth="71" measuredHeight="21">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="18" x="409" y="10" text="CNPJ:" measuredWidth="36" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Combo" id="19" x="93" y="220" width="68" text="Contato&#xD;&#xA;Comercial&#xD;&#xA;Celular" measuredWidth="68" measuredHeight="65">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="20" x="409" y="220" text="E-mail:" measuredWidth="42" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="21" x="474" y="220" width="219" text="maria@rmfinanceira.com.br" measuredWidth="219" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" id="22" x="33" y="47" width="660" height="152" measuredWidth="660" measuredHeight="152">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="23" x="37" y="93" width="57" text="Rua:" measuredWidth="57" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="24" x="94" y="93" width="286" text="Av. Rui Barbosa" measuredWidth="286" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="25" x="409" y="93" text="N°:" measuredWidth="22" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="26" x="474" y="93" width="53" text="100" measuredWidth="53" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="27" x="37" y="130" width="52" text="Bairro:" measuredWidth="52" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="28" x="94" y="130" width="286" text="Centro" measuredWidth="286" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="29" x="409" y="130" width="52" text="Cidade:" measuredWidth="52" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="30" x="474" y="130" width="184" text="Caruaru" measuredWidth="184" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="31" x="37" y="164" width="52" text="CEP:" measuredWidth="52" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="32" x="94" y="164" width="286" text="55.013-100" measuredWidth="286" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="33" x="409" y="164" width="52" text="Estado:" measuredWidth="52" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Combo" id="34" x="474" y="164" width="58" text="PE&#xD;&#xA;" measuredWidth="58" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="35" x="33" y="220" width="55" text="Telefone:" measuredWidth="55" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Combo" id="36" x="94" y="59" width="93" text="Comercial1" measuredWidth="93" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="37" x="37" y="59" width="58" text="Endereço:" measuredWidth="58" measuredHeight="23">
+      <font/>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

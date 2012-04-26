@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseEditar.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="2" x="188" y="208" text="Funcionário" measuredWidth="144" measuredHeight="45">
+    <font size="20"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="4" x="162" y="252" width="679" measuredWidth="679" measuredHeight="305" dimmed="true">
+    <screen xsi:type="model:Screen" href="FormCadastroFuncionario.screen#/"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="16"/>
+      <widgets ref="2" y="-20" width="679"/>
+      <widgets ref="3" y="-1" width="74"/>
+      <widgets ref="4" x="84" y="-1" width="560" text="Peter José da Silva"/>
+      <widgets ref="5" y="39" width="52"/>
+      <widgets ref="6" x="84" y="39" width="222" text="050.444.567 - 44"/>
+      <widgets ref="7" x="328" y="39" width="52"/>
+      <widgets ref="8" x="392" y="39" width="248" text="R. Fulano de tal"/>
+      <widgets ref="9" y="79" width="52"/>
+      <widgets ref="10" x="84" y="79" width="222" text="Centro"/>
+      <widgets ref="11" x="328" y="123" width="52"/>
+      <widgets ref="12" x="328" y="79" width="52"/>
+      <widgets ref="13" x="392" y="79" width="248" text="55550000"/>
+      <widgets ref="14" x="328" y="171" width="52"/>
+      <widgets ref="15" x="568" y="235" width="72" text="Atualizar"/>
+      <widgets ref="17" x="392" y="123" width="50"/>
+      <widgets ref="18" x="392" y="171" width="89"/>
+      <widgets ref="19" y="123" width="39"/>
+      <widgets ref="20" y="171" width="41"/>
+      <widgets ref="21" x="84" y="123" width="222" text="peterjose"/>
+      <widgets ref="22" x="84" y="171" width="222" text="********"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="RealizarVenda.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="4" x="232" y="148" width="661" height="396" text="Busca" measuredWidth="661" measuredHeight="396" closeButton="false"/>
+  <widgets xsi:type="model:RadioButton" id="6" x="256" y="184" text="Pessoa Física" measuredWidth="88" measuredHeight="23" selected="true">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="7" x="365" y="184" text="Pessoa Jurídica" measuredWidth="99" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="9" x="249" y="207" height="239" measuredWidth="638" measuredHeight="237" name="FormListagemPF">
+    <widgets xsi:type="model:Panel" id="10" width="638" height="237" measuredWidth="638" measuredHeight="237" border="none"/>
+    <widgets xsi:type="model:Table" id="11" x="10" y="97" width="568" height="123" text="Nome,CPF, Situação, Ação&#xA;Peter José da Silva,050.444.567-69,Regular, {add}&#xA;Maria Aparecida Cavalcante,012.223.456-90,Inadimplente,{add}&#xA;José Edson Lima,015.343.322-80,Regular,{add}" measuredWidth="568" measuredHeight="123" alternative="#eeeeee">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Combo" id="12" x="11" y="2" width="69" text="Nome&#xD;&#xA;Endereço&#xD;&#xA;Telefone&#xD;&#xA;CPF" measuredWidth="69" measuredHeight="86">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="13" x="87" y="2" width="240" measuredWidth="240" measuredHeight="23">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" id="14" x="713" y="480" width="112" height="39" text="Cadastrar Novo" measuredWidth="112" measuredHeight="39" link="CadastrarClienteVenda.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="15" x="616" y="482" width="70" height="35" text="Cancelar" measuredWidth="70" measuredHeight="35" link="RealizarVenda.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

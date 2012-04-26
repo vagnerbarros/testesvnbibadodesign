@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="ListagemContratoVencendo.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="2" x="72" y="105" width="840" height="552" text="Detalhes" measuredWidth="840" measuredHeight="552"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

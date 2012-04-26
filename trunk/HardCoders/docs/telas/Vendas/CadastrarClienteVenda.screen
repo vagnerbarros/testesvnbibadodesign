@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="RealizarVenda.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="2" x="213" y="124" width="732" height="452" text="Cadastro" measuredWidth="732" measuredHeight="452"/>
+  <widgets xsi:type="model:Master" id="4" x="231" y="204" measuredWidth="697" measuredHeight="353" dimmed="true">
+    <screen xsi:type="model:Screen" href="../Cadastro/Clientes/FormCadastroPF.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="5" x="247" y="162" text="Pessoa Física" measuredWidth="88" measuredHeight="23" selected="true">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="6" x="352" y="162" text="Pessoa Jurídica" measuredWidth="99" measuredHeight="23">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

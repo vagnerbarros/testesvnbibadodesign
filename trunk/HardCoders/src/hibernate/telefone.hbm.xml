@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="entidades.Telefone" table="telefone">
+	
+	  <id name="id_pessoa" type="long" column="id_pessoa" >
+	   <generator class="assigned"/>
+	  </id>
+	  
+	  <property name="rotulo" type="string" column="rotulo" length="50"/>
+
+	  <property name="numero" type="string" column="numero" length="13"/>
+	  
+	  <property name="ativo" type="string" column="ativo" length="1"/>
+	  
+   </class>
+
+</hibernate-mapping>

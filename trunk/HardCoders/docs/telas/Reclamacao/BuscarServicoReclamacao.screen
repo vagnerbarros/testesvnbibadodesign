@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides" theme="clean">
+  <widgets xsi:type="model:Master" id="12" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="RegistrarReclamacao.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="13" x="176" y="144" width="601" height="337" text="Busca" measuredWidth="601" measuredHeight="337"/>
+  <widgets xsi:type="model:Master" id="15" x="192" y="184" measuredWidth="553" measuredHeight="237" dimmed="true">
+    <screen xsi:type="model:Screen" href="../Cadastro/Servico/FormListagemServico.screen#/"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="5"/>
+      <widgetChanges xsi:type="o:Delete" ref="4"/>
+      <widgetChanges xsi:type="o:Delete" ref="3"/>
+      <widgets ref="1" x="-192" y="-84" width="553" height="237"/>
+      <widgets ref="2" x="-181" y="-29" width="529" height="165" text="Nome do Serviço, Data de Cadastro, Valor,Ação&#xA;Oi Velox,15/03/11, R$ 50.00,{add}&#xA;Oi Fixo,17/04/11, R$ 30.00,{add}&#xA;Plano Completo,16/07/11, R$ 90.00,{add}"/>
+      <widgets ref="6" x="-181" y="-83" width="70"/>
+      <widgets ref="7" x="-96" y="-83" width="230"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Button" id="16" x="675" y="420" width="57" height="37" text="Cancelar" measuredWidth="57" measuredHeight="37" link="RegistrarReclamacao.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="RealizarVenda.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="2" x="213" y="138" width="508" height="308" text="Buscar" measuredWidth="508" measuredHeight="308" closeButton="false"/>
+  <widgets xsi:type="model:WidgetGroup" id="6" x="223" y="184" measuredWidth="492" measuredHeight="193" name="FormListagemServico">
+    <widgets xsi:type="model:Panel" id="7" width="492" height="193" measuredWidth="492" measuredHeight="193" border="none"/>
+    <widgets xsi:type="model:Table" id="8" x="11" y="56" width="468" height="120" text="Nome do Serviço, Data de Cadastro, Valor,Ação&#xA;Oi Velox,15/03/11, R$ 50.00,{add}&#xA;Oi Fixo,17/04/11, R$ 30.00,{add}&#xA;Plano Completo,16/07/11, R$ 90.00,{add}" measuredWidth="468" measuredHeight="120" alternative="#eeeeee">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Combo" id="9" x="11" y="1" width="63" text="Nome&#xD;&#xA;Valor" measuredWidth="63" measuredHeight="44">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="10" x="97" y="1" width="202" measuredWidth="202" measuredHeight="23">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" id="5" x="634" y="382" width="68" height="42" text="Cancelar" measuredWidth="68" measuredHeight="42" link="RealizarVenda.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

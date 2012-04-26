@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" x="10" y="10" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseListagem.screen#/"/>
+    <overrides>
+      <widgets ref="4">
+        <items ref="@items.0" link="CadastroPJ.screen"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Label" id="13" x="128" y="184" text="Filtrar" measuredWidth="54" measuredHeight="31">
+    <font size="13" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="24" x="128" y="214" text="Pessoa Física" measuredWidth="88" measuredHeight="23" link="ListagemPF.screen">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:RadioButton" id="25" x="224" y="214" text="Pessoa Jurídica" measuredWidth="99" measuredHeight="23" selected="true">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="26" x="116" y="256" width="775" measuredWidth="775" measuredHeight="328" dimmed="true">
+    <screen xsi:type="model:Screen" href="FormListagemPJ.screen#/"/>
+    <overrides>
+      <widgets ref="1" width="773" height="328"/>
+      <widgets ref="2" x="15" width="733" height="181"/>
+      <widgets ref="3" x="15" width="94"/>
+      <widgets ref="4" x="124" width="309"/>
+      <widgets ref="5" x="626" y="140"/>
+      <widgets ref="6" x="642" y="140"/>
+      <widgets ref="7" x="657" y="140"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

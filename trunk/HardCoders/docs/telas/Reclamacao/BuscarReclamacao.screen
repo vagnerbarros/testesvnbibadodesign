@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="RegistrarReclamacao.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="2" x="272" y="96" width="576" height="408" text="Busca" measuredWidth="576" measuredHeight="408" closeButton="false"/>
+  <widgets xsi:type="model:WidgetGroup" id="5" x="292" y="148" measuredWidth="544" measuredHeight="264" name="FormListagemReclamacao">
+    <widgets xsi:type="model:Panel" id="6" width="544" height="264" measuredWidth="544" measuredHeight="264" border="none"/>
+    <widgets xsi:type="model:Table" id="7" x="6" y="69" width="516" height="180" text="Codigo,Tipo de Reclamação, Data de Cadastro,Ação&#xA;11,Muito Caro,10/03/11, {add}&#xA;34,Baixa Qualidade,15/04/11,{add}&#xA;44,Defeito,16/04/11,{add}" measuredWidth="516" measuredHeight="180" alternative="#eeeeee">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Combo" id="11" x="6" y="3" width="62" text="Código&#xD;&#xA;Tipo" measuredWidth="62" measuredHeight="44">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="12" x="84" y="3" width="223" measuredWidth="223" measuredHeight="23">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" id="13" x="752" y="432" width="60" height="41" text="Cancelar" measuredWidth="60" measuredHeight="41" link="RegistrarReclamacao.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

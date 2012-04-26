@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Master" id="1" x="249" y="116" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../Base.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:List" id="4" x="259" y="161" width="110" text="Clientes&#xA;Serviços&#xA;Funcionários&#xA;Reclamações&#xA;Empresas" measuredWidth="110" measuredHeight="109">
+    <font/>
+    <items link="Clientes/CadastroPF.screen" x="0" y="2" width="110" height="21" text="Clientes"/>
+    <items link="Servico/CadastroServico.screen" x="0" y="23" width="110" height="21" text="Serviços"/>
+    <items link="Funcionários/CadastroFuncionario.screen" x="0" y="44" width="110" height="21" text="Funcionários"/>
+    <items link="Reclamações/CadastroReclamacao.screen" x="0" y="65" width="110" height="21" text="Reclamações"/>
+    <items link="Empresas/CadastroEmpresa.screen" x="0" y="86" width="110" height="21" text="Empresas"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

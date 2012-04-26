@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Window" id="1" x="10" y="10" width="800" height="600" text="Sobre o Sistema" measuredWidth="800" measuredHeight="600"/>
+  <widgets xsi:type="model:Text" id="4" x="56" y="392" width="669" height="145" text="Integrantes da Equipe:&#xA;* Plínio Manoel - pliniomanoel@yahoo.com.br&#xA;* Vagner Barros - vagnerbarrospereira@gmail.com&#xA;* Wanessa Lima - wanessaglima@gmail.com" measuredWidth="669" measuredHeight="145">
+    <font size="16"/>
+  </widgets>
+  <widgets xsi:type="model:TextArea" id="5" x="56" y="176" width="725" height="193" text="Este projeto foi desenvolvido como parte da cadeira Projeto Interdisciplinar I da FAFICA. A cadeira foi ministrada pelo prof. César França e tem duração de um semestre.&#xA;" measuredWidth="725" measuredHeight="193">
+    <font size="14"/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="6" x="685" y="536" width="96" height="41" text="Voltar" measuredWidth="96" measuredHeight="41" link="Login.screen">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

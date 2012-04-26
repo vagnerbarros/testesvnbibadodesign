@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides" theme="clean">
+  <widgets xsi:type="model:Master" id="3" measuredWidth="1024" measuredHeight="762" dimmed="true">
+    <screen xsi:type="model:Screen" href="../BaseEditar.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="4" x="169" y="229" text="Empresa" measuredWidth="106" measuredHeight="45">
+    <font size="20"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="6" x="130" y="273" measuredWidth="695" measuredHeight="177" dimmed="true">
+    <screen xsi:type="model:Screen" href="FormCadastroEmpresa.screen#/"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="5"/>
+      <widgets ref="1" width="695"/>
+      <widgets ref="2" x="39" width="114"/>
+      <widgets ref="3" x="178" width="461" text="Tim"/>
+      <widgets ref="4" x="563" width="76" text="Atualizar"/>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>
