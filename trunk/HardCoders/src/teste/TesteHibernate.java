@@ -101,6 +101,7 @@ public class TesteHibernate {
 
 	public static void main(String[] args) {
 
+		
 		TesteHibernate teste = new TesteHibernate();
 		//	teste.inserirCliente();
 		//  teste.inserirEmpresa("Tim");
