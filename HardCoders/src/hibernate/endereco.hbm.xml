@@ -5,9 +5,11 @@
 <hibernate-mapping>
   <class name="entidades.Endereco" table="endereco">
 	
-	  <id name="id_pessoa" type="long" column="id_pessoa" >
-	   <generator class="assigned"/>
+	  <id name="id" type="long" column="id" >
+	   <generator class="increment"/>
 	  </id>
+	  
+	  <property name="id_pessoa" type="long" column="id_pessoa"/>
 	  
 	  <property name="rotulo" type="string" column="rotulo" length="50"/>
 
