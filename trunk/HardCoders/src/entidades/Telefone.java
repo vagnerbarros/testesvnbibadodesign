@@ -9,6 +9,7 @@ import interfaces.IEntidades;
 public class Telefone implements IEntidades<Telefone>{
 
 	private static String tabela = "Telefone";
+	private Long id;
 	private Long id_pessoa;
 	private String rotulo;
 	private String numero;
@@ -18,6 +19,12 @@ public class Telefone implements IEntidades<Telefone>{
 		
 	}
 
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getId_pessoa() {
 		return id_pessoa;
 	}
@@ -66,6 +73,9 @@ public class Telefone implements IEntidades<Telefone>{
 		
 		Map<String, Object> mapa = new Hashtable<String, Object>();
 		
+		if(this.id != null){
+			mapa.put("id", this.id);
+		}
 		if(this.id_pessoa != null){
 			mapa.put("id_pessoa", this.id_pessoa);
 		}

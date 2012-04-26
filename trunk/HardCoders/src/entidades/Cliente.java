@@ -97,6 +97,8 @@ public class Cliente implements IEntidades<Cliente>{
 		}
 		if(this.cpfOrCnpj != null){
 			mapa.put("cpfOrCnpj", this.cpfOrCnpj);
+		}
+		if(this.tipo != null){
 			mapa.put("tipo", this.tipo);
 		}
 		if(this.id_empresa != null){
