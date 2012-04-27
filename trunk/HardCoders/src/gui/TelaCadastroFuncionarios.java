@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.util.List;
+
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -16,16 +18,15 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -63,6 +64,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	private JButton btnCadastro;
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
+	private Border bordaPadrao;
 
 	public TelaCadastroFuncionarios() {
 
@@ -211,6 +213,8 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtCidade.setBounds(368, 149, 157, 20);
 		panel.add(txtCidade);
 
+		this.bordaPadrao = txtCidade.getBorder();
+		
 		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
 		txtComplemento = new JFormattedTextField(mascaraComplemento);
 		txtComplemento.setColumns(10);
@@ -498,7 +502,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		Fachada fachada = Fachada.getInstancia();
 
 		try {
-			
+
 			// inserir pessoa
 			Pessoa p = new Pessoa();
 			p.setAtivo(Constantes.ATIVO);
@@ -549,7 +553,8 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	public void actionPerformed(ActionEvent evt) {
 
 		JComponent elemento = (JComponent) evt.getSource();
-
+		normalizarCampos();
+		
 		if(elemento.equals(this.btnLimpar)){
 			this.limparCadastro();
 		}
@@ -562,11 +567,43 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			this.buscar();
 		}
 	}
+	
+	private void normalizarCampos(){
+		txtCpf.setBorder(bordaPadrao);
+		txtLogin.setBorder(bordaPadrao);
+		txtNome.setBorder(bordaPadrao);
+		txtSenha.setBorder(bordaPadrao);
+	}
 
-	public boolean camposValidos(){
+	private boolean camposValidos(){
 
-		//deve validar todos os campos
-		return true;
+		boolean valido = true;
+
+		if(!(txtCpf.getText().trim().length() == 14)){
+			valido = false;
+			pintarBorda(txtCpf);
+		}
+		if(txtLogin.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtLogin);
+		}
+		if(txtNome.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtNome);
+		}
+		if(txtSenha.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtSenha);
+		}
+
+		if(!valido){
+			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private void pintarBorda(JFormattedTextField campo){
+		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
 	}
 
 	public void keyReleased(KeyEvent evt) {
@@ -576,7 +613,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		}
 	}
 
-	public void buscar(){
+	private void buscar(){
 
 		Funcionario f = new Funcionario();
 		if(this.comboBoxBusca.getSelectedItem().equals(Constantes.NOME)){
@@ -592,14 +629,14 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 	// evento do tabbetPane
 	public void stateChanged(ChangeEvent evt) {
-
+		
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Funcionario());
 		}
 	}
-	
+
 	private MaskFormatter criarMascara(String formato){
-		
+
 		try {
 			MaskFormatter mascara = new MaskFormatter(formato);
 			return mascara;

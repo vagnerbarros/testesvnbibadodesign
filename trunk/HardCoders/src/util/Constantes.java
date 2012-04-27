@@ -42,15 +42,9 @@ public class Constantes {
 		return retorno;
 	}
 	
-	//lista de tipos de telefone pessoa física
-	public static String [] getRotuloTelefonePF(){
-		String [] retorno = {RESIDENCIAL, COMERCIAL, CELULAR};
-		return retorno;
-	}
-	
 	//lista de tipos de telefone pessoa jurídica
-	public static String [] getRotuloTelefonePJ(){
-		String [] retorno = {CONTATO, COMERCIAL, CELULAR};
+	public static String [] getRotuloTelefoneCliente(){
+		String [] retorno = {RESIDENCIAL, COMERCIAL, CELULAR, CONTATO};
 		return retorno;
 	}
 	

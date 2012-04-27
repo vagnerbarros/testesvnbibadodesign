@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -18,27 +18,25 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+
 import util.Constantes;
 import util.Sessao;
 import entidades.Servico;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
-import java.awt.TextField;
 
 public class TelaCadastroServicos extends JPanel implements ActionListener, ChangeListener, KeyListener{
 
@@ -50,6 +48,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private JButton botaoCadastrar;
 	private JTabbedPane tabbedPane;
 	private JComboBox comboBoxBusca;
+	private Border bordaPadrao;
 
 	public TelaCadastroServicos() {
 
@@ -150,7 +149,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtValor.setBackground(Color.WHITE);
 		txtValor.setBounds(147, 42, 89, 20);
 		panel_2.add(txtValor);
-
+		
 		botaoLimpar = new JButton("Limpar");
 		botaoLimpar.addActionListener(this);
 		botaoLimpar.setBounds(255, 42, 89, 23);
@@ -197,6 +196,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtBusca.addKeyListener(this);
 		txtBusca.setColumns(10);
 		txtBusca.setBackground(Color.WHITE);
+		
+		this.bordaPadrao = txtBusca.getBorder();
 
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
@@ -310,7 +311,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	public void actionPerformed(ActionEvent evt) {
 
 		JComponent elemento = (JComponent) evt.getSource();
-
+		normalizarCampos();
+		
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
 				cadastrar();
@@ -352,8 +354,30 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	}
 
 	private boolean camposValidos(){
-		//aqui deve ser feita todo tipo de validação
-		return true;
+		
+		boolean valido = true;
+
+		if(txtNome.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtNome);
+		}
+		if(txtValor.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtValor);
+		}
+		if(!valido){
+			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private void pintarBorda(JFormattedTextField campo){
+		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
+	}
+	
+	private void normalizarCampos(){
+		txtNome.setBorder(bordaPadrao);
+		txtValor.setBorder(bordaPadrao);
 	}
 
 	public void stateChanged(ChangeEvent evt) {
