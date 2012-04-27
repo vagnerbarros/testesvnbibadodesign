@@ -11,6 +11,8 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+
+import util.Constantes;
 import util.HibernateUtility;
 
 
@@ -77,6 +79,7 @@ public class Dao<T extends IEntidades> {
 		
 		try {
 			Criteria c = sessao.createCriteria(obj.getClass());
+			c.add(Restrictions.eq("ativo", Constantes.ATIVO));
 			List<T> list = (List<T>) c.list();
 			tx.commit();
 			return list;
@@ -103,6 +106,7 @@ public class Dao<T extends IEntidades> {
 				valor = map.get(chave);
 				crit.add(Restrictions.eq(chave, valor));
 			}
+			crit.add(Restrictions.eq("ativo", Constantes.ATIVO));
 			List<T> retorno = (List<T>) crit.list();
 			return retorno;
 		}
@@ -130,6 +134,7 @@ public class Dao<T extends IEntidades> {
 					crit.add(Restrictions.ilike(chave, "%"+valor+"%"));
 				}
 			}
+			crit.add(Restrictions.eq("ativo", Constantes.ATIVO));
 			List<T> retorno = (List<T>) crit.list();
 			return retorno;
 		}

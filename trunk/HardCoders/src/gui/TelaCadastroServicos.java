@@ -130,6 +130,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		panel_2.add(lblNomeDoServio);
 
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
+		mascaraNome.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?");
 		txtNome = new JFormattedTextField(mascaraNome);
 		txtNome.setColumns(10);
 		txtNome.setBackground(Color.WHITE);
@@ -141,8 +142,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		lblValorPadro.setBounds(27, 42, 110, 17);
 		panel_2.add(lblValorPadro);
 
-		MaskFormatter mascaraValor = criarMascara("********");
-		mascaraValor.setValidCharacters("1234567890.");
+		MaskFormatter mascaraValor = criarMascara("######.##");
 		txtValor = new JFormattedTextField(mascaraValor);
 		txtValor.setFocusLostBehavior(JFormattedTextField.COMMIT);
 		txtValor.setColumns(10);
@@ -343,7 +343,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso.");
 			limparCadastro();
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, "Serviço já existe.");
 		}
 	}
 
@@ -366,7 +366,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			pintarBorda(txtValor);
 		}
 		if(!valido){
-			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+			JOptionPane.showMessageDialog(null, "Campos Obrigatórios não preenchidos");
 		}
 		return valido;
 	}

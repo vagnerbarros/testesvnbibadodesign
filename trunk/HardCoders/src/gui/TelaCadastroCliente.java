@@ -1,9 +1,11 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextLayout.CaretPolicy;
 import java.text.ParseException;
 import java.util.Hashtable;
 import java.util.Map;
@@ -549,7 +551,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtRazaoSocial.setVisible(true);
 	}
 
-	private void cadastrarPessoaFisica(){
+	private void cadastrar(int tipo){
 
 		Fachada fachada = Fachada.getInstancia();
 
@@ -558,34 +560,59 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		p.setAtivo(Constantes.ATIVO);
 		try {
 			fachada.cadastrarPessoa(p);
-		} catch (EntidadeJaExisteException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
+			
+			
+			Long id_pessoa = fachada.ultimoIdPessoa(new Pessoa());
 
-		Long id_pessoa = fachada.ultimoIdPessoa(new Pessoa());
+			String cpfOrCnpj = "";
+			String tipoCliente = "";
+			String nome = "";
+			// pessoa fisica
+			if(tipo == 1){
+				nome = this.txtNome.getText().trim();
+				cpfOrCnpj = this.txtCpf.getText().trim();
+				tipoCliente = Constantes.PF;
+			}
+			//pessoa juridica
+			else if(tipo == 2){
+				nome = this.txtRazaoSocial.getText().trim();
+				cpfOrCnpj = this.txtCnpj.getText().trim();
+				tipoCliente = Constantes.PJ;
+			}
+			
+			String email = this.txtEmail.getText().trim();
 
-		String cpf = this.txtCpf.getText().trim();
-		String nome = this.txtNome.getText().trim();
-		String email = this.txtEmail.getText().trim();
-
-		Cliente c = new Cliente();
-		c.setId_pessoa(id_pessoa);
-		c.setNome(nome);
-		c.setTipo(Constantes.PF);
-		c.setId_empresa(Sessao.getEmpresa().getId());
-		c.setEmail(email);
-		c.setCpfOrCnpj(cpf);
-		c.setAtivo(Constantes.ATIVO);
-
-		try {
+			Cliente c = new Cliente();
+			c.setId_pessoa(id_pessoa);
+			c.setNome(nome);
+			c.setTipo(tipoCliente);
+			c.setId_empresa(Sessao.getEmpresa().getId());
+			c.setEmail(email);
+			c.setCpfOrCnpj(cpfOrCnpj);
+			c.setAtivo(Constantes.ATIVO);
+			
 			fachada.cadastrarCliente(c);
 			cadastrarEnderecos(id_pessoa);
 			cadastrarTelefones(id_pessoa);
 			
-
-		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso.");
+			limparCadastro();
+			
+		} catch (EntidadeJaExisteException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
+	}
+	
+	private void limparCadastro(){
+		limparEndereco();
+		limparTelefone();
+		txtCpf.setText("");
+		txtCnpj.setText("");
+		txtNome.setText("");
+		txtRazaoSocial.setText("");
+		txtEmail.setText("");
+		this.enderecos.clear();
+		this.telefones.clear();
 	}
 	
 	private void cadastrarTelefones(Long id_pessoa) throws EntidadeJaExisteException{
@@ -637,11 +664,6 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		}
 	}
 
-	private void cadastrarPessoaJuridica(){
-
-
-	}
-
 	private MaskFormatter criarMascara(String formato){
 
 		try {
@@ -657,7 +679,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		
 		boolean valido = true;
 
-		if(!(txtCpf.getText().trim().length() == 18)){
+		if(!(txtCpf.getText().trim().length() == 14)){
 			valido = false;
 			pintarBorda(txtCpf);
 		}
@@ -676,7 +698,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		
 		boolean valido = true;
 
-		if(!(txtCnpj.getText().trim().length() == 14)){
+		if(!(txtCnpj.getText().trim().length() == 18)){
 			valido = false;
 			pintarBorda(txtCnpj);
 		}
@@ -709,27 +731,22 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 
 		if(elemento.equals(this.rbtnFisica)){
 			this.ativarCamposPF();
-			limparEndereco();
-			limparTelefone();
-			this.enderecos.clear();
-			this.telefones.clear();
+			limparCadastro();
+			
 		}
 		else if(elemento.equals(this.rbtnJurica)){
 			this.ativarCamposPJ();
-			limparEndereco();
-			limparTelefone();
-			this.enderecos.clear();
-			this.telefones.clear();
+			limparCadastro();
 		}
 		else if(elemento.equals(this.botaoCadastrar)){
 			if(this.rbtnFisica.isSelected()){
 				if(camposPFValidos()){
-					cadastrarPessoaFisica();
+					cadastrar(1);
 				}
 			}
 			else if(this.rbtnJurica.isSelected()){
-				if(camposPFValidos()){
-					cadastrarPessoaJuridica();
+				if(camposPJValidos()){
+					cadastrar(2);
 				}
 			}
 		}

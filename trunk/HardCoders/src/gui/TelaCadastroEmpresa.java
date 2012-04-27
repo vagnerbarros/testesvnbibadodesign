@@ -122,6 +122,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		lblNomeDaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		MaskFormatter mascaraEmpresa = criarMascara("****************************************************************************************************");
+		mascaraEmpresa.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
 		txtNomeEmpresa = new JFormattedTextField(mascaraEmpresa);
 		txtNomeEmpresa.setColumns(10);
 		txtNomeEmpresa.setBackground(Color.WHITE);
