@@ -157,7 +157,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
-		mascaraNome.setInvalidCharacters("1234567890");
+		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		txtNome = new JFormattedTextField(mascaraNome);
 		txtNome.setBounds(81, 52, 532, 20);
 		txtNome.setColumns(10);
@@ -168,7 +168,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtCep.setBounds(81, 87, 187, 20);
 		txtCep.setColumns(10);
 
-		MaskFormatter mascaraNumero = criarMascara("*****");
+		MaskFormatter mascaraNumero = criarMascara("#####");
 		txtNumero = new JFormattedTextField(mascaraNumero);
 		txtNumero.setColumns(10);
 		txtNumero.setBounds(564, 87, 49, 20);
@@ -182,16 +182,19 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 
 		MaskFormatter mascaraBairro = criarMascara("**************************************************");
+		mascaraBairro.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtBairro = new JFormattedTextField(mascaraBairro);
 		txtBairro.setBounds(81, 118, 187, 20);
 		txtBairro.setColumns(10);
 
 		MaskFormatter mascaraLogin = criarMascara("********************");
+		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtLogin = new JFormattedTextField(mascaraLogin);
 		txtLogin.setBounds(81, 177, 187, 20);
 		txtLogin.setColumns(10);
 
 		MaskFormatter mascaraSenha = criarMascara("********************");
+		mascaraSenha.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtSenha = new JFormattedTextField(mascaraSenha);
 		txtSenha.setBounds(81, 208, 187, 20);
 		txtSenha.setColumns(10);
@@ -203,11 +206,13 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtTelefone.setColumns(10);
 
 		MaskFormatter mascaraEndereco = criarMascara("****************************************************************************************************");
+		mascaraEndereco.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtEndereco = new JFormattedTextField(mascaraEndereco);
 		txtEndereco.setBounds(368, 87, 157, 20);
 		txtEndereco.setColumns(10);
 
 		MaskFormatter mascaraCidade = criarMascara("**************************************************");
+		mascaraCidade.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtCidade = new JFormattedTextField(mascaraCidade);
 		txtCidade.setColumns(10);
 		txtCidade.setBounds(368, 149, 157, 20);
@@ -216,6 +221,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		this.bordaPadrao = txtCidade.getBorder();
 		
 		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
+		mascaraComplemento.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtComplemento = new JFormattedTextField(mascaraComplemento);
 		txtComplemento.setColumns(10);
 		txtComplemento.setBounds(368, 118, 245, 20);
@@ -546,7 +552,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			this.limparCadastro();
 			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, "Este Login já existe para esta empresa");
+			JOptionPane.showMessageDialog(null, "Este Login já existe.");
 		}
 	}
 
@@ -645,7 +651,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			return null;
 		}
 	}
-
+	
 	public void keyPressed(KeyEvent evt) {}
 	public void keyTyped(KeyEvent evt) {}
 }

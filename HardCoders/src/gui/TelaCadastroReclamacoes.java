@@ -160,6 +160,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		MaskFormatter mascaraTipo = criarMascara("****************************************************************************************************");
+		mascaraTipo.setInvalidCharacters("!@#$%Ё&*()\"'+=-_[]{}|?><");
 		txtTipo = new JFormattedTextField(mascaraTipo);
 		txtTipo.setBackground(Color.WHITE);
 		txtTipo.setBounds(147, 55, 296, 20);
@@ -339,7 +340,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			JOptionPane.showMessageDialog(null, "Reclamaзгo cadastrada com sucesso.");
 			limparCadastro();
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, "Reclamaзгo jб existe.");
 		}
 	}
 
@@ -378,7 +379,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			pintarBorda(txtTipo);
 		}
 		if(!valido){
-			JOptionPane.showMessageDialog(null, "Campos Obrigatуriaos nгo preenchidos");
+			JOptionPane.showMessageDialog(null, "Campos obrigatуrios nгo preenchidos");
 		}
 		return valido;
 	}

@@ -4,30 +4,30 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import util.Sessao;
-
 import entidades.Empresa;
 import entidades.Funcionario;
 import fachada.Fachada;
 
 public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 	
-	private JTextField login_txt;
+	private JFormattedTextField login_txt;
 	private JPasswordField senha_txt;
 	private List<Empresa> listaEmpresas;
 	private JComboBox comboEmpresa;
@@ -87,7 +87,10 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 			getContentPane().add(lblSenha);
 		}
 
-		login_txt = new JTextField();
+		MaskFormatter mascaraLogin = criarMascara("********************");
+		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?");
+		login_txt = new JFormattedTextField(mascaraLogin);
+		login_txt.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		login_txt.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		login_txt.addActionListener(this);
 		login_txt.addKeyListener(this);
@@ -95,6 +98,7 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 		getContentPane().add(login_txt);
 		login_txt.setColumns(10);
 
+		MaskFormatter mascaraPw = criarMascara("********************");
 		senha_txt = new JPasswordField();
 		senha_txt.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		senha_txt.addKeyListener(this);
@@ -179,12 +183,18 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 			senha_txt.grabFocus();
 		}
 	}
-
-	public void keyReleased(KeyEvent arg0) {
+	
+	private MaskFormatter criarMascara(String formato){
 		
+		try {
+			MaskFormatter mascara = new MaskFormatter(formato);
+			return mascara;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	public void keyTyped(KeyEvent arg0) {
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
+	public void keyTyped(KeyEvent arg0) {}
 }
