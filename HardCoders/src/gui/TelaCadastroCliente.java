@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -38,7 +40,7 @@ import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
 public class TelaCadastroCliente extends JPanel implements ActionListener{
-	
+
 	private JTable table;
 	private JFormattedTextField txtNome;
 	private JFormattedTextField txtCpf;
@@ -51,8 +53,8 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 	private JFormattedTextField txtCidade;
 	private JFormattedTextField txtTelefone;
 	private JFormattedTextField txtEmail;
-	private final JComboBox comboBoxTelPF;
-	private final JComboBox comboBoxTelPJ;
+	private JFormattedTextField txtComplemento;
+	private final JComboBox comboBoxTelefone;
 	private final JComboBox comboBoxEndereco;
 	private final JComboBox comboBoxEstado;
 	private JRadioButton rbtnJurica;
@@ -63,7 +65,10 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 	private final JLabel lblRazoSocial;
 	private final JButton botaoCadastrar;
 	private Map<String, String[]> enderecos;
+	private Map<String, String[]> telefones;
 	private int comboEnderecoAtual;
+	private int comboTelefoneAtual;
+	private Border bordaPadrao;
 
 	public TelaCadastroCliente() {
 
@@ -153,6 +158,8 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
 		txtNome = new JFormattedTextField(mascaraNome);
 		txtNome.setColumns(10);
+		
+		this.bordaPadrao = txtNome.getBorder();
 
 		lblCpf = new JLabel("CPF:");
 
@@ -189,11 +196,9 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtEmail = new JFormattedTextField(mascararEmail);
 		txtEmail.setColumns(10);
 
-		comboBoxTelPF = new JComboBox();
-		carregarCombo(comboBoxTelPF);
-
-		comboBoxTelPJ = new JComboBox();
-		carregarCombo(comboBoxTelPJ);
+		comboBoxTelefone = new JComboBox();
+		carregarCombo(comboBoxTelefone);
+		comboBoxTelefone.addActionListener(this);
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
@@ -238,184 +243,204 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		final JLabel lbl_estado_end = new JLabel("Estado:");
 
 		this.enderecos = new Hashtable<String, String[]>();
+		this.telefones = new Hashtable<String, String[]>();
 		this.comboEnderecoAtual = 0;
+		this.comboTelefoneAtual = 0;
 
 		comboBoxEstado = new JComboBox();
 		carregarCombo(comboBoxEstado);
 
+		JLabel lblComplemento = new JLabel("Complemento:");
+
+		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
+		txtComplemento = new JFormattedTextField(mascaraComplemento);
+		txtComplemento.setColumns(10);
+
 		GroupLayout gl_panel_end_Fisica = new GroupLayout(panel_end_Fisica);
 		gl_panel_end_Fisica.setHorizontalGroup(
-				gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+			gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-						.addGap(10)
-						.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(10)
+							.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-										.addComponent(lbl_end)
-										.addGap(10)
-										.addComponent(comboBoxEndereco, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-												.addComponent(lbl_rua_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-												.addGap(13)
-												.addComponent(txtRua, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-												.addGap(10)
+									.addComponent(lbl_end)
+									.addGap(10)
+									.addComponent(comboBoxEndereco, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+									.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+										.addComponent(lbl_bairro_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lbl_cep_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lbl_rua_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+									.addGap(33)
+									.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(txtComplemento, Alignment.LEADING)
+										.addComponent(txtCep)
+										.addComponent(txtBairro, Alignment.LEADING)
+										.addComponent(txtRua, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+									.addGap(65)
+									.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_panel_end_Fisica.createSequentialGroup()
 												.addComponent(lbl_numero_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 												.addGap(10)
-												.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-														.addComponent(lbl_bairro_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-														.addGap(13)
-														.addComponent(txtBairro, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-														.addGap(10)
-														.addComponent(lbl_cidade_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-														.addGap(10)
-														.addComponent(txtCidade, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
-														.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																.addComponent(lbl_cep_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-																.addGap(13)
-																.addComponent(txtCep, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-																.addGap(10)
-																.addComponent(lbl_estado_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-																.addGap(10)
-																.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))
-				);
+												.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+												.addComponent(lbl_cidade_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+												.addGap(10)
+												.addComponent(txtCidade, 0, 0, Short.MAX_VALUE)))
+										.addGroup(Alignment.TRAILING, gl_panel_end_Fisica.createSequentialGroup()
+											.addComponent(lbl_estado_end, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+											.addGap(10)
+											.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))))
+							.addGap(41))
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblComplemento)))
+					.addGap(9))
+		);
 		gl_panel_end_Fisica.setVerticalGroup(
-				gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+			gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-						.addGap(8)
-						.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+					.addGap(8)
+					.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lbl_end))
+						.addComponent(comboBoxEndereco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(10)
+					.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtRua, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lbl_rua_end))
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lbl_numero_end))
+						.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-										.addGap(3)
-										.addComponent(lbl_end))
-										.addComponent(comboBoxEndereco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGap(10)
-										.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-														.addGap(3)
-														.addComponent(lbl_rua_end))
-														.addComponent(txtRua, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																.addGap(3)
-																.addComponent(lbl_numero_end))
-																.addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																.addGap(11)
-																.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
-																		.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																				.addGap(4)
-																				.addComponent(lbl_bairro_end))
-																				.addComponent(txtBairro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																				.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																						.addGap(4)
-																						.addComponent(lbl_cidade_end))
-																						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																								.addGap(1)
-																								.addComponent(txtCidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-																								.addGap(10)
-																								.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
-																										.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																												.addGap(3)
-																												.addComponent(lbl_cep_end))
-																												.addComponent(txtCep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																												.addGroup(gl_panel_end_Fisica.createSequentialGroup()
-																														.addGap(3)
-																														.addComponent(lbl_estado_end))
-																														.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-				);
+									.addGap(11)
+									.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+											.addGap(4)
+											.addComponent(lbl_bairro_end))
+										.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+											.addGap(4)
+											.addComponent(lbl_cidade_end))))
+								.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+									.addGap(12)
+									.addComponent(txtCidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(11)
+							.addComponent(txtBairro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(10)
+					.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lbl_cep_end))
+						.addGroup(gl_panel_end_Fisica.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lbl_estado_end))
+						.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtCep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel_end_Fisica.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblComplemento)
+						.addComponent(txtComplemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panel_end_Fisica.setLayout(gl_panel_end_Fisica);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addGap(46)
-										.addComponent(rbtnFisica)
-										.addComponent(rbtnJurica))
-										.addGroup(gl_panel.createSequentialGroup()
-												.addGap(10)
-												.addComponent(lblCpf, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-												.addGap(4)
-												.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-												.addGap(10)
-												.addComponent(lblNome)
-												.addGap(40)
-												.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_panel.createSequentialGroup()
-														.addContainerGap()
-														.addComponent(lblCnpj, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-														.addGap(4)
-														.addComponent(txtCnpj, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-														.addGap(10)
-														.addComponent(lblRazoSocial, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-														.addGap(4)
-														.addComponent(txtRazaoSocial, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
-														.addGroup(gl_panel.createSequentialGroup()
-																.addContainerGap()
-																.addComponent(panel_end_Fisica, GroupLayout.PREFERRED_SIZE, 530, GroupLayout.PREFERRED_SIZE))
-																.addGroup(gl_panel.createSequentialGroup()
-																		.addContainerGap()
-																		.addComponent(botaoCadastrar))
-																		.addGroup(gl_panel.createSequentialGroup()
-																				.addGap(10)
-																				.addComponent(lbl_tel_fisica)
-																				.addGap(18)
-																				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																						.addComponent(comboBoxTelPJ, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-																						.addGroup(gl_panel.createSequentialGroup()
-																								.addComponent(comboBoxTelPF, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-																								.addPreferredGap(ComponentPlacement.RELATED)
-																								.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-																								.addGap(64)
-																								.addComponent(lbl_email_fisica)
-																								.addGap(18)
-																								.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))))
-																								.addContainerGap(682, Short.MAX_VALUE))
-				);
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(46)
+							.addComponent(rbtnFisica)
+							.addComponent(rbtnJurica))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(10)
+							.addComponent(lblCpf, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(lblNome)
+							.addGap(40)
+							.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblCnpj, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(txtCnpj, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(lblRazoSocial, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(txtRazaoSocial, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(botaoCadastrar))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(20)
+							.addComponent(lbl_tel_fisica)
+							.addGap(33)
+							.addComponent(comboBoxTelefone, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+							.addGap(68)
+							.addComponent(lbl_email_fisica)
+							.addGap(18)
+							.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_end_Fisica, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(265, Short.MAX_VALUE))
+		);
 		gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addGap(17)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(rbtnFisica)
-								.addComponent(rbtnJurica))
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panel.createSequentialGroup()
-												.addGap(3)
-												.addComponent(lblCnpj))
-												.addComponent(txtCnpj, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_panel.createSequentialGroup()
-														.addGap(3)
-														.addComponent(lblRazoSocial))
-														.addComponent(txtRazaoSocial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-														.addGap(3)
-														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																.addGroup(gl_panel.createSequentialGroup()
-																		.addGap(3)
-																		.addComponent(lblCpf))
-																		.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																		.addGroup(gl_panel.createSequentialGroup()
-																				.addGap(3)
-																				.addComponent(lblNome))
-																				.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																				.addPreferredGap(ComponentPlacement.RELATED)
-																				.addComponent(panel_end_Fisica, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-																				.addGap(19)
-																				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																						.addGroup(gl_panel.createSequentialGroup()
-																								.addGap(3)
-																								.addComponent(lbl_tel_fisica))
-																								.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-																										.addComponent(comboBoxTelPF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																										.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-																												.addComponent(lbl_email_fisica)
-																												.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-																												.addPreferredGap(ComponentPlacement.RELATED)
-																												.addComponent(comboBoxTelPJ, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																												.addGap(18)
-																												.addComponent(botaoCadastrar)
-																												.addGap(85))
-				);
+					.addGap(17)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(rbtnFisica)
+						.addComponent(rbtnJurica))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblCnpj))
+						.addComponent(txtCnpj, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblRazoSocial))
+						.addComponent(txtRazaoSocial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(3)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblCpf))
+						.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNome))
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_end_Fisica, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbl_email_fisica)
+						.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbl_tel_fisica))
+					.addGap(44)
+					.addComponent(botaoCadastrar)
+					.addGap(85))
+		);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -462,7 +487,6 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtCnpj.setVisible(false);
 		lblRazoSocial.setVisible(false);
 		txtRazaoSocial.setVisible(false);
-		comboBoxTelPJ.setVisible(false);
 
 		this.setLayout(layout);
 	}
@@ -473,21 +497,16 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtBairro.setText("");
 		txtCidade.setText("");
 		txtCep.setText("");
+		txtComplemento.setText("");
 		comboBoxEstado.setSelectedIndex(0);
 	}
 
 	private void carregarCombo(JComboBox combo){
 
-		if(combo.equals(this.comboBoxTelPF)){
-			String [] rotulos = Constantes.getRotuloTelefonePF();
+		if(combo.equals(this.comboBoxTelefone)){
+			String [] rotulos = Constantes.getRotuloTelefoneCliente();
 			for(String rotulo : rotulos){
-				this.comboBoxTelPF.addItem(rotulo);
-			}
-		}
-		else if(combo.equals(this.comboBoxTelPJ)){
-			String [] rotulos = Constantes.getRotuloTelefonePJ();
-			for(String rotulo : rotulos){
-				this.comboBoxTelPJ.addItem(rotulo);
+				this.comboBoxTelefone.addItem(rotulo);
 			}
 		}
 		else if(combo.equals(this.comboBoxEndereco)){
@@ -510,13 +529,11 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtCpf.setVisible(true);
 		lblNome.setVisible(true);
 		txtNome.setVisible(true);
-		comboBoxTelPF.setVisible(true);
 
 		lblCnpj.setVisible(false);
 		txtCnpj.setVisible(false);
 		lblRazoSocial.setVisible(false);
 		txtRazaoSocial.setVisible(false);
-		comboBoxTelPJ.setVisible(false);
 	}
 
 	private void ativarCamposPJ(){
@@ -525,13 +542,11 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtCpf.setVisible(false);
 		lblNome.setVisible(false);
 		txtNome.setVisible(false);
-		comboBoxTelPF.setVisible(false);
 
 		lblCnpj.setVisible(true);
 		txtCnpj.setVisible(true);
 		lblRazoSocial.setVisible(true);
 		txtRazaoSocial.setVisible(true);
-		comboBoxTelPJ.setVisible(true);
 	}
 
 	private void cadastrarPessoaFisica(){
@@ -561,30 +576,39 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		c.setEmail(email);
 		c.setCpfOrCnpj(cpf);
 		c.setAtivo(Constantes.ATIVO);
+
 		try {
 			fachada.cadastrarCliente(c);
 			cadastrarEnderecos(id_pessoa);
+			cadastrarTelefones(id_pessoa);
 			
-			//dados de telefone
-			String rotuloTelefone = (String) this.comboBoxTelPF.getSelectedItem();
-			String numeroTelefone = this.txtTelefone.getText().trim();
-			Telefone t = new Telefone();
-			t.setId_pessoa(id_pessoa);
-			t.setNumero(numeroTelefone);
-			t.setRotulo(rotuloTelefone);
-			
-			fachada.cadastrarTelefone(t);
-			
+
 		} catch (EntidadeJaExisteException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
-
+	}
+	
+	private void cadastrarTelefones(Long id_pessoa) throws EntidadeJaExisteException{
 		
+		//dados de telefone
+		Fachada fachada = Fachada.getInstancia();
+		salvarCampos((String)comboBoxTelefone.getSelectedItem(), 2);
+		Set<String> rotulos = telefones.keySet();
+		for(String rotulo : rotulos){
+			String numeroTelefone = telefones.get(rotulo)[0];
+			Telefone t = new Telefone();
+			t.setId_pessoa(id_pessoa);
+			t.setNumero(numeroTelefone);
+			t.setRotulo(rotulo);
+			t.setAtivo(Constantes.ATIVO);
+			
+			fachada.cadastrarTelefone(t);
+		}
 	}
 
 	private void cadastrarEnderecos(Long id_pessoa) throws EntidadeJaExisteException{
 
-		salvarCampos((String)comboBoxEndereco.getSelectedItem());
+		salvarCampos((String)comboBoxEndereco.getSelectedItem(), 1);
 		Set<String> rotulos = enderecos.keySet();
 		Fachada fachada = Fachada.getInstancia();
 		for(String rotulo : rotulos){
@@ -596,13 +620,14 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 			String cidade = campos[3];
 			String cep = campos[4];
 			String estado = (String)comboBoxEstado.getItemAt(Integer.parseInt(campos[5]));
+			String complemento = campos[6];
 
 			Endereco e = new Endereco();
 			e.setId_pessoa(id_pessoa);
 			e.setRotulo(rotulo);
 			e.setRua(rua);
 			e.setNumero(numero);
-			//	e.setComplemento(complemento)
+			e.setComplemento(complemento);
 			e.setBairro(bairro);
 			e.setCidade(cidade);
 			e.setCep(cep);
@@ -610,7 +635,6 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 			e.setAtivo(Constantes.ATIVO);
 			fachada.cadastrarEndereco(e);
 		}
-
 	}
 
 	private void cadastrarPessoaJuridica(){
@@ -628,69 +652,167 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 			return null;
 		}
 	}
+	
+	private boolean camposPFValidos(){
+		
+		boolean valido = true;
+
+		if(!(txtCpf.getText().trim().length() == 18)){
+			valido = false;
+			pintarBorda(txtCpf);
+		}
+		if(txtNome.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtNome);
+		}
+
+		if(!valido){
+			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private boolean camposPJValidos(){
+		
+		boolean valido = true;
+
+		if(!(txtCnpj.getText().trim().length() == 14)){
+			valido = false;
+			pintarBorda(txtCnpj);
+		}
+		if(txtRazaoSocial.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtRazaoSocial);
+		}
+
+		if(!valido){
+			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private void pintarBorda(JFormattedTextField campo){
+		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
+	}
+	
+	private void normalizarCampos(){
+		txtCpf.setBorder(bordaPadrao);
+		txtCnpj.setBorder(bordaPadrao);
+		txtNome.setBorder(bordaPadrao);
+		txtRazaoSocial.setBorder(bordaPadrao);
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 
 		JComponent elemento = (JComponent) evt.getSource();
+		normalizarCampos();
 
 		if(elemento.equals(this.rbtnFisica)){
 			this.ativarCamposPF();
 			limparEndereco();
+			limparTelefone();
 			this.enderecos.clear();
+			this.telefones.clear();
 		}
 		else if(elemento.equals(this.rbtnJurica)){
 			this.ativarCamposPJ();
 			limparEndereco();
+			limparTelefone();
 			this.enderecos.clear();
+			this.telefones.clear();
 		}
 		else if(elemento.equals(this.botaoCadastrar)){
 			if(this.rbtnFisica.isSelected()){
-				cadastrarPessoaFisica();
+				if(camposPFValidos()){
+					cadastrarPessoaFisica();
+				}
 			}
 			else if(this.rbtnJurica.isSelected()){
-				cadastrarPessoaJuridica();
+				if(camposPFValidos()){
+					cadastrarPessoaJuridica();
+				}
 			}
 		}
 		else if(elemento.equals(this.comboBoxEndereco)){
-			this.atualizarCampos("Salvar");
-			this.atualizarCampos("Restaurar");
+			this.atualizarCampos("Salvar", 1);
+			this.atualizarCampos("Restaurar", 1);
+		}
+		else if(elemento.equals(this.comboBoxTelefone)){
+			this.atualizarCampos("Salvar", 2);
+			this.atualizarCampos("Restaurar", 2);
 		}
 	}
 
-	private void atualizarCampos(String operacao){
+	private void atualizarCampos(String operacao, int tipo){
 
-		String rotulo = (String)this.comboBoxEndereco.getItemAt(this.comboEnderecoAtual);
-		if(operacao.equals("Salvar")){
-			salvarCampos(rotulo);
+		if(tipo == 1){
+			String rotulo = (String)this.comboBoxEndereco.getItemAt(this.comboEnderecoAtual);
+			if(operacao.equals("Salvar")){
+				salvarCampos(rotulo, tipo);
+			}
+			else if(operacao.equals("Restaurar")){
+				restaurarCampos(rotulo, tipo);
+			}
 		}
-		else if(operacao.equals("Restaurar")){
-			restaurarCampos(rotulo);
-		}
-	}
-
-	private void restaurarCampos(String chave){
-
-		String [] campos = enderecos.get(chave);
-		if(campos != null){
-			txtRua.setText(campos[0]);
-			txtNumero.setText(campos[1]);
-			txtBairro.setText(campos[2]);
-			txtCidade.setText(campos[3]);
-			txtCep.setText(campos[4]);
-			comboBoxEstado.setSelectedIndex(Integer.parseInt(campos[5]));
+		else if(tipo == 2){
+			String rotulo = (String) this.comboBoxTelefone.getItemAt(this.comboTelefoneAtual);
+			if(operacao.equals("Salvar")){
+				salvarCampos(rotulo, tipo);
+			}
+			else if(operacao.equals("Restaurar")){
+				restaurarCampos(rotulo, tipo);
+			}
 		}
 	}
 
-	private void salvarCampos(String chave){
-		String [] campos = new String[6];
-		campos[0] = txtRua.getText().trim();
-		campos[1] = txtNumero.getText().trim();
-		campos[2] = txtBairro.getText().trim();
-		campos[3] = txtCidade.getText().trim();
-		campos[4] = txtCep.getText().trim();
-		campos[5] = comboBoxEstado.getSelectedIndex() + "";
-		enderecos.put(chave, campos);
-		comboEnderecoAtual = comboBoxEndereco.getSelectedIndex();
-		limparEndereco();
+	private void restaurarCampos(String chave, int tipo){
+
+		String [] campos;
+			if(tipo == 1){
+				campos = enderecos.get(chave);
+				if(campos != null){
+				txtRua.setText(campos[0]);
+				txtNumero.setText(campos[1]);
+				txtBairro.setText(campos[2]);
+				txtCidade.setText(campos[3]);
+				txtCep.setText(campos[4]);
+				comboBoxEstado.setSelectedIndex(Integer.parseInt(campos[5]));
+				txtComplemento.setText(campos[6]);
+				}
+			}
+			else if(tipo == 2){
+				campos = telefones.get(chave);
+				if(campos != null){
+				txtTelefone.setText(campos[0]);
+				}
+			}
+	}
+
+	private void salvarCampos(String chave, int tipo){
+
+		if(tipo == 1){
+			String [] campos = new String[7];
+			campos[0] = txtRua.getText().trim();
+			campos[1] = txtNumero.getText().trim();
+			campos[2] = txtBairro.getText().trim();
+			campos[3] = txtCidade.getText().trim();
+			campos[4] = txtCep.getText().trim();
+			campos[5] = comboBoxEstado.getSelectedIndex() + "";
+			campos[6] = txtComplemento.getText().trim();
+			enderecos.put(chave, campos);
+			comboEnderecoAtual = comboBoxEndereco.getSelectedIndex();
+			limparEndereco();
+		}
+		else if(tipo == 2){
+			String [] campos = new String[1];
+			campos[0] = txtTelefone.getText().trim();
+			telefones.put(chave, campos);
+			comboTelefoneAtual = comboBoxTelefone.getSelectedIndex();
+			limparTelefone();
+		}
+	}
+
+	private void limparTelefone(){
+		txtTelefone.setText("");
 	}
 }

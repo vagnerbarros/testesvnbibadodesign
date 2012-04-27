@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -23,8 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -42,6 +43,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 	private JTable table;
 	private JButton botaoCadastrar;
 	private JTabbedPane tabbedPane;
+	private Border bordaPadrao;
 
 	public TelaCadastroEmpresa() {
 		
@@ -124,6 +126,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		txtNomeEmpresa.setColumns(10);
 		txtNomeEmpresa.setBackground(Color.WHITE);
 		
+		this.bordaPadrao = txtNomeEmpresa.getBorder();
 		
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
@@ -263,6 +266,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 	public void actionPerformed(ActionEvent evt) {
 		
 		JComponent elemento = (JComponent) evt.getSource();
+		normalizarCampos();
 		
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
@@ -323,8 +327,25 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 	}
 	
 	private boolean camposValidos(){
-		//aqui devem ser verificados os campos
-		return true;
+		
+		boolean valido = true;
+
+		if(txtNomeEmpresa.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtNomeEmpresa);
+		}
+		if(!valido){
+			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private void pintarBorda(JFormattedTextField campo){
+		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
+	}
+	
+	private void normalizarCampos(){
+		txtNomeEmpresa.setBorder(bordaPadrao);
 	}
 	
 	public void stateChanged(ChangeEvent e) {

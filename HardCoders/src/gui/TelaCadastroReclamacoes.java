@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -24,8 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -48,6 +49,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	private JButton botaoCadastrar;
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
+	private Border bordaPadrao;
 
 	public TelaCadastroReclamacoes() {
 
@@ -163,6 +165,8 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtTipo.setBounds(147, 55, 296, 20);
 		panel_3.add(txtTipo);
 		txtTipo.setColumns(10);
+		
+		this.bordaPadrao = txtTipo.getBorder();
 
 		botaoLimpar = new JButton("Limpar");
 		botaoLimpar.addActionListener(this);
@@ -306,6 +310,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	public void actionPerformed(ActionEvent evt) {
 
 		JComponent elemento = (JComponent) evt.getSource();
+		normalizarCampos();
 
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
@@ -361,8 +366,30 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	}
 
 	private boolean camposValidos(){
-		//aqui deve ser validado todos os campos
-		return true;
+		
+		boolean valido = true;
+
+		if(txtCodigo.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtCodigo);
+		}
+		if(txtTipo.getText().trim().equals("")){
+			valido = false;
+			pintarBorda(txtTipo);
+		}
+		if(!valido){
+			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private void pintarBorda(JFormattedTextField campo){
+		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
+	}
+	
+	private void normalizarCampos(){
+		txtCodigo.setBorder(bordaPadrao);
+		txtTipo.setBorder(bordaPadrao);
 	}
 
 	private void limparCadastro(){
@@ -379,6 +406,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	}
 
 	public void stateChanged(ChangeEvent e) {
+		
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Reclamacao());
 		}
