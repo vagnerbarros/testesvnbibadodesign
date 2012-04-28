@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
@@ -48,6 +49,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private JTable table;
 	private JButton botaoLimpar;
 	private JButton botaoCadastrar;
+	private JButton btnEditar;
+	private JButton btnRemover;
 	private JTabbedPane tabbedPane;
 	private JComboBox comboBoxBusca;
 	private Border bordaPadrao;
@@ -147,7 +150,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		MaskFormatter mascaraValor = criarMascara("********");
 		mascaraValor.setValidCharacters("1234567890.");
 		txtValor = new JFormattedTextField(mascaraValor);
-		txtValor.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		txtValor.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtValor.setColumns(10);
 		txtValor.setBackground(Color.WHITE);
 		txtValor.setBounds(147, 42, 89, 20);
@@ -234,33 +237,48 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		lblServiosCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JScrollPane scrollPane = new JScrollPane();
+		
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(this);
+		
+		btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-						.addGap(14)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
-								.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE))
-								.addContainerGap())
-				);
-		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-						.addGap(6)
-						.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addGap(11)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-						.addGap(26))
-				);
+					.addGap(14)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+						.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE))
+					.addContainerGap())
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap(529, Short.MAX_VALUE)
+					.addComponent(btnEditar)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnRemover)
+					.addGap(84))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+					.addGap(3)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEditar)
+						.addComponent(btnRemover)))
+		);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome", "Valor"}
 				) {
-			Class[] types = new Class [] {java.lang.String.class, java.lang.Double.class};
+			Class[] types = new Class [] {Servico.class, java.lang.Double.class};
 			boolean[] canEdit = new boolean [] {false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -273,6 +291,9 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		});
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
+		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		this.montaTabela(new Servico());
 
 		this.setLayout(layout);
@@ -292,13 +313,13 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		} else {
 			for (int i = 0; i < listaServicos.size(); i++) {
 
-				linhas[i][0] = listaServicos.get(i).getNome();
+				linhas[i][0] = listaServicos.get(i);
 				linhas[i][1] = listaServicos.get(i).getValor();
 			}
 		}
 
 		table.setModel(new DefaultTableModel(linhas, colunas) {
-			Class[] types = new Class[] { java.lang.String.class, java.lang.Double.class};
+			Class[] types = new Class[] { Servico.class, java.lang.Double.class};
 			boolean[] canEdit = new boolean[] { false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -327,6 +348,29 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		else if(elemento.equals(this.comboBoxBusca)){
 			this.txtBusca.setText(null);
 			this.buscar();
+		}
+		else if(elemento.equals(this.btnRemover)){
+			removerServico();
+		}
+		else if(elemento.equals(this.btnEditar)){
+			
+		}
+	}
+	
+	private void removerServico(){
+		
+		int linha = table.getSelectedRow();
+		
+		if(linha != -1){
+			
+			Object[] options = { "OK", "Cancelar" };
+			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if(resposta == 0){
+				Servico s = (Servico) table.getModel().getValueAt(linha, 0);
+				Fachada fachada = Fachada.getInstancia();
+				fachada.removerServico(s);
+				montaTabela(new Servico());
+			}
 		}
 	}
 

@@ -26,10 +26,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -40,7 +42,7 @@ import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
 public class TelaCadastroReclamacoes extends JPanel implements ActionListener, KeyListener, ChangeListener{
-	
+
 	private JFormattedTextField txtCodigo;
 	private JFormattedTextField txtTipo;
 	private JFormattedTextField txtBusca;
@@ -50,6 +52,8 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
 	private Border bordaPadrao;
+	private JButton btnEditar;
+	private JButton btnRemover;
 
 	public TelaCadastroReclamacoes() {
 
@@ -166,7 +170,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtTipo.setBounds(147, 55, 296, 20);
 		panel_3.add(txtTipo);
 		txtTipo.setColumns(10);
-		
+
 		this.bordaPadrao = txtTipo.getBorder();
 
 		botaoLimpar = new JButton("Limpar");
@@ -192,27 +196,43 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_2.setBackground(SystemColor.control);
+
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(this);
+
+		btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 				gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel_2, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
-								.addComponent(lblTiposDeReclamao, Alignment.LEADING))
-								.addContainerGap())
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+										.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+												.addComponent(panel_2, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 786, Short.MAX_VALUE)
+												.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+												.addComponent(lblTiposDeReclamao, Alignment.LEADING))
+												.addContainerGap())
+												.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+														.addComponent(btnEditar)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(btnRemover)
+														.addGap(98))))
 				);
 		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
 						.addGap(19)
 						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(lblTiposDeReclamao)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-						.addGap(15))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnEditar)
+								.addComponent(btnRemover)))
 				);
 
 		JLabel lblFiltrar = new JLabel("Filtrar:");
@@ -257,7 +277,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Código", "Tipo de Reclamação"}
 				) {
-			Class[] types = new Class [] {java.lang.String.class, java.lang.String.class};
+			Class[] types = new Class [] {Reclamacao.class, java.lang.String.class};
 			boolean[] canEdit = new boolean [] {false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -270,6 +290,8 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		});
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
+
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		this.montaTabela(new Reclamacao());
 
@@ -289,13 +311,13 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		} else {
 			for (int i = 0; i < listaReclamacao.size(); i++) {
 
-				linhas[i][0] = listaReclamacao.get(i).getCodigo();
+				linhas[i][0] = listaReclamacao.get(i);
 				linhas[i][1] = listaReclamacao.get(i).getNome();
 			}
 		}
 
 		table.setModel(new DefaultTableModel(linhas, colunas) {
-			Class[] types = new Class[] { java.lang.String.class, java.lang.String.class};
+			Class[] types = new Class[] { Reclamacao.class, java.lang.String.class};
 			boolean[] canEdit = new boolean[] { false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -324,6 +346,28 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		else if(elemento.equals(this.comboBoxBusca)){
 			this.txtBusca.setText(null);
 			this.buscar();
+		}
+		else if(elemento.equals(this.btnEditar)){
+
+		}
+		else if(elemento.equals(this.btnRemover)){
+			removerReclamacao();
+		}
+	}
+
+	private void removerReclamacao(){
+
+		int linha = table.getSelectedRow();
+
+		if(linha != -1){
+			Object[] options = { "OK", "Cancelar" };
+			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if(resposta == 0){
+				Reclamacao r = (Reclamacao) table.getModel().getValueAt(linha, 0);
+				Fachada fachada = Fachada.getInstancia();
+				fachada.removerReclamacao(r);
+				montaTabela(new Reclamacao());
+			}
 		}
 	}
 
@@ -367,7 +411,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	}
 
 	private boolean camposValidos(){
-		
+
 		boolean valido = true;
 
 		if(txtCodigo.getText().trim().equals("")){
@@ -383,11 +427,11 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		}
 		return valido;
 	}
-	
+
 	private void pintarBorda(JFormattedTextField campo){
 		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
 	}
-	
+
 	private void normalizarCampos(){
 		txtCodigo.setBorder(bordaPadrao);
 		txtTipo.setBorder(bordaPadrao);
@@ -407,14 +451,14 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	}
 
 	public void stateChanged(ChangeEvent e) {
-		
+
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Reclamacao());
 		}
 	}
-	
+
 	private MaskFormatter criarMascara(String formato){
-		
+
 		try {
 			MaskFormatter mascara = new MaskFormatter(formato);
 			return mascara;

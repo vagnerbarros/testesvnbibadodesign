@@ -72,6 +72,9 @@ public class Funcionario implements IEntidades<Funcionario>{
 	public void setId_empresa(Long id_empresa) {
 		this.id_empresa = id_empresa;
 	}
+	public String toString(){
+		return this.nome;
+	}
 	public boolean equals(Object obj){
 		Funcionario f = (Funcionario) obj;
 		if(this.login.equals(f.getLogin()) && this.id_empresa.compareTo(f.getId_empresa()) == 0){
