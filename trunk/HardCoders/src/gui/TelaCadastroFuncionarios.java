@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -67,6 +68,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	private JComboBox comboBoxBusca;
 	private JButton btnLimpar;
 	private JButton btnCadastro;
+	private JButton btnRemover;
+	private JButton btnEditar;
+	private JButton btnVisualizar;
 	private JTabbedPane tabbedPane;
 	private Border bordaPadrao;
 	private int comboTelefoneAtual;
@@ -381,30 +385,52 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		panel_2.setLayout(gl_panel_2);
 
 		JScrollPane scrollPane = new JScrollPane();
+		
+		btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(this);
+		
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(this);
+		
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
 								.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addContainerGap())
-				);
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+							.addComponent(btnEditar)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnRemover)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnVisualizar)
+							.addGap(47))))
+		);
 		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-						.addGap(34)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-						.addGap(10))
-				);
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnRemover)
+						.addComponent(btnEditar)
+						.addComponent(btnVisualizar)))
+		);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome", "CPF", "Cargo"}
 				) {
-			Class[] types = new Class [] {java.lang.String.class, java.lang.String.class, java.lang.String.class};
+			Class[] types = new Class [] {Funcionario.class, java.lang.String.class, java.lang.String.class};
 			boolean[] canEdit = new boolean [] {false, false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -417,6 +443,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		});
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
+		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		this.montaTabela(new Funcionario());
 
 		this.setLayout(layout);
@@ -436,14 +465,14 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		} else {
 			for (int i = 0; i < listaFuncionarios.size(); i++) {
 
-				linhas[i][0] = listaFuncionarios.get(i).getNome();
+				linhas[i][0] = listaFuncionarios.get(i);
 				linhas[i][1] = listaFuncionarios.get(i).getCpf();
 				linhas[i][2] = listaFuncionarios.get(i).getCargo();
 			}
 		}
 
 		table.setModel(new DefaultTableModel(linhas, colunas) {
-			Class[] types = new Class[] { java.lang.String.class, java.lang.String.class,
+			Class[] types = new Class[] { Funcionario.class, java.lang.String.class,
 					java.lang.String.class};
 			boolean[] canEdit = new boolean[] { false, false, false};
 
@@ -605,6 +634,49 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		else if(elemento.equals(this.comboBoxTelefone)){
 			this.atualizarCampos("Salvar");
 			this.atualizarCampos("Restaurar");
+		}
+		else if(elemento.equals(btnVisualizar)){
+			
+		}
+		else if(elemento.equals(btnRemover)){
+			removerFuncionario();
+		}
+		else if(elemento.equals(btnEditar)){
+			
+		}
+	}
+	
+	private void removerFuncionario(){
+		
+		int linha = table.getSelectedRow();
+		if(linha != -1){
+			Object[] options = { "OK", "Cancelar" };
+			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if(resposta == 0){
+				Fachada fachada = Fachada.getInstancia();
+				Funcionario f = (Funcionario) table.getModel().getValueAt(linha, 0);
+				
+				Pessoa p = new Pessoa();
+				p.setId(f.getId_pessoa());
+				fachada.removerPessoa(p);
+				
+				Endereco e = new Endereco();
+				e.setId_pessoa(f.getId_pessoa());
+				List<Endereco> listaEnd = fachada.buscarEndereco(e);
+				for(Endereco elem : listaEnd){
+					fachada.removerEndereco(elem);
+				}
+				
+				Telefone t = new Telefone();
+				t.setId_pessoa(f.getId_pessoa());
+				List<Telefone> listaTel = fachada.buscarTelefone(t);
+				for(Telefone tel : listaTel){
+					fachada.removerTelefone(tel);
+				}
+				
+				fachada.removerFuncionario(f);
+				montaTabela(new Funcionario());
+			}
 		}
 	}
 
