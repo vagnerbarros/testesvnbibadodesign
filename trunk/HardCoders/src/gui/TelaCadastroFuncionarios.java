@@ -8,7 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -65,6 +68,8 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
 	private Border bordaPadrao;
+	private int comboTelefoneAtual;
+	private Map<String, String[]> telefones;
 
 	public TelaCadastroFuncionarios() {
 
@@ -156,6 +161,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		lblBairro.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
+		this.comboTelefoneAtual = 0;
+		this.telefones = new Hashtable<String, String[]>();
+
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
 		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		txtNome = new JFormattedTextField(mascaraNome);
@@ -190,12 +198,14 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		MaskFormatter mascaraLogin = criarMascara("********************");
 		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtLogin = new JFormattedTextField(mascaraLogin);
+		txtLogin.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtLogin.setBounds(81, 177, 187, 20);
 		txtLogin.setColumns(10);
 
 		MaskFormatter mascaraSenha = criarMascara("********************");
 		mascaraSenha.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtSenha = new JFormattedTextField(mascaraSenha);
+		txtSenha.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtSenha.setBounds(81, 208, 187, 20);
 		txtSenha.setColumns(10);
 
@@ -219,7 +229,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		panel.add(txtCidade);
 
 		this.bordaPadrao = txtCidade.getBorder();
-		
+
 		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
 		mascaraComplemento.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtComplemento = new JFormattedTextField(mascaraComplemento);
@@ -241,6 +251,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		comboBoxTelefone = new JComboBox();
 		comboBoxTelefone.setBounds(80, 149, 91, 20);
 		iniciarCombo(comboBoxTelefone);
+		comboBoxTelefone.addActionListener(this);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setBounds(17, 151, 53, 15);
@@ -486,6 +497,11 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtComplemento.setText(null);
 		txtNumero.setText(null);
 		txtCidade.setText(null);
+		telefones.clear();
+		comboBoxTelefone.setSelectedIndex(0);
+		comboTelefoneAtual = 0;
+		comboBoxCargo.setSelectedIndex(0);
+		comboBoxEstado.setSelectedIndex(0);
 	}
 
 	private void cadastrar(){
@@ -541,13 +557,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			end.setAtivo(Constantes.ATIVO);
 			fachada.cadastrarEndereco(end);
 
-			// dados de telefone
-			Telefone tel = new Telefone();
-			tel.setAtivo(Constantes.ATIVO);
-			tel.setId_pessoa(id_pessoa);
-			tel.setNumero(telefone);
-			tel.setRotulo(rotuloTel);
-			fachada.cadastrarTelefone(tel);
+			cadastrarTelefones(id_pessoa);
 
 			this.limparCadastro();
 			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
@@ -555,12 +565,31 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			JOptionPane.showMessageDialog(null, "Este Login já existe.");
 		}
 	}
+	
+	private void cadastrarTelefones(Long id_pessoa) throws EntidadeJaExisteException{
+		
+		//dados de telefone
+		Fachada fachada = Fachada.getInstancia();
+		salvarCampos((String)comboBoxTelefone.getSelectedItem());
+		Set<String> rotulos = telefones.keySet();
+		
+		for(String rotulo : rotulos){
+			String numeroTelefone = telefones.get(rotulo)[0];
+			Telefone t = new Telefone();
+			t.setId_pessoa(id_pessoa);
+			t.setNumero(numeroTelefone);
+			t.setRotulo(rotulo);
+			t.setAtivo(Constantes.ATIVO);
+			
+			fachada.cadastrarTelefone(t);
+		}
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 
 		JComponent elemento = (JComponent) evt.getSource();
 		normalizarCampos();
-		
+
 		if(elemento.equals(this.btnLimpar)){
 			this.limparCadastro();
 		}
@@ -572,8 +601,41 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		else if(elemento.equals(this.comboBoxBusca)){
 			this.buscar();
 		}
+		else if(elemento.equals(this.comboBoxTelefone)){
+			this.atualizarCampos("Salvar");
+			this.atualizarCampos("Restaurar");
+		}
 	}
-	
+
+	private void atualizarCampos(String operacao){
+
+		String rotulo = (String) this.comboBoxTelefone.getItemAt(this.comboTelefoneAtual);
+		if(operacao.equals("Salvar")){
+			salvarCampos(rotulo);
+		}
+		else if(operacao.equals("Restaurar")){
+			restaurarCampos(rotulo);
+		}
+	}
+
+	private void salvarCampos(String chave){
+
+		String [] campos = new String[1];
+		campos[0] = txtTelefone.getText().trim();
+		telefones.put(chave, campos);
+		comboTelefoneAtual = comboBoxTelefone.getSelectedIndex();
+		txtTelefone.setText("");
+	}
+
+	private void restaurarCampos(String chave){
+
+		String [] campos;
+		campos = telefones.get(chave);
+		if(campos != null){
+			txtTelefone.setText(campos[0]);
+		}
+	}
+
 	private void normalizarCampos(){
 		txtCpf.setBorder(bordaPadrao);
 		txtLogin.setBorder(bordaPadrao);
@@ -607,7 +669,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		}
 		return valido;
 	}
-	
+
 	private void pintarBorda(JFormattedTextField campo){
 		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
 	}
@@ -635,7 +697,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 	// evento do tabbetPane
 	public void stateChanged(ChangeEvent evt) {
-		
+
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Funcionario());
 		}
@@ -651,7 +713,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			return null;
 		}
 	}
-	
+
 	public void keyPressed(KeyEvent evt) {}
 	public void keyTyped(KeyEvent evt) {}
 }

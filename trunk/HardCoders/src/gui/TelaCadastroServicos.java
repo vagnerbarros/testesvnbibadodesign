@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NavigationFilter;
 
 import util.Constantes;
 import util.Sessao;
@@ -142,9 +144,10 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		lblValorPadro.setBounds(27, 42, 110, 17);
 		panel_2.add(lblValorPadro);
 
-		MaskFormatter mascaraValor = criarMascara("######.##");
+		MaskFormatter mascaraValor = criarMascara("********");
+		mascaraValor.setValidCharacters("1234567890.");
 		txtValor = new JFormattedTextField(mascaraValor);
-		txtValor.setFocusLostBehavior(JFormattedTextField.COMMIT);
+		txtValor.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		txtValor.setColumns(10);
 		txtValor.setBackground(Color.WHITE);
 		txtValor.setBounds(147, 42, 89, 20);
