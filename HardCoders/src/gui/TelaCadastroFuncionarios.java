@@ -38,6 +38,7 @@ import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
 import util.Sessao;
+import util.Validacao;
 import entidades.Endereco;
 import entidades.Funcionario;
 import entidades.Pessoa;
@@ -63,9 +64,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	private JComboBox comboBoxEstado;
 	private JComboBox comboBoxTelefone;
 	private JComboBox comboBoxCargo;
+	private JComboBox comboBoxBusca;
 	private JButton btnLimpar;
 	private JButton btnCadastro;
-	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
 	private Border bordaPadrao;
 	private int comboTelefoneAtual;
@@ -594,7 +595,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			this.limparCadastro();
 		}
 		else if(elemento.equals(this.btnCadastro)){
-			if(camposValidos()){
+			if(camposPreenchidos() && camposValidos()){
 				this.cadastrar();
 			}
 		}
@@ -643,7 +644,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtSenha.setBorder(bordaPadrao);
 	}
 
-	private boolean camposValidos(){
+	private boolean camposPreenchidos(){
 
 		boolean valido = true;
 
@@ -666,6 +667,15 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		if(!valido){
 			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+		}
+		return valido;
+	}
+	
+	private boolean camposValidos(){
+		boolean valido = true;
+		if(!Validacao.cpfValido(txtCpf.getText())){
+			valido = false;
+			JOptionPane.showMessageDialog(null, "CPJ inválido");
 		}
 		return valido;
 	}
