@@ -78,24 +78,22 @@ public class Fachada {
 	
 	// métodos de cliente
 	public void cadastrarCliente(Cliente c) throws EntidadeJaExisteException {
-
 		this.cadCliente.cadastrar(c);
 	}
 	public void removerCliente(Cliente c) {
-
 		this.cadCliente.remover(c);
 	}
 	public void atualizarCliente(Cliente c) {
-		
 		this.cadCliente.atualizar(c);
 	}
 	public List<Cliente> listarClientes(Cliente c){
-		
 		return this.cadCliente.listarTodos(c);
 	}
 	public List<Cliente> buscarCliente(Cliente c){
-		
 		return this.cadCliente.buscar(c);
+	}
+	public List<Cliente> buscaLikeCliente(Cliente c){
+		return cadCliente.buscaLike(c);
 	}
 	
 	//métodos de Funcionario

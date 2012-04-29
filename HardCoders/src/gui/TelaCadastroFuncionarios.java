@@ -171,32 +171,39 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
 		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
+		mascaraNome.setPlaceholder("");
 		txtNome = new JFormattedTextField(mascaraNome);
+		txtNome.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNome.setBounds(81, 52, 532, 20);
 		txtNome.setColumns(10);
 
 		MaskFormatter mascaraCep = criarMascara("##.###-###");
+		mascaraCep.setPlaceholder("");
 		txtCep = new JFormattedTextField(mascaraCep);
 		txtCep.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCep.setBounds(81, 87, 187, 20);
 		txtCep.setColumns(10);
 
 		MaskFormatter mascaraNumero = criarMascara("#####");
+		mascaraNumero.setPlaceholder("");
 		txtNumero = new JFormattedTextField(mascaraNumero);
+		txtNumero.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNumero.setColumns(10);
 		txtNumero.setBounds(564, 87, 49, 20);
 		panel.add(txtNumero);
 
 		MaskFormatter mascaraCpf = criarMascara("###.###.###-##");
+		mascaraCpf.setPlaceholder("");
 		txtCpf = new JFormattedTextField(mascaraCpf);
 		txtCpf.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCpf.setBounds(81, 21, 187, 20);
 		txtCpf.setColumns(10);
 
-
 		MaskFormatter mascaraBairro = criarMascara("**************************************************");
-		mascaraBairro.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
+		mascaraBairro.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
+		mascaraBairro.setPlaceholder("");
 		txtBairro = new JFormattedTextField(mascaraBairro);
+		txtBairro.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtBairro.setBounds(81, 118, 187, 20);
 		txtBairro.setColumns(10);
 
@@ -215,6 +222,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtSenha.setColumns(10);
 
 		MaskFormatter mascaraTelefone = criarMascara("(##)####-####");
+		mascaraTelefone.setPlaceholder("");
 		txtTelefone = new JFormattedTextField(mascaraTelefone);
 		txtTelefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtTelefone.setBounds(182, 149, 86, 20);
@@ -222,13 +230,17 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		MaskFormatter mascaraEndereco = criarMascara("****************************************************************************************************");
 		mascaraEndereco.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
+		mascaraEndereco.setPlaceholder("");
 		txtEndereco = new JFormattedTextField(mascaraEndereco);
+		txtEndereco.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtEndereco.setBounds(368, 87, 157, 20);
 		txtEndereco.setColumns(10);
 
 		MaskFormatter mascaraCidade = criarMascara("**************************************************");
 		mascaraCidade.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
+		mascaraCidade.setPlaceholder("");
 		txtCidade = new JFormattedTextField(mascaraCidade);
+		txtCidade.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCidade.setColumns(10);
 		txtCidade.setBounds(368, 149, 157, 20);
 		panel.add(txtCidade);
@@ -237,7 +249,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
 		mascaraComplemento.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
+		mascaraComplemento.setPlaceholder("");
 		txtComplemento = new JFormattedTextField(mascaraComplemento);
+		txtComplemento.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtComplemento.setColumns(10);
 		txtComplemento.setBounds(368, 118, 245, 20);
 		panel.add(txtComplemento);
@@ -592,11 +606,11 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			this.limparCadastro();
 			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, "Este Login já existe.");
+			JOptionPane.showMessageDialog(null, "Este Login ou CPF já existe.");
 		}
 	}
 	
-	private void cadastrarTelefones(Long id_pessoa) throws EntidadeJaExisteException{
+	private void cadastrarTelefones(Long id_pessoa){
 		
 		//dados de telefone
 		Fachada fachada = Fachada.getInstancia();
@@ -611,7 +625,11 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			t.setRotulo(rotulo);
 			t.setAtivo(Constantes.ATIVO);
 			
-			fachada.cadastrarTelefone(t);
+			try {
+				fachada.cadastrarTelefone(t);
+			} catch (EntidadeJaExisteException e) {
+				JOptionPane.showMessageDialog(null, "O Telefone já existe.");
+			}
 		}
 	}
 
@@ -629,6 +647,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			}
 		}
 		else if(elemento.equals(this.comboBoxBusca)){
+			this.txtBusca.setText("");
 			this.buscar();
 		}
 		else if(elemento.equals(this.comboBoxTelefone)){

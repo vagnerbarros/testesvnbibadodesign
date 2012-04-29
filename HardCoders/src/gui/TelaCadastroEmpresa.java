@@ -126,7 +126,9 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 
 		MaskFormatter mascaraEmpresa = criarMascara("****************************************************************************************************");
 		mascaraEmpresa.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
+		mascaraEmpresa.setPlaceholder("");
 		txtNomeEmpresa = new JFormattedTextField(mascaraEmpresa);
+		txtNomeEmpresa.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNomeEmpresa.setColumns(10);
 		txtNomeEmpresa.setBackground(Color.WHITE);
 
@@ -187,7 +189,9 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		JLabel lblNome = new JLabel("Nome:");
 
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
+		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
+		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtBusca.addKeyListener(this);
 		txtBusca.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
@@ -219,10 +223,6 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 
 		btnRemover = new JButton("Remover");
 		btnRemover.addActionListener(this);
-		btnRemover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 
 		btnEditar = new JButton("Editar");
 		btnEditar.addActionListener(this);
@@ -369,7 +369,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 			JOptionPane.showMessageDialog(null, "Empresa cadastrada com sucesso.");
 			limparCadastro();
 		} catch (EntidadeJaExisteException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
+			JOptionPane.showMessageDialog(null, "A Empresa já existe.");
 		}
 	}
 

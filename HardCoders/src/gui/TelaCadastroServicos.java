@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
 
@@ -34,6 +36,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NavigationFilter;
+import javax.swing.text.NumberFormatter;
 
 import util.Constantes;
 import util.Sessao;
@@ -136,7 +139,9 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
 		mascaraNome.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?");
+		mascaraNome.setPlaceholder("");
 		txtNome = new JFormattedTextField(mascaraNome);
+		txtNome.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNome.setColumns(10);
 		txtNome.setBackground(Color.WHITE);
 		txtNome.setBounds(147, 11, 296, 20);
@@ -149,6 +154,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 
 		MaskFormatter mascaraValor = criarMascara("********");
 		mascaraValor.setValidCharacters("1234567890.");
+		mascaraValor.setPlaceholder("");
 		txtValor = new JFormattedTextField(mascaraValor);
 		txtValor.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtValor.setColumns(10);
@@ -346,7 +352,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			limparCadastro();
 		}
 		else if(elemento.equals(this.comboBoxBusca)){
-			this.txtBusca.setText(null);
+			this.txtBusca.setText("");
 			this.buscar();
 		}
 		else if(elemento.equals(this.btnRemover)){

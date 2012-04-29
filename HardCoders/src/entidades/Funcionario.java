@@ -77,7 +77,7 @@ public class Funcionario implements IEntidades<Funcionario>{
 	}
 	public boolean equals(Object obj){
 		Funcionario f = (Funcionario) obj;
-		if(this.login.equals(f.getLogin()) && this.id_empresa.compareTo(f.getId_empresa()) == 0){
+		if((this.login.equals(f.getLogin()) && this.id_empresa.compareTo(f.getId_empresa()) == 0) || (this.cpf.equals(f.getCpf()) && this.id_empresa.compareTo(f.getId_empresa()) == 0)){
 			return true;
 		}
 		else{
@@ -88,6 +88,7 @@ public class Funcionario implements IEntidades<Funcionario>{
 		Funcionario retorno =  new Funcionario();
 		retorno.setAtivo(this.ativo);
 		retorno.setLogin(this.login);
+		retorno.setCpf(this.cpf);
 		retorno.setId_empresa(this.id_empresa);
 		return retorno;
 	}
