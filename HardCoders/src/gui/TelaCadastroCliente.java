@@ -159,6 +159,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		lblNome = new JLabel("Nome:");
 
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
+		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		txtNome = new JFormattedTextField(mascaraNome);
 		txtNome.setColumns(10);
 
@@ -176,6 +177,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		lblRazoSocial = new JLabel("Raz\u00E3o Social:");
 
 		MaskFormatter mascaraRazaoSocial = criarMascara("****************************************************************************************************");
+		mascaraRazaoSocial.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		txtRazaoSocial = new JFormattedTextField(mascaraRazaoSocial);
 		txtRazaoSocial.setColumns(10);
 
@@ -195,8 +197,9 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 
 		final JLabel lbl_email_fisica = new JLabel("E-mail:");
 
-		MaskFormatter mascararEmail = criarMascara("****************************************************************************************************");
-		txtEmail = new JFormattedTextField(mascararEmail);
+		MaskFormatter mascaraEmail = criarMascara("****************************************************************************************************");
+		mascaraEmail.setInvalidCharacters(" !\"#$%&'()*,/:;<>=?[]\\^`ABCDEFGHIJLMNOPQRSTUVXZKY|{}´-°");
+		txtEmail = new JFormattedTextField(mascaraEmail);
 		txtEmail.setColumns(10);
 
 		comboBoxTelefone = new JComboBox();
@@ -215,12 +218,13 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		final JLabel lbl_rua_end = new JLabel("Rua:");
 
 		MaskFormatter mascaraRua = criarMascara("****************************************************************************************************");
+		mascaraRua.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtRua = new JFormattedTextField(mascaraRua);
 		txtRua.setColumns(10);
 
 		final JLabel lbl_numero_end = new JLabel("N\u00BA:");
 
-		MaskFormatter mascaraNumero = criarMascara("*****");
+		MaskFormatter mascaraNumero = criarMascara("#####");
 		txtNumero = new JFormattedTextField(mascaraNumero);
 		txtNumero.setColumns(10);
 
@@ -229,6 +233,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		final JLabel lbl_cep_end = new JLabel("CEP:");
 
 		MaskFormatter mascaraBairro = criarMascara("**************************************************");
+		mascaraBairro.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtBairro = new JFormattedTextField(mascaraBairro);
 		txtBairro.setColumns(10);
 
@@ -238,6 +243,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		txtCep.setColumns(10);
 
 		MaskFormatter mascaraCidade = criarMascara("**************************************************");
+		mascaraCidade.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtCidade = new JFormattedTextField(mascaraCidade);
 		txtCidade.setColumns(10);
 
@@ -256,6 +262,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener{
 		JLabel lblComplemento = new JLabel("Complemento:");
 
 		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
+		mascaraComplemento.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtComplemento = new JFormattedTextField(mascaraComplemento);
 		txtComplemento.setColumns(10);
 
