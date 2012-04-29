@@ -33,6 +33,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
@@ -149,8 +150,9 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		lblCdigo.setBounds(89, 11, 48, 17);
 		panel_3.add(lblCdigo);
 		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
+		
 		MaskFormatter mascaraCodigo = criarMascara("U####");
+		mascaraCodigo.setPlaceholder("");
 		txtCodigo = new JFormattedTextField(mascaraCodigo);
 		txtCodigo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCodigo.setBackground(Color.WHITE);
@@ -158,18 +160,21 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		panel_3.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
-		JLabel lblTipoDeReclamao = new JLabel("Tipo de Reclama\u00E7\u00E3o:");
-		lblTipoDeReclamao.setBounds(10, 55, 127, 17);
-		panel_3.add(lblTipoDeReclamao);
-		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		MaskFormatter mascaraTipo = criarMascara("****************************************************************************************************");
 		mascaraTipo.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
+		mascaraTipo.setPlaceholder("");
 		txtTipo = new JFormattedTextField(mascaraTipo);
+		txtTipo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtTipo.setBackground(Color.WHITE);
 		txtTipo.setBounds(147, 55, 296, 20);
 		panel_3.add(txtTipo);
 		txtTipo.setColumns(10);
+		
+		JLabel lblTipoDeReclamao = new JLabel("Tipo de Reclama\u00E7\u00E3o:");
+		lblTipoDeReclamao.setBounds(10, 55, 127, 17);
+		panel_3.add(lblTipoDeReclamao);
+		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		this.bordaPadrao = txtTipo.getBorder();
 
@@ -245,6 +250,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
 		txtBusca = new JFormattedTextField(mascaraBusca);
 		txtBusca.addKeyListener(this);
+	
 		txtBusca.setColumns(10);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
@@ -344,7 +350,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			limparCadastro();
 		}
 		else if(elemento.equals(this.comboBoxBusca)){
-			this.txtBusca.setText(null);
+			this.txtBusca.setText("");
 			this.buscar();
 		}
 		else if(elemento.equals(this.btnEditar)){
@@ -354,7 +360,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			removerReclamacao();
 		}
 	}
-
+	
 	private void removerReclamacao(){
 
 		int linha = table.getSelectedRow();
