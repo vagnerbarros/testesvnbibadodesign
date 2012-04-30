@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.Hashtable;
 import java.util.List;
@@ -47,7 +49,7 @@ import entidades.Telefone;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
-public class TelaCadastroFuncionarios extends JPanel implements ActionListener, KeyListener, ChangeListener{
+public class TelaCadastroFuncionarios extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
 
 	private JFormattedTextField txtNome;
 	private JFormattedTextField txtCpf;
@@ -173,6 +175,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraNome.setPlaceholder("");
 		txtNome = new JFormattedTextField(mascaraNome);
+		txtNome.addMouseListener(this);
 		txtNome.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNome.setBounds(81, 52, 532, 20);
 		txtNome.setColumns(10);
@@ -187,6 +190,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		MaskFormatter mascaraNumero = criarMascara("#####");
 		mascaraNumero.setPlaceholder("");
 		txtNumero = new JFormattedTextField(mascaraNumero);
+		txtNumero.addMouseListener(this);
 		txtNumero.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNumero.setColumns(10);
 		txtNumero.setBounds(564, 87, 49, 20);
@@ -203,6 +207,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraBairro.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraBairro.setPlaceholder("");
 		txtBairro = new JFormattedTextField(mascaraBairro);
+		txtBairro.addMouseListener(this);
 		txtBairro.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtBairro.setBounds(81, 118, 187, 20);
 		txtBairro.setColumns(10);
@@ -210,6 +215,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		MaskFormatter mascaraLogin = criarMascara("********************");
 		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtLogin = new JFormattedTextField(mascaraLogin);
+		txtLogin.addMouseListener(this);
 		txtLogin.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtLogin.setBounds(81, 177, 187, 20);
 		txtLogin.setColumns(10);
@@ -217,6 +223,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		MaskFormatter mascaraSenha = criarMascara("********************");
 		mascaraSenha.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
 		txtSenha = new JFormattedTextField(mascaraSenha);
+		txtSenha.addMouseListener(this);
 		txtSenha.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtSenha.setBounds(81, 208, 187, 20);
 		txtSenha.setColumns(10);
@@ -232,6 +239,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraEndereco.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraEndereco.setPlaceholder("");
 		txtEndereco = new JFormattedTextField(mascaraEndereco);
+		txtEndereco.addMouseListener(this);
 		txtEndereco.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtEndereco.setBounds(368, 87, 157, 20);
 		txtEndereco.setColumns(10);
@@ -240,6 +248,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraCidade.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraCidade.setPlaceholder("");
 		txtCidade = new JFormattedTextField(mascaraCidade);
+		txtCidade.addMouseListener(this);
 		txtCidade.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCidade.setColumns(10);
 		txtCidade.setBounds(368, 149, 157, 20);
@@ -251,13 +260,17 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraComplemento.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraComplemento.setPlaceholder("");
 		txtComplemento = new JFormattedTextField(mascaraComplemento);
+		txtComplemento.addMouseListener(this);
 		txtComplemento.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtComplemento.setColumns(10);
 		txtComplemento.setBounds(368, 118, 245, 20);
 		panel.add(txtComplemento);
 
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
+		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
+		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
+		txtBusca.addMouseListener(this);
 		txtBusca.addKeyListener(this);
 		txtBusca.setColumns(10);
 
@@ -814,7 +827,19 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			return null;
 		}
 	}
+	
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
+	}
 
 	public void keyPressed(KeyEvent evt) {}
 	public void keyTyped(KeyEvent evt) {}
+	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 }

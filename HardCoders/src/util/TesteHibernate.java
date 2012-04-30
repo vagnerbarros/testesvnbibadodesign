@@ -1,8 +1,7 @@
-package teste;
+package util;
 
 import java.util.List;
 
-import util.Constantes;
 import entidades.Cliente;
 import entidades.Empresa;
 import entidades.Funcionario;

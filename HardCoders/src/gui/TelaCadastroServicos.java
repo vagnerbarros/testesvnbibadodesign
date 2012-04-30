@@ -1,15 +1,14 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.List;
 
@@ -35,8 +34,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
-import javax.swing.text.NavigationFilter;
-import javax.swing.text.NumberFormatter;
 
 import util.Constantes;
 import util.Sessao;
@@ -44,7 +41,7 @@ import entidades.Servico;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
-public class TelaCadastroServicos extends JPanel implements ActionListener, ChangeListener, KeyListener{
+public class TelaCadastroServicos extends JPanel implements ActionListener, ChangeListener, KeyListener, MouseListener{
 
 	private JFormattedTextField txtNome;
 	private JFormattedTextField txtValor;
@@ -145,6 +142,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtNome.setColumns(10);
 		txtNome.setBackground(Color.WHITE);
 		txtNome.setBounds(147, 11, 296, 20);
+		txtNome.addMouseListener(this);
 		panel_2.add(txtNome);
 
 		JLabel lblValorPadro = new JLabel("Valor Padr\u00E3o:");
@@ -160,6 +158,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtValor.setColumns(10);
 		txtValor.setBackground(Color.WHITE);
 		txtValor.setBounds(147, 42, 89, 20);
+		txtValor.addMouseListener(this);
 		panel_2.add(txtValor);
 		
 		botaoLimpar = new JButton("Limpar");
@@ -204,10 +203,13 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		comboBoxBusca.addActionListener(this);
 		
 		MaskFormatter mascaraBusca = criarMascara("*********************************************************************************");
+		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
+		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtBusca.addKeyListener(this);
 		txtBusca.setColumns(10);
 		txtBusca.setBackground(Color.WHITE);
+		txtBusca.addMouseListener(this);
 		
 		this.bordaPadrao = txtBusca.getBorder();
 
@@ -482,6 +484,18 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		}
 	}
 
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+	
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
+	}
+	
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 	public void keyPressed(KeyEvent evt) {}
 	public void keyTyped(KeyEvent evt) {}
 }

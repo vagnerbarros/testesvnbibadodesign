@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.List;
 
@@ -31,9 +33,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
@@ -42,7 +42,7 @@ import entidades.Reclamacao;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
-public class TelaCadastroReclamacoes extends JPanel implements ActionListener, KeyListener, ChangeListener{
+public class TelaCadastroReclamacoes extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
 
 	private JFormattedTextField txtCodigo;
 	private JFormattedTextField txtTipo;
@@ -157,6 +157,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtCodigo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCodigo.setBackground(Color.WHITE);
 		txtCodigo.setBounds(147, 11, 104, 20);
+		txtCodigo.addMouseListener(this);
 		panel_3.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
@@ -168,6 +169,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtTipo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtTipo.setBackground(Color.WHITE);
 		txtTipo.setBounds(147, 55, 296, 20);
+		txtTipo.addMouseListener(this);
 		panel_3.add(txtTipo);
 		txtTipo.setColumns(10);
 		
@@ -248,8 +250,11 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		comboBoxBusca.addActionListener(this);
 
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
+		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
+		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtBusca.addKeyListener(this);
+		txtBusca.addMouseListener(this);
 	
 		txtBusca.setColumns(10);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
@@ -473,7 +478,19 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			return null;
 		}
 	}
+	
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+	
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
+	}
 
+	public void mouseClicked(MouseEvent evt) {}
+	public void mouseReleased(MouseEvent evt) {}
 	public void keyTyped(KeyEvent arg0) {}
 	public void keyPressed(KeyEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
 }

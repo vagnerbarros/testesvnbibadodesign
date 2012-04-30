@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.List;
 
@@ -38,7 +40,7 @@ import entidades.Empresa;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
-public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyListener, ChangeListener{
+public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
 	private JFormattedTextField txtNomeEmpresa;
 	private JFormattedTextField txtBusca;
 	private JTable table;
@@ -131,6 +133,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		txtNomeEmpresa.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNomeEmpresa.setColumns(10);
 		txtNomeEmpresa.setBackground(Color.WHITE);
+		txtNomeEmpresa.addMouseListener(this);
 
 		this.bordaPadrao = txtNomeEmpresa.getBorder();
 
@@ -194,6 +197,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtBusca.addKeyListener(this);
 		txtBusca.setColumns(10);
+		txtBusca.addMouseListener(this);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 				gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -418,7 +422,19 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 			return null;
 		}
 	}
+	
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+	
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
+	}
 
 	public void keyPressed(KeyEvent evt) {}
 	public void keyTyped(KeyEvent evt) {}
+	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 }
