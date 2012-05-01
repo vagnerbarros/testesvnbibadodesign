@@ -190,6 +190,11 @@ public class TelaPrincipal extends JFrame {
 		BarraMenu.add(mnContratos);
 
 		JMenuItem mntmContratosVencer = new JMenuItem("       Contratos \u00E0 Vencer   ");
+		mntmContratosVencer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorGui.abrirTelaContVencer();
+			}
+		});
 		mntmContratosVencer.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/contratoIco.png")));
 		mntmContratosVencer.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		mnContratos.add(mntmContratosVencer);
