@@ -92,29 +92,29 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+			layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(429, Short.MAX_VALUE)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-						.addGroup(layout.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
-								.addContainerGap())
-				);
+					.addContainerGap(618, Short.MAX_VALUE)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tabbedPane)
+					.addContainerGap())
+		);
 		layout.setVerticalGroup(
-				layout.createParallelGroup(Alignment.LEADING)
+			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-				);
+					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+		);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -232,36 +232,31 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		btnEditar.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-										.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-												.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 829, Short.MAX_VALUE)
-												.addGroup(gl_panel_1.createSequentialGroup()
-														.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
-														.addGap(2)))
-														.addPreferredGap(ComponentPlacement.RELATED))
-														.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-																.addComponent(btnEditar)
-																.addPreferredGap(ComponentPlacement.UNRELATED)
-																.addComponent(btnRemover)
-																.addGap(90)))
-																.addGap(89))
-				);
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(scrollPane, Alignment.LEADING)
+							.addComponent(panel_3, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 652, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(btnEditar)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnRemover)))
+					.addContainerGap(353, Short.MAX_VALUE))
+		);
 		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnRemover)
-								.addComponent(btnEditar)))
-				);
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnRemover)
+						.addComponent(btnEditar)))
+		);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome da Empresa"}
