@@ -1023,7 +1023,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 			
 		}
 		else if(elemento.equals(this.btnRemover)){
-			
+			verificarTipoRemocao();
 		}
 		else if(elemento.equals(this.btnVisualizar)){
 			
@@ -1042,6 +1042,86 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		else if(elemento.equals(this.comboBoxBusca)){
 			txtBusca.setText("");
 			buscar();
+		}
+	}
+	
+	private void verificarTipoRemocao(){
+		
+		if(comboBoxBusca.getSelectedItem().equals(Constantes.NOMERAZAO)){
+			removerCliente();
+		}
+		else if(comboBoxBusca.getSelectedItem().equals(Constantes.TELEFONE)){
+			removerTelefone();
+		}
+		else if(comboBoxBusca.getSelectedItem().equals(Constantes.ENDERECO)){
+			removerEndereco();
+		}
+		else if(comboBoxBusca.getSelectedItem().equals(Constantes.CPFCNPJ)){
+			removerCliente();
+		}
+	}
+	
+	private void removerCliente(){
+		
+		int linha = table.getSelectedRow();
+		if(linha != -1){
+			Object[] options = { "OK", "Cancelar" };
+			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if(resposta == 0){
+				Fachada fachada = Fachada.getInstancia();
+				Cliente c = (Cliente) table.getModel().getValueAt(linha, 0);
+				
+				Pessoa p = new Pessoa();
+				p.setId(c.getId_pessoa());
+				fachada.removerPessoa(p);
+				
+				Endereco e = new Endereco();
+				e.setId_pessoa(c.getId_pessoa());
+				List<Endereco> listaEnd = fachada.buscarEndereco(e);
+				for(Endereco elem : listaEnd){
+					fachada.removerEndereco(elem);
+				}
+				
+				Telefone t = new Telefone();
+				t.setId_pessoa(c.getId_pessoa());
+				List<Telefone> listaTel = fachada.buscarTelefone(t);
+				for(Telefone tel : listaTel){
+					fachada.removerTelefone(tel);
+				}
+				
+				fachada.removerCliente(c);
+				montaTabelaCliente(new Cliente());
+			}
+		}
+	}
+	
+	private void removerTelefone(){
+		
+		int linha = this.table.getSelectedRow();
+		if(linha != -1){
+			Object[] options = { "OK", "Cancelar" };
+			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if(resposta == 0){
+				Fachada fachada = Fachada.getInstancia();
+				Telefone t = (Telefone) this.table.getModel().getValueAt(linha, 0);
+				fachada.removerTelefone(t);
+				montaTabelaTelefone(new Telefone());
+			}
+		}
+	}
+	
+	private void removerEndereco(){
+		
+		int linha = this.table.getSelectedRow();
+		if(linha != -1){
+			Object[] options = { "OK", "Cancelar" };
+			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if(resposta == 0){
+				Fachada fachada = Fachada.getInstancia();
+				Endereco e = (Endereco) this.table.getModel().getValueAt(linha, 0);
+				fachada.removerEndereco(e);
+				montaTabelaEndereco(new Endereco());
+			}
 		}
 	}
 	
@@ -1145,6 +1225,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 	}
 	public void stateChanged(ChangeEvent evt) {
 		if(tabbedPane.getSelectedIndex() == 1){
+			comboBoxBusca.setSelectedIndex(0);
 			montaTabelaCliente(new Cliente());
 		}
 	}
