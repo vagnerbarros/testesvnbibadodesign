@@ -17,8 +17,8 @@ public class Constantes {
 //	public static String COMERCIAL = "Comercial";
 	
 	// tipos constantes de clientes
-	public static String PF = "pessoa fisica";
-	public static String PJ = "pessoa juridica";
+	public static String PF = "Pessoa Física";
+	public static String PJ = "Pessoa Jurídica";
 	
 	//parametros de busca funcionario
 	public static String NOME = "Nome";
