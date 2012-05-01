@@ -159,6 +159,9 @@ public class Fachada {
 	public Long ultimoIdEndereco(Endereco e){
 		return this.cadEndereco.ultimoId(e);
 	}
+	public List<Endereco> buscaLikeEndereco(Endereco e){
+		return this.cadEndereco.buscaLike(e);
+	}
 	
 	//métodos de Falha
 	public void cadastrarFalha(Falha f) throws EntidadeJaExisteException{
@@ -244,6 +247,9 @@ public class Fachada {
 	}
 	public Long ultimoIdTelefone(Telefone t){
 		return this.cadTelefone.ultimoId(t);
+	}
+	public List<Telefone> buscaLikeTelefone(Telefone t){
+		return this.cadTelefone.buscaLike(t);
 	}
 	
 	//métodos de contrato
