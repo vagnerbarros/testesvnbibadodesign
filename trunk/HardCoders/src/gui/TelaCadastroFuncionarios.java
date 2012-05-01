@@ -427,18 +427,16 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(scrollPane, Alignment.LEADING)
+							.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
-								.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
 							.addComponent(btnEditar)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnRemover)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnVisualizar)
-							.addGap(47))))
+							.addComponent(btnVisualizar)))
+					.addContainerGap(369, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -455,19 +453,16 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		);
 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome", "CPF", "Cargo"}
-				) {
-			Class[] types = new Class [] {Funcionario.class, java.lang.String.class, java.lang.String.class};
-			boolean[] canEdit = new boolean [] {false, false, false};
-
-			public Class getColumnClass(int columnIndex) {
-				return types [columnIndex];
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"Nome", "CPF", "Cargo"
 			}
-
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit [columnIndex];
-			}
-		});
+		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);
+		table.getColumnModel().getColumn(1).setPreferredWidth(120);
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 		

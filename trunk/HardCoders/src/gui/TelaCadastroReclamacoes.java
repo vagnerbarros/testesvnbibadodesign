@@ -131,32 +131,32 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
-						.addContainerGap())
-				);
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 		gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(178, Short.MAX_VALUE))
-				);
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(273, Short.MAX_VALUE))
+		);
 		panel_3.setLayout(null);
 
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(89, 11, 48, 17);
+		lblCdigo.setBounds(10, 12, 48, 17);
 		panel_3.add(lblCdigo);
-		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		MaskFormatter mascaraCodigo = criarMascara("U####");
 		mascaraCodigo.setPlaceholder("");
 		txtCodigo = new JFormattedTextField(mascaraCodigo);
 		txtCodigo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCodigo.setBackground(Color.WHITE);
-		txtCodigo.setBounds(147, 11, 104, 20);
+		txtCodigo.setBounds(147, 11, 76, 20);
 		txtCodigo.addMouseListener(this);
 		panel_3.add(txtCodigo);
 		txtCodigo.setColumns(10);
@@ -168,26 +168,26 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtTipo = new JFormattedTextField(mascaraTipo);
 		txtTipo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtTipo.setBackground(Color.WHITE);
-		txtTipo.setBounds(147, 55, 296, 20);
+		txtTipo.setBounds(147, 39, 296, 20);
 		txtTipo.addMouseListener(this);
 		panel_3.add(txtTipo);
 		txtTipo.setColumns(10);
 		
 		JLabel lblTipoDeReclamao = new JLabel("Tipo de Reclama\u00E7\u00E3o:");
-		lblTipoDeReclamao.setBounds(10, 55, 127, 17);
+		lblTipoDeReclamao.setBounds(10, 40, 127, 17);
 		panel_3.add(lblTipoDeReclamao);
-		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		this.bordaPadrao = txtTipo.getBorder();
 
 		botaoLimpar = new JButton("Limpar");
 		botaoLimpar.addActionListener(this);
-		botaoLimpar.setBounds(255, 96, 89, 23);
+		botaoLimpar.setBounds(255, 70, 89, 23);
 		panel_3.add(botaoLimpar);
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
-		botaoCadastrar.setBounds(354, 96, 89, 23);
+		botaoCadastrar.setBounds(354, 69, 89, 23);
 		panel_3.add(botaoCadastrar);
 		panel.setLayout(gl_panel);
 
@@ -211,36 +211,39 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		btnRemover.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-										.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-												.addComponent(panel_2, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 786, Short.MAX_VALUE)
-												.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
-												.addComponent(lblTiposDeReclamao, Alignment.LEADING))
-												.addContainerGap())
-												.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-														.addComponent(btnEditar)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnRemover)
-														.addGap(98))))
-				);
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblTiposDeReclamao)
+							.addContainerGap(1039, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+									.addGap(418)
+									.addComponent(btnEditar)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnRemover))
+								.addComponent(panel_2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+								.addComponent(scrollPane, Alignment.LEADING))
+							.addGap(686))))
+		);
 		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addGap(19)
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblTiposDeReclamao)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnEditar)
-								.addComponent(btnRemover)))
-				);
+					.addGap(19)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblTiposDeReclamao)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEditar)
+						.addComponent(btnRemover))
+					.addContainerGap())
+		);
 
 		JLabel lblFiltrar = new JLabel("Filtrar:");
 		lblFiltrar.setFont(new Font("Tahoma", Font.BOLD, 14));

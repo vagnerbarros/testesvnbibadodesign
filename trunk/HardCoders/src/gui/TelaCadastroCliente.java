@@ -122,15 +122,15 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-					.addContainerGap(470, Short.MAX_VALUE)
+					.addContainerGap(848, Short.MAX_VALUE)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+					.addComponent(tabbedPane)
 					.addContainerGap())
 		);
 		layout.setVerticalGroup(
@@ -138,8 +138,8 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
@@ -400,6 +400,8 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 																																										.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				);
 		panel_end_Fisica.setLayout(gl_panel_end_Fisica);
+		
+		JButton btnLimpar = new JButton("Limpar");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -429,22 +431,27 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 							.addComponent(txtRazaoSocial, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(botaoCadastrar))
+							.addComponent(panel_end_Fisica, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(20)
-							.addComponent(lbl_tel_fisica)
-							.addGap(33)
-							.addComponent(comboBoxTelefone, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(lbl_email_fisica)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel_end_Fisica, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(269, Short.MAX_VALUE))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(20)
+									.addComponent(lbl_tel_fisica))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(botaoCadastrar, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(comboBoxTelefone, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(lbl_email_fisica)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(647, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -482,9 +489,11 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 						.addComponent(txtTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lbl_tel_fisica)
 						.addComponent(lbl_email_fisica))
-					.addGap(44)
-					.addComponent(botaoCadastrar)
-					.addGap(85))
+					.addGap(15)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnLimpar)
+						.addComponent(botaoCadastrar))
+					.addGap(114))
 		);
 		panel.setLayout(gl_panel);
 
