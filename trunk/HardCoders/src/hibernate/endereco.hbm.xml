@@ -27,6 +27,8 @@
 	  
 	  <property name="estado" type="string" column="estado" length="2"/>
 	  
+	  <property name="id_empresa" type="long" column="id_empresa"/>
+	  
 	  <property name="ativo" type="string" column="ativo" length="1"/>
 	  
    </class>

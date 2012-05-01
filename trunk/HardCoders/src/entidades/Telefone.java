@@ -13,6 +13,7 @@ public class Telefone implements IEntidades<Telefone>{
 	private Long id_pessoa;
 	private String rotulo;
 	private String numero;
+	private Long id_empresa;
 	private String ativo;
 
 	public Telefone(){
@@ -43,6 +44,12 @@ public class Telefone implements IEntidades<Telefone>{
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+	public Long getId_empresa() {
+		return id_empresa;
+	}
+	public void setId_empresa(Long id_empresa) {
+		this.id_empresa = id_empresa;
+	}
 	public String nomeTabela() {
 		return tabela;
 	}
@@ -51,6 +58,9 @@ public class Telefone implements IEntidades<Telefone>{
 	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public String toString(){
+		return this.numero;
 	}
 	public boolean equals(Object obj){
 		Telefone t = (Telefone) obj;

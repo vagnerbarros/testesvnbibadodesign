@@ -19,6 +19,7 @@ public class Endereco implements IEntidades<Endereco>{
 	private String cep;
 	private String cidade;
 	private String estado;
+	private Long id_empresa;
 	private String ativo;
 	
 	public Long getId() {
@@ -84,11 +85,20 @@ public class Endereco implements IEntidades<Endereco>{
 	public String nomeTabela() {
 		return tabela;
 	}
+	public Long getId_empresa() {
+		return id_empresa;
+	}
+	public void setId_empresa(Long id_empresa) {
+		this.id_empresa = id_empresa;
+	}
 	public String getAtivo() {
 		return ativo;
 	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public String toString(){
+		return this.rua;
 	}
 	public boolean equals(Object obj){
 		Endereco e = (Endereco) obj;

@@ -606,6 +606,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			end.setCidade(cidade);
 			end.setEstado(estado);
 			end.setId_pessoa(id_pessoa);
+			end.setId_empresa(Sessao.getEmpresa().getId());
 			end.setAtivo(Constantes.ATIVO);
 			fachada.cadastrarEndereco(end);
 
@@ -624,6 +625,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		Fachada fachada = Fachada.getInstancia();
 		salvarCampos((String)comboBoxTelefone.getSelectedItem());
 		Set<String> rotulos = telefones.keySet();
+		Long id_empresa = Sessao.getEmpresa().getId();
 		
 		for(String rotulo : rotulos){
 			String numeroTelefone = telefones.get(rotulo)[0];
@@ -631,6 +633,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			t.setId_pessoa(id_pessoa);
 			t.setNumero(numeroTelefone);
 			t.setRotulo(rotulo);
+			t.setId_empresa(id_empresa);
 			t.setAtivo(Constantes.ATIVO);
 			
 			try {

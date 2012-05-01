@@ -32,6 +32,12 @@ public class Constantes {
 	public static String CODIGO = "Código";
 	public static String TIPO = "Tipo";
 	
+	// parametros de busca cliente
+	public static String NOMERAZAO = "Nome/Razão Social";
+	public static String ENDERECO = "Endereço";
+	public static String TELEFONE = "Telefone";
+	public static String CPFCNPJ = "CPF/CNPJ";
+	
 	// lista de estados possíveis 
 	public static String [] listaEstados = { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI",
 		"PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"};
@@ -75,6 +81,12 @@ public class Constantes {
 	//tipos busca reclamacao
 	public static String [] getBuscaReclamacao(){
 		String [] retorno = {CODIGO, TIPO};
+		return retorno;
+	}
+	
+	//tipos busca cliente
+	public static String [] getBuscaCliente(){
+		String [] retorno = {NOMERAZAO, ENDERECO, TELEFONE, CPFCNPJ};
 		return retorno;
 	}
 	
