@@ -18,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaContratosVencer extends JPanel {
 	private JTextField textField;
@@ -168,6 +170,11 @@ public class TelaContratosVencer extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnDetalhar = new JButton("Detalhar");
+		btnDetalhar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DetalharContrato.main(null);
+			}
+		});
 		btnDetalhar.setBounds(28, 306, 89, 23);
 		panel.add(btnDetalhar);
 
