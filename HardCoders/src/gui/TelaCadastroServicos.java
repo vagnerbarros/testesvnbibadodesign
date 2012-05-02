@@ -127,8 +127,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 
 		JLabel lblNomeDoServio = new JLabel("Nome do Servi\u00E7o:");
-		lblNomeDoServio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeDoServio.setBounds(27, 11, 110, 17);
+		lblNomeDoServio.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNomeDoServio.setBounds(10, 41, 89, 17);
 		panel_2.add(lblNomeDoServio);
 
 		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
@@ -138,13 +138,13 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtNome.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNome.setColumns(10);
 		txtNome.setBackground(Color.WHITE);
-		txtNome.setBounds(147, 11, 296, 20);
+		txtNome.setBounds(99, 39, 296, 20);
 		txtNome.addMouseListener(this);
 		panel_2.add(txtNome);
 
 		JLabel lblValorPadro = new JLabel("Valor Padr\u00E3o:");
-		lblValorPadro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblValorPadro.setBounds(27, 42, 110, 17);
+		lblValorPadro.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblValorPadro.setBounds(10, 70, 66, 17);
 		panel_2.add(lblValorPadro);
 
 		MaskFormatter mascaraValor = criarMascara("********");
@@ -154,34 +154,39 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtValor.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtValor.setColumns(10);
 		txtValor.setBackground(Color.WHITE);
-		txtValor.setBounds(147, 42, 89, 20);
+		txtValor.setBounds(99, 68, 89, 20);
 		txtValor.addMouseListener(this);
 		panel_2.add(txtValor);
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
-		botaoCadastrar.setBounds(354, 42, 89, 23);
+		botaoCadastrar.setBounds(306, 67, 89, 23);
 		panel_2.add(botaoCadastrar);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
-						.addContainerGap())
-				);
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(840, Short.MAX_VALUE))
+		);
 		gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(227, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(270, Short.MAX_VALUE))
+		);
 		
 		JLabel lblEx = new JLabel("Ex.: 00.00");
-		lblEx.setFont(new Font("Liberation Sans Narrow", Font.PLAIN, 11));
-		lblEx.setBounds(246, 45, 66, 14);
+		lblEx.setFont(new Font("Dialog", Font.ITALIC, 11));
+		lblEx.setBounds(198, 70, 66, 14);
 		panel_2.add(lblEx);
+		
+		JLabel lblCadastrarNovoServio = new JLabel("Cadastrar Novo Servi\u00E7o");
+		lblCadastrarNovoServio.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCadastrarNovoServio.setBounds(10, 11, 142, 17);
+		panel_2.add(lblCadastrarNovoServio);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
