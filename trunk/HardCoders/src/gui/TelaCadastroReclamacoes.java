@@ -253,6 +253,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		comboBoxBusca.addActionListener(this);
 
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
+		mascaraBusca.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
 		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);

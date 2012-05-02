@@ -129,7 +129,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		panel_1.add(lblDataFinal);
 
 		txtDataFinal = new JDateChooser();
-		txtDataFinal.getDateEditor().setEnabled(false);
+		txtDataFinal.setEnabled(false);
 		txtDataFinal.addPropertyChangeListener(this);
 		txtDataFinal.setBounds(273, 26, 86, 20);
 		panel_1.add(txtDataFinal);
@@ -190,9 +190,19 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 	public void propertyChange(PropertyChangeEvent evt) {
 
 		Date dataInicial = txtDataInicial.getDate();
-		if(dataInicial != null){
-			System.out.println(dataInicial);
+		Date dataFinal = txtDataFinal.getDate();
+		JDateChooser data = (JDateChooser) evt.getSource();
+		
+		if(dataInicial != null && data.equals(txtDataInicial)){
+			System.out.println("data inicial");
 			txtDataFinal.setMinSelectableDate(dataInicial);
+			txtDataFinal.setEnabled(true);
+			txtDataFinal.getDateEditor().setEnabled(false);
+		}
+		else if(dataFinal != null && data.equals(txtDataFinal)){
+			System.out.println("data final");
+		}
+		if(dataInicial != null){
 			int dia1 = txtDataInicial.getCalendar().get(Calendar.DAY_OF_MONTH);
 			int mes1 = txtDataInicial.getCalendar().get(Calendar.MONTH);
 			int ano1 = txtDataInicial.getCalendar().get(Calendar.YEAR);

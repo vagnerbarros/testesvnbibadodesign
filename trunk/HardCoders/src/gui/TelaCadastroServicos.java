@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -34,13 +33,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
-
 import util.Constantes;
 import util.Sessao;
 import entidades.Servico;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
-import javax.swing.DefaultComboBoxModel;
 
 public class TelaCadastroServicos extends JPanel implements ActionListener, ChangeListener, KeyListener, MouseListener{
 
@@ -48,7 +45,6 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private JFormattedTextField txtValor;
 	private JFormattedTextField txtBusca;
 	private JTable table;
-	private JButton botaoLimpar;
 	private JButton botaoCadastrar;
 	private JButton btnEditar;
 	private JButton btnRemover;
@@ -161,11 +157,6 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtValor.setBounds(147, 42, 89, 20);
 		txtValor.addMouseListener(this);
 		panel_2.add(txtValor);
-		
-		botaoLimpar = new JButton("Limpar");
-		botaoLimpar.addActionListener(this);
-		botaoLimpar.setBounds(255, 42, 89, 23);
-		panel_2.add(botaoLimpar);
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
@@ -186,6 +177,11 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(227, Short.MAX_VALUE))
 				);
+		
+		JLabel lblEx = new JLabel("Ex.: 00.00");
+		lblEx.setFont(new Font("Liberation Sans Narrow", Font.PLAIN, 11));
+		lblEx.setBounds(246, 45, 66, 14);
+		panel_2.add(lblEx);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -200,11 +196,11 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		comboBoxBusca = new JComboBox();
-		comboBoxBusca.setModel(new DefaultComboBoxModel(new String[] {"Nome", "Valor"}));
 		iniciarCombo(comboBoxBusca);
 		comboBoxBusca.addActionListener(this);
 		
 		MaskFormatter mascaraBusca = criarMascara("*********************************************************************************");
+		mascaraBusca.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
 		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -290,7 +286,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome", "Valor"}
 				) {
-			Class[] types = new Class [] {Servico.class, java.lang.Double.class};
+			Class[] types = new Class [] {Servico.class, java.lang.String.class};
 			boolean[] canEdit = new boolean [] {false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -326,12 +322,12 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			for (int i = 0; i < listaServicos.size(); i++) {
 
 				linhas[i][0] = listaServicos.get(i);
-				linhas[i][1] = listaServicos.get(i).getValor();
+				linhas[i][1] = listaServicos.get(i).getValor().toString();
 			}
 		}
 
 		table.setModel(new DefaultTableModel(linhas, colunas) {
-			Class[] types = new Class[] { Servico.class, java.lang.Double.class};
+			Class[] types = new Class[] { Servico.class, java.lang.String.class};
 			boolean[] canEdit = new boolean[] { false, false};
 
 			public Class getColumnClass(int columnIndex) {
@@ -354,9 +350,6 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 				cadastrar();
 			}
 		}
-		else if(elemento.equals(this.botaoLimpar)){
-			limparCadastro();
-		}
 		else if(elemento.equals(this.comboBoxBusca)){
 			this.txtBusca.setText("");
 			this.buscar();
@@ -374,7 +367,6 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		int linha = table.getSelectedRow();
 		
 		if(linha != -1){
-			
 			Object[] options = { "OK", "Cancelar" };
 			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 			if(resposta == 0){
@@ -470,8 +462,14 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		else if(this.comboBoxBusca.getSelectedItem().equals(Constantes.VALOR)){
 			String valor = txtBusca.getText().trim();
 			if(!valor.equals("")){
-				s.setValor(Double.parseDouble(valor));
-				System.out.println(s.getValor());
+				try{
+					double v = Double.parseDouble(valor);
+					s.setValor(v);
+				}
+				catch(Exception e){
+					JOptionPane.showMessageDialog(null, "A busca por valor deve conter números");
+					txtBusca.setText("");
+				}
 			}
 		}
 		this.montaTabela(s);
