@@ -120,53 +120,43 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(Alignment.LEADING)
+			layout.createParallelGroup(Alignment.LEADING)
 				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
 				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(356, Short.MAX_VALUE)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-						.addGroup(layout.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 671, Short.MAX_VALUE)
-								.addContainerGap())
-				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(Alignment.LEADING)
+					.addContainerGap(356, Short.MAX_VALUE)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 333, Short.MAX_VALUE)
-						.addGap(18)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-				);
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 671, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+		);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		tabbedPane.addTab("Cadastro", null, panel, null);
 
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(17, 54, 53, 14);
+		lblNome.setBounds(229, 23, 53, 14);
 		lblNome.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(17, 23, 24, 15);
+		lblCpf.setBounds(27, 23, 24, 15);
 		lblCpf.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-		lblEndereo.setBounds(278, 89, 56, 15);
-		lblEndereo.setHorizontalAlignment(SwingConstants.LEFT);
-		lblEndereo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		JLabel lblBairro = new JLabel("CEP:");
-		lblBairro.setBounds(17, 89, 25, 15);
-		lblBairro.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		this.comboTelefoneAtual = 0;
 		this.telefones = new Hashtable<String, String[]>();
@@ -175,96 +165,49 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraNome.setPlaceholder("");
 		txtNome = new JFormattedTextField(mascaraNome);
+		txtNome.setBounds(278, 21, 335, 20);
 		txtNome.addMouseListener(this);
 		txtNome.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtNome.setBounds(81, 52, 532, 20);
 		txtNome.setColumns(10);
 
 		MaskFormatter mascaraCep = criarMascara("##.###-###");
 		mascaraCep.setPlaceholder("");
-		txtCep = new JFormattedTextField(mascaraCep);
-		txtCep.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtCep.setBounds(81, 87, 187, 20);
-		txtCep.setColumns(10);
 
 		MaskFormatter mascaraNumero = criarMascara("#####");
 		mascaraNumero.setPlaceholder("");
-		txtNumero = new JFormattedTextField(mascaraNumero);
-		txtNumero.addMouseListener(this);
-		txtNumero.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtNumero.setColumns(10);
-		txtNumero.setBounds(564, 87, 49, 20);
-		panel.add(txtNumero);
+		panel.setLayout(null);
 
 		MaskFormatter mascaraCpf = criarMascara("###.###.###-##");
 		mascaraCpf.setPlaceholder("");
 		txtCpf = new JFormattedTextField(mascaraCpf);
+		txtCpf.setBounds(81, 21, 138, 20);
 		txtCpf.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtCpf.setBounds(81, 21, 187, 20);
 		txtCpf.setColumns(10);
 
 		MaskFormatter mascaraBairro = criarMascara("**************************************************");
 		mascaraBairro.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraBairro.setPlaceholder("");
-		txtBairro = new JFormattedTextField(mascaraBairro);
-		txtBairro.addMouseListener(this);
-		txtBairro.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtBairro.setBounds(81, 118, 187, 20);
-		txtBairro.setColumns(10);
 
 		MaskFormatter mascaraLogin = criarMascara("********************");
 		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
-		txtLogin = new JFormattedTextField(mascaraLogin);
-		txtLogin.addMouseListener(this);
-		txtLogin.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtLogin.setBounds(81, 177, 187, 20);
-		txtLogin.setColumns(10);
 
 		MaskFormatter mascaraSenha = criarMascara("********************");
 		mascaraSenha.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?<>");
-		txtSenha = new JFormattedTextField(mascaraSenha);
-		txtSenha.addMouseListener(this);
-		txtSenha.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtSenha.setBounds(81, 208, 187, 20);
-		txtSenha.setColumns(10);
 
 		MaskFormatter mascaraTelefone = criarMascara("(##)####-####");
 		mascaraTelefone.setPlaceholder("");
-		txtTelefone = new JFormattedTextField(mascaraTelefone);
-		txtTelefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtTelefone.setBounds(182, 149, 86, 20);
-		txtTelefone.setColumns(10);
 
 		MaskFormatter mascaraEndereco = criarMascara("****************************************************************************************************");
 		mascaraEndereco.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraEndereco.setPlaceholder("");
-		txtEndereco = new JFormattedTextField(mascaraEndereco);
-		txtEndereco.addMouseListener(this);
-		txtEndereco.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtEndereco.setBounds(368, 87, 157, 20);
-		txtEndereco.setColumns(10);
 
 		MaskFormatter mascaraCidade = criarMascara("**************************************************");
 		mascaraCidade.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraCidade.setPlaceholder("");
-		txtCidade = new JFormattedTextField(mascaraCidade);
-		txtCidade.addMouseListener(this);
-		txtCidade.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtCidade.setColumns(10);
-		txtCidade.setBounds(368, 149, 157, 20);
-		panel.add(txtCidade);
-
-		this.bordaPadrao = txtCidade.getBorder();
 
 		MaskFormatter mascaraComplemento = criarMascara("**************************************************");
 		mascaraComplemento.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?<>");
 		mascaraComplemento.setPlaceholder("");
-		txtComplemento = new JFormattedTextField(mascaraComplemento);
-		txtComplemento.addMouseListener(this);
-		txtComplemento.setFocusLostBehavior(JFormattedTextField.PERSIST);
-		txtComplemento.setColumns(10);
-		txtComplemento.setBounds(368, 118, 245, 20);
-		panel.add(txtComplemento);
 
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
 		mascaraBusca.setInvalidCharacters("!@#$%¨&*()\"'+=_[]{}|?><");
@@ -275,99 +218,178 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtBusca.addKeyListener(this);
 		txtBusca.setColumns(10);
 
-
-		JLabel lblBairro_1 = new JLabel("Bairro:");
-		lblBairro_1.setBounds(17, 120, 34, 15);
-		lblBairro_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBairro_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		comboBoxTelefone = new JComboBox();
-		comboBoxTelefone.setBounds(80, 149, 91, 20);
-		iniciarCombo(comboBoxTelefone);
-		comboBoxTelefone.addActionListener(this);
-
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(17, 151, 53, 15);
-		lblTelefone.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setBounds(17, 179, 53, 15);
-		lblLogin.setHorizontalAlignment(SwingConstants.LEFT);
-		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setBounds(17, 210, 53, 15);
-		lblSenha.setHorizontalAlignment(SwingConstants.LEFT);
-		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
 		btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(17, 248, 78, 23);
+		btnLimpar.setBounds(10, 328, 78, 23);
 		btnLimpar.addActionListener(this);
 
 		btnCadastro = new JButton("Cadastro");
-		btnCadastro.setBounds(101, 248, 78, 23);
+		btnCadastro.setBounds(95, 328, 78, 23);
 		btnCadastro.addActionListener(this);
-
-		JLabel lblEstado = new JLabel("UF:");
-		lblEstado.setBounds(535, 151, 18, 15);
-		lblEstado.setHorizontalAlignment(SwingConstants.LEFT);
-		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		comboBoxEstado = new JComboBox();
-		comboBoxEstado.setBounds(563, 149, 50, 20);
-		iniciarCombo(comboBoxEstado);
-
-		JLabel lblCargo = new JLabel("Cargo:");
-		lblCargo.setBounds(278, 179, 53, 15);
-		lblCargo.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		comboBoxCargo = new JComboBox();
-		comboBoxCargo.setBounds(368, 177, 99, 20);
-		iniciarCombo(comboBoxCargo);
-		panel.setLayout(null);
 		panel.add(btnLimpar);
 		panel.add(btnCadastro);
-		panel.add(lblSenha);
-		panel.add(lblLogin);
-		panel.add(lblBairro_1);
-		panel.add(lblTelefone);
-		panel.add(lblBairro);
 		panel.add(lblNome);
 		panel.add(lblCpf);
 		panel.add(txtNome);
-		panel.add(txtCep);
-		panel.add(lblEndereo);
-		panel.add(txtLogin);
-		panel.add(lblCargo);
-		panel.add(txtSenha);
-		panel.add(txtBairro);
-		panel.add(lblEstado);
-		panel.add(comboBoxTelefone);
-		panel.add(txtTelefone);
-		panel.add(comboBoxCargo);
-		panel.add(txtEndereco);
-		panel.add(comboBoxEstado);
 		panel.add(txtCpf);
 
 		JLabel lblComplemento = new JLabel("Complemento:");
+		lblComplemento.setBounds(278, 120, 69, 15);
 		lblComplemento.setHorizontalAlignment(SwingConstants.LEFT);
-		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblComplemento.setBounds(278, 120, 90, 15);
+		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		panel.add(lblComplemento);
-
-		JLabel lblNumero = new JLabel("N\u00B0:");
-		lblNumero.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNumero.setBounds(535, 90, 25, 15);
-		panel.add(lblNumero);
-
-		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCidade.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCidade.setBounds(278, 151, 56, 15);
-		panel.add(lblCidade);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(10, 49, 604, 159);
+		panel.add(panel_3);
+				panel_3.setLayout(null);
+		
+				JLabel lblBairro = new JLabel("CEP:");
+				lblBairro.setBounds(10, 132, 25, 15);
+				panel_3.add(lblBairro);
+				lblBairro.setHorizontalAlignment(SwingConstants.LEFT);
+				lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				txtCep = new JFormattedTextField(mascaraCep);
+				txtCep.setBounds(64, 129, 187, 20);
+				panel_3.add(txtCep);
+				txtCep.setFocusLostBehavior(JFormattedTextField.PERSIST);
+				txtCep.setColumns(10);
+				
+						JLabel lblEndereo = new JLabel("Endere\u00E7o:");
+						lblEndereo.setBounds(10, 11, 77, 15);
+						panel_3.add(lblEndereo);
+						lblEndereo.setHorizontalAlignment(SwingConstants.LEFT);
+						lblEndereo.setFont(new Font("Tahoma", Font.BOLD, 12));
+						txtEndereco = new JFormattedTextField(mascaraEndereco);
+						txtEndereco.setBounds(64, 38, 187, 20);
+						panel_3.add(txtEndereco);
+						txtEndereco.addMouseListener(this);
+						txtEndereco.setFocusLostBehavior(JFormattedTextField.PERSIST);
+						txtEndereco.setColumns(10);
+						
+								JLabel lblNumero = new JLabel("N\u00B0:");
+								lblNumero.setBounds(271, 41, 25, 15);
+								panel_3.add(lblNumero);
+								lblNumero.setHorizontalAlignment(SwingConstants.LEFT);
+								lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 11));
+								txtNumero = new JFormattedTextField(mascaraNumero);
+								txtNumero.setBounds(346, 38, 49, 20);
+								panel_3.add(txtNumero);
+								txtNumero.addMouseListener(this);
+								txtNumero.setFocusLostBehavior(JFormattedTextField.PERSIST);
+								txtNumero.setColumns(10);
+								
+								JLabel lblRua = new JLabel("Rua:");
+								lblRua.setHorizontalAlignment(SwingConstants.LEFT);
+								lblRua.setFont(new Font("Tahoma", Font.PLAIN, 11));
+								lblRua.setBounds(10, 40, 25, 15);
+								panel_3.add(lblRua);
+								
+								
+										JLabel lblBairro_1 = new JLabel("Bairro:");
+										lblBairro_1.setBounds(10, 72, 34, 15);
+										panel_3.add(lblBairro_1);
+										lblBairro_1.setHorizontalAlignment(SwingConstants.LEFT);
+										lblBairro_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+														
+																JLabel lblCidade = new JLabel("Cidade:");
+																lblCidade.setBounds(10, 100, 40, 15);
+																panel_3.add(lblCidade);
+																lblCidade.setHorizontalAlignment(SwingConstants.LEFT);
+																lblCidade.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																txtCidade = new JFormattedTextField(mascaraCidade);
+																txtCidade.setBounds(64, 98, 187, 20);
+																panel_3.add(txtCidade);
+																txtCidade.addMouseListener(this);
+																txtCidade.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																txtCidade.setColumns(10);
+																txtComplemento = new JFormattedTextField(mascaraComplemento);
+																txtComplemento.setBounds(345, 69, 157, 20);
+																panel_3.add(txtComplemento);
+																txtComplemento.addMouseListener(this);
+																txtComplemento.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																txtComplemento.setColumns(10);
+																
+																		JLabel lblEstado = new JLabel("UF:");
+																		lblEstado.setBounds(268, 100, 18, 15);
+																		panel_3.add(lblEstado);
+																		lblEstado.setHorizontalAlignment(SwingConstants.LEFT);
+																		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																		
+																				comboBoxEstado = new JComboBox();
+																				comboBoxEstado.setBounds(345, 97, 50, 20);
+																				panel_3.add(comboBoxEstado);
+																				iniciarCombo(comboBoxEstado);
+																				txtBairro = new JFormattedTextField(mascaraBairro);
+																				txtBairro.setBounds(64, 69, 187, 20);
+																				panel_3.add(txtBairro);
+																				txtBairro.addMouseListener(this);
+																				txtBairro.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																				txtBairro.setColumns(10);
+																																								
+																																								JPanel panel_4 = new JPanel();
+																																								panel_4.setBounds(10, 216, 603, 105);
+																																								panel.add(panel_4);
+																																								panel_4.setLayout(null);
+																																								
+																																								JLabel lblAcessoAoSistema = new JLabel("Acesso ao Sistema:");
+																																								lblAcessoAoSistema.setBounds(10, 11, 151, 15);
+																																								lblAcessoAoSistema.setHorizontalAlignment(SwingConstants.LEFT);
+																																								lblAcessoAoSistema.setFont(new Font("Tahoma", Font.BOLD, 12));
+																																								panel_4.add(lblAcessoAoSistema);
+																																								
+																																										JLabel lblLogin = new JLabel("Login:");
+																																										lblLogin.setBounds(10, 37, 29, 15);
+																																										panel_4.add(lblLogin);
+																																										lblLogin.setHorizontalAlignment(SwingConstants.LEFT);
+																																										lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																																										txtLogin = new JFormattedTextField(mascaraLogin);
+																																										txtLogin.setBounds(68, 37, 187, 20);
+																																										panel_4.add(txtLogin);
+																																										txtLogin.addMouseListener(this);
+																																										txtLogin.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																																										txtLogin.setColumns(10);
+																																										
+																																												JLabel lblSenha = new JLabel("Senha:");
+																																												lblSenha.setBounds(10, 71, 53, 15);
+																																												panel_4.add(lblSenha);
+																																												lblSenha.setHorizontalAlignment(SwingConstants.LEFT);
+																																												lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																																												txtSenha = new JFormattedTextField(mascaraSenha);
+																																												txtSenha.setBounds(68, 68, 187, 20);
+																																												panel_4.add(txtSenha);
+																																												txtSenha.addMouseListener(this);
+																																												txtSenha.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																																												txtSenha.setColumns(10);
+																																												
+																																														JLabel lblCargo = new JLabel("Cargo:");
+																																														lblCargo.setBounds(265, 40, 53, 15);
+																																														panel_4.add(lblCargo);
+																																														lblCargo.setHorizontalAlignment(SwingConstants.LEFT);
+																																														lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																																														
+																																																comboBoxCargo = new JComboBox();
+																																																comboBoxCargo.setBounds(343, 37, 99, 20);
+																																																panel_4.add(comboBoxCargo);
+																																																iniciarCombo(comboBoxCargo);
+																																																
+																																																		JLabel lblTelefone = new JLabel("Telefone:");
+																																																		lblTelefone.setBounds(265, 71, 53, 15);
+																																																		panel_4.add(lblTelefone);
+																																																		lblTelefone.setHorizontalAlignment(SwingConstants.LEFT);
+																																																		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																																																		
+																																																				comboBoxTelefone = new JComboBox();
+																																																				comboBoxTelefone.setBounds(343, 68, 99, 20);
+																																																				panel_4.add(comboBoxTelefone);
+																																																				iniciarCombo(comboBoxTelefone);
+																																																				txtTelefone = new JFormattedTextField(mascaraTelefone);
+																																																				txtTelefone.setBounds(451, 68, 142, 20);
+																																																				panel_4.add(txtTelefone);
+																																																				txtTelefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																																																				txtTelefone.setColumns(10);
+																																				comboBoxTelefone.addActionListener(this);
+																
+																		this.bordaPadrao = txtCidade.getBorder();
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -422,35 +444,41 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		
 		btnVisualizar = new JButton("Visualizar");
 		btnVisualizar.addActionListener(this);
+		
+		JLabel lblFuncionriosCadastrados = new JLabel("Funcion\u00E1rios Cadastrados");
+		lblFuncionriosCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(scrollPane, Alignment.LEADING)
-							.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addComponent(btnEditar)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnRemover)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnVisualizar)))
-					.addContainerGap(369, Short.MAX_VALUE))
+							.addComponent(btnVisualizar))
+						.addComponent(lblFuncionriosCadastrados)
+						.addComponent(scrollPane))
+					.addContainerGap(235, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addGap(34)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblFuncionriosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnRemover)
 						.addComponent(btnEditar)
-						.addComponent(btnVisualizar)))
+						.addComponent(btnRemover)
+						.addComponent(btnVisualizar))
+					.addContainerGap())
 		);
 
 		table = new JTable();
