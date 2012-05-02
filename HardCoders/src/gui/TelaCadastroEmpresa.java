@@ -36,7 +36,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
+import util.Sessao;
 import entidades.Empresa;
+import entidades.Funcionario;
+import entidades.Pessoa;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 
@@ -192,6 +195,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		JLabel lblNome = new JLabel("Nome:");
 
 		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
+		mascaraBusca.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraBusca.setPlaceholder("");
 		txtBusca = new JFormattedTextField(mascaraBusca);
 		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -365,6 +369,18 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		Fachada fachada = Fachada.getInstancia();
 		try {
 			fachada.cadastrarEmpresa(e);
+			Long id_empresa = fachada.ultimoIdEmpresa(new Empresa());
+			
+			Pessoa p = new Pessoa();
+			p.setAtivo(Constantes.ATIVO);
+			fachada.cadastrarPessoa(p);
+			Long id_pessoa = fachada.ultimoIdPessoa(new Pessoa());
+			
+			Funcionario f = Sessao.getFuncionario();
+			f.setId_pessoa(id_pessoa);
+			f.setId_empresa(id_empresa);
+			fachada.cadastrarFuncionario(f);
+			
 			JOptionPane.showMessageDialog(null, "Empresa cadastrada com sucesso.");
 			limparCadastro();
 		} catch (EntidadeJaExisteException e1) {
