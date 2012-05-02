@@ -132,27 +132,25 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-					.addContainerGap(848, Short.MAX_VALUE)
+					.addContainerGap(486, Short.MAX_VALUE)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabbedPane)
-					.addContainerGap())
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+				.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+					.addGap(10)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+					.addGap(0, 0, Short.MAX_VALUE))
 		);
 
 		ButtonGroup group = new ButtonGroup();

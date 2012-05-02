@@ -121,27 +121,25 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap(356, Short.MAX_VALUE)
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+					.addContainerGap(594, Short.MAX_VALUE)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 671, Short.MAX_VALUE)
-					.addContainerGap())
+				.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addGap(86)
+					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+					.addGap(0, 0, Short.MAX_VALUE))
 		);
 
 		JPanel panel = new JPanel();
@@ -219,11 +217,11 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtBusca.setColumns(10);
 
 		btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(10, 328, 78, 23);
+		btnLimpar.setBounds(10, 332, 78, 23);
 		btnLimpar.addActionListener(this);
 
 		btnCadastro = new JButton("Cadastro");
-		btnCadastro.setBounds(95, 328, 78, 23);
+		btnCadastro.setBounds(98, 332, 78, 23);
 		btnCadastro.addActionListener(this);
 		panel.add(btnLimpar);
 		panel.add(btnCadastro);
@@ -303,7 +301,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 																txtCidade.setFocusLostBehavior(JFormattedTextField.PERSIST);
 																txtCidade.setColumns(10);
 																txtComplemento = new JFormattedTextField(mascaraComplemento);
-																txtComplemento.setBounds(345, 69, 157, 20);
+																txtComplemento.setBounds(345, 69, 249, 20);
 																panel_3.add(txtComplemento);
 																txtComplemento.addMouseListener(this);
 																txtComplemento.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -325,6 +323,23 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 																				txtBairro.addMouseListener(this);
 																				txtBairro.setFocusLostBehavior(JFormattedTextField.PERSIST);
 																				txtBairro.setColumns(10);
+																				
+																						JLabel lblTelefone = new JLabel("Telefone:");
+																						lblTelefone.setBounds(265, 132, 53, 15);
+																						panel_3.add(lblTelefone);
+																						lblTelefone.setHorizontalAlignment(SwingConstants.LEFT);
+																						lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																						
+																								comboBoxTelefone = new JComboBox();
+																								comboBoxTelefone.setBounds(346, 129, 99, 20);
+																								panel_3.add(comboBoxTelefone);
+																								iniciarCombo(comboBoxTelefone);
+																								txtTelefone = new JFormattedTextField(mascaraTelefone);
+																								txtTelefone.setBounds(455, 129, 139, 20);
+																								panel_3.add(txtTelefone);
+																								txtTelefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
+																								txtTelefone.setColumns(10);
+																								comboBoxTelefone.addActionListener(this);
 																																								
 																																								JPanel panel_4 = new JPanel();
 																																								panel_4.setBounds(10, 216, 603, 105);
@@ -371,23 +386,6 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 																																																comboBoxCargo.setBounds(343, 37, 99, 20);
 																																																panel_4.add(comboBoxCargo);
 																																																iniciarCombo(comboBoxCargo);
-																																																
-																																																		JLabel lblTelefone = new JLabel("Telefone:");
-																																																		lblTelefone.setBounds(265, 71, 53, 15);
-																																																		panel_4.add(lblTelefone);
-																																																		lblTelefone.setHorizontalAlignment(SwingConstants.LEFT);
-																																																		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 11));
-																																																		
-																																																				comboBoxTelefone = new JComboBox();
-																																																				comboBoxTelefone.setBounds(343, 68, 99, 20);
-																																																				panel_4.add(comboBoxTelefone);
-																																																				iniciarCombo(comboBoxTelefone);
-																																																				txtTelefone = new JFormattedTextField(mascaraTelefone);
-																																																				txtTelefone.setBounds(451, 68, 142, 20);
-																																																				panel_4.add(txtTelefone);
-																																																				txtTelefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
-																																																				txtTelefone.setColumns(10);
-																																				comboBoxTelefone.addActionListener(this);
 																
 																		this.bordaPadrao = txtCidade.getBorder();
 
