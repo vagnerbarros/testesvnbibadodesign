@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="C:/Users/vagner/Documents/arquivos/projetos/HardCoders/lib/xerces-2.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/vagner/Documents/arquivos/projetos/HardCoders/lib/xml-apis.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/vagner/Documents/arquivos/projetos/HardCoders/lib/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
