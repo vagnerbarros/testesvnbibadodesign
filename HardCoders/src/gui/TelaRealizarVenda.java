@@ -21,6 +21,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelaRealizarVenda extends JPanel {
 	private JTextField textField;
@@ -190,6 +192,15 @@ public class TelaRealizarVenda extends JPanel {
 		panel_4.add(lblMeses);
 		
 		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			
+				TelaBuscarServ tbc = new TelaBuscarServ(new javax.swing.JFrame(), true);
+				tbc.setVisible(true);
+				
+			}
+		});
 		label.setIcon(new ImageIcon(TelaRealizarVenda.class.getResource("/gui/imagens/lupaS.png")));
 		label.setBounds(314, 23, 30, 31);
 		panel_3.add(label);

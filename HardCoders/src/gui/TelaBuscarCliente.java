@@ -151,7 +151,7 @@ public class TelaBuscarCliente extends JDialog {
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 707, GroupLayout.PREFERRED_SIZE)
+				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(10)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
