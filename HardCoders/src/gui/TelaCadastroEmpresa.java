@@ -422,7 +422,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 			pintarBorda(txtNomeEmpresa);
 		}
 		if(!valido){
-			JOptionPane.showMessageDialog(null, "Campos Obrigatóriaos não preenchidos");
+			JOptionPane.showMessageDialog(null, "Campos obrigatórios não preenchidos");
 		}
 		return valido;
 	}
