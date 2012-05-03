@@ -422,7 +422,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			pintarBorda(txtValor);
 		}
 		if(!valido){
-			JOptionPane.showMessageDialog(null, "Campos Obrigatórios não preenchidos");
+			JOptionPane.showMessageDialog(null, "Campos obrigatórios não preenchidos");
 		}
 		return valido;
 	}
