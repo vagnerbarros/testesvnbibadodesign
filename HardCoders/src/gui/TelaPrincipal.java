@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -21,6 +20,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Toolkit;
 
 public class TelaPrincipal extends JFrame {
+
+	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -124,7 +125,6 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 
-
 		menuCadClientes.setBackground(Color.WHITE);
 		menuCadClientes.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/clienteIco.png")));
 		menuCadClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
@@ -204,6 +204,11 @@ public class TelaPrincipal extends JFrame {
 		BarraMenu.add(mnVendas);
 
 		JMenuItem mntmRealizarVenda = new JMenuItem("       Realizar Venda   ");
+		mntmRealizarVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorGui.abrirTelaRealVenda();
+			}
+		});
 		mntmRealizarVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/dinheiroIco.png")));
 		mntmRealizarVenda.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		mnVendas.add(mntmRealizarVenda);

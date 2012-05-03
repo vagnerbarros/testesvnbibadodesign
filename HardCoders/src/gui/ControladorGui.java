@@ -15,23 +15,35 @@ public class ControladorGui {
 	
 	private TelaContratosVencer telaContVencer;
 	
+	private TelaRealizarVenda telaVenda;
+	
+	
 	public ControladorGui(Container p){
 		contentPane = p;
 	}
 
-	public void abrirTelaCadCliente(){
+	public void abrirTelaRealVenda(){
 
-		//fecha as outras
 		fecharTodas();
 
-		//instancia
+		if(telaVenda == null){
+			telaVenda = new TelaRealizarVenda();
+			contentPane.add(telaVenda, BorderLayout.CENTER);
+		}
+		
+		contentPane.setComponentZOrder(telaVenda, 0);
+		telaVenda.setVisible(true);
+	}
+	
+	public void abrirTelaCadCliente(){
+
+		fecharTodas();
+
 		if(telaCadCliente == null){
-			//instancia
 			telaCadCliente = new TelaCadastroCliente();
 			contentPane.add(telaCadCliente, BorderLayout.CENTER);
 		}
 		
-		//mostra essa
 		contentPane.setComponentZOrder(telaCadCliente, 0);
 		telaCadCliente.setVisible(true);
 	}
@@ -144,6 +156,12 @@ public class ControladorGui {
 			telaContVencer.setVisible(false);
 			contentPane.remove(telaContVencer);
 			telaContVencer = null;
+		}
+		
+		if(telaVenda != null) {
+			telaVenda.setVisible(false);
+			contentPane.remove(telaVenda);
+			telaVenda = null;
 		}
 		
 		System.gc();
