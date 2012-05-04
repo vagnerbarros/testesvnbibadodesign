@@ -7,7 +7,6 @@ import java.util.List;
 import repositorio.Repositorio;
 import cadastro.Cadastro;
 import entidades.Cliente;
-import entidades.Contrato;
 import entidades.Empresa;
 import entidades.Endereco;
 import entidades.Falha;
@@ -15,6 +14,7 @@ import entidades.Funcionario;
 import entidades.Pessoa;
 import entidades.Reclamacao;
 import entidades.Servico;
+import entidades.Solicitacao;
 import entidades.Telefone;
 import exception.EntidadeJaExisteException;
 
@@ -22,7 +22,6 @@ public class Fachada {
 
 	private static Fachada instancia;
 	private Cadastro<Cliente> cadCliente;
-	private Cadastro<Contrato> cadContrato;
 	private Cadastro<Empresa> cadEmpresa;
 	private Cadastro<Endereco> cadEndereco;
 	private Cadastro<Falha> cadFalha;
@@ -31,6 +30,7 @@ public class Fachada {
 	private Cadastro<Servico> cadServico;
 	private Cadastro<Telefone> cadTelefone;
 	private Cadastro<Pessoa> cadPessoa;
+	private Cadastro<Solicitacao> cadSolicitacacao;
 	
 	private Fachada(){
 		iniciarCadastros();
@@ -40,9 +40,6 @@ public class Fachada {
 		
 		IRepositorio<Cliente> rCliente = new Repositorio<Cliente>();
 		this.cadCliente = new Cadastro<Cliente>(rCliente);
-		
-		IRepositorio<Contrato> rContrato = new Repositorio<Contrato>();
-		this.cadContrato = new Cadastro<Contrato>(rContrato);
 		
 		IRepositorio<Empresa> rEmpresa = new Repositorio<Empresa>();
 		this.cadEmpresa = new Cadastro<Empresa>(rEmpresa);
@@ -67,6 +64,9 @@ public class Fachada {
 		
 		IRepositorio<Pessoa> rPessoa = new Repositorio<Pessoa>();
 		this.cadPessoa = new Cadastro<Pessoa>(rPessoa);
+		
+		IRepositorio<Solicitacao> rSolicitacao = new Repositorio<Solicitacao>();
+		this.cadSolicitacacao = new Cadastro<Solicitacao>(rSolicitacao);
 	}
 	
 	public static Fachada getInstancia(){
@@ -252,26 +252,6 @@ public class Fachada {
 		return this.cadTelefone.buscaLike(t);
 	}
 	
-	//métodos de contrato
-	public void cadastrarContrato(Contrato c) throws EntidadeJaExisteException{
-		this.cadContrato.cadastrar(c);
-	}
-	public void removerContrato(Contrato c){
-		this.cadContrato.remover(c);
-	}
-	public void atualizarContrato(Contrato c){
-		this.cadContrato.atualizar(c);
-	}
-	public List<Contrato> listarContrato(Contrato c){
-		return this.cadContrato.listarTodos(c);
-	}
-	public List<Contrato> buscarContrato(Contrato c){
-		return this.cadContrato.buscar(c);
-	}
-	public Long ultimoIdContrato(Contrato c){
-		return this.cadContrato.ultimoId(c);
-	}
-	
 	//métodos de pessoa
 	public void cadastrarPessoa(Pessoa p) throws EntidadeJaExisteException{
 		this.cadPessoa.cadastrar(p);
@@ -290,5 +270,22 @@ public class Fachada {
 	}
 	public Long ultimoIdPessoa(Pessoa p){
 		return this.cadPessoa.ultimoId(p);
+	}
+	
+	//métodos de solicitacao
+	public void cadastrarSolicitacao(Solicitacao s) throws EntidadeJaExisteException{
+		this.cadSolicitacacao.cadastrar(s);
+	}
+	public void removerSolicitacao(Solicitacao s){
+		this.cadSolicitacacao.remover(s);
+	}
+	public void atualizarSolicitacao(Solicitacao s){
+		this.cadSolicitacacao.atualizar(s);
+	}
+	public List<Solicitacao> listarSolicitacao(Solicitacao s){
+		return this.cadSolicitacacao.listarTodos(s);
+	}
+	public List<Solicitacao> buscarSolicitacao(Solicitacao s){
+		return this.cadSolicitacacao.buscar(s);
 	}
 }

@@ -1,6 +1,9 @@
 package util;
 
 public class Constantes {
+	
+	//quantidade de clicks do mouse para ação
+	public static int QUANT_CLICKS = 2;
 
 	// cargos possíveis para funcionarios.
 	public static String GERENTE = "Gerente";
