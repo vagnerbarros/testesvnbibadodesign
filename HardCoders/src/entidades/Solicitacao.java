@@ -7,13 +7,16 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import util.Constantes;
+
 public class Solicitacao implements IEntidades<Solicitacao>{
 
 	private static String tabela = "Solicitacao";
 	private Long id;
 	private Long id_cliente;
 	private Long id_servico;
-	private Date data;
+	private Date data_inicial;
+	private Date data_final;
 	private String ativo;
 	
 	public Solicitacao(){
@@ -38,21 +41,43 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 	public void setId_servico(Long id_servico) {
 		this.id_servico = id_servico;
 	}
-	public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		this.data = data;
-	}
 	public String nomeTabela() {
 		return tabela;
 	}
 	public String getAtivo() {
 		return ativo;
 	}
-
+	public Date getData_inicial() {
+		return data_inicial;
+	}
+	public void setData_inicial(Date data_inicial) {
+		this.data_inicial = data_inicial;
+	}
+	public Date getData_final() {
+		return data_final;
+	}
+	public void setData_final(Date data_final) {
+		this.data_final = data_final;
+	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public Solicitacao getCamposChave() {
+		Solicitacao retorno = new Solicitacao();
+		retorno.setAtivo(Constantes.ATIVO);
+		retorno.setId_cliente(this.id_cliente);
+		retorno.setId_servico(this.id_servico);
+		return retorno;
+	}
+	
+	public boolean equals(Object obj){
+		Solicitacao s = (Solicitacao) obj;
+		if(this.id_cliente.equals(s.getId_cliente()) && this.id_servico.equals(s.getId_servico())){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public Map<String, Object> getHashMap() {
@@ -68,19 +93,16 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 		if(this.id_servico != null){
 			mapa.put("id_servico", this.id_servico);
 		}
-		if(this.data != null){
-			mapa.put("data", this.data);
+		if(this.data_inicial != null){
+			mapa.put("data_inicial", this.data_inicial);
+		}
+		if(this.data_final != null){
+			mapa.put("data_final", this.data_final);
 		}
 		if(this.ativo != null){
 			mapa.put("ativo", this.ativo);
 		}
 		
 		return mapa;
-	}
-
-	@Override
-	public Solicitacao getCamposChave() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

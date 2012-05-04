@@ -13,7 +13,9 @@
 	  
 	  <property name="id_servico" type="long" column="id_servico"/>
 
-	  <property name="data" type="date" column="data"/>
+	  <property name="data_inicial" type="date" column="data_inicial"/>
+	  
+	  <property name="data_final" type="date" column="data_final"/>
 	  
 	  <property name="ativo" type="string" column="ativo" length="1"/>
 	  

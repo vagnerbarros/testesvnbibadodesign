@@ -24,7 +24,6 @@
       <mapping resource="hibernate/servico.hbm.xml"/>
       <mapping resource="hibernate/solicitacao.hbm.xml"/>
       <mapping resource="hibernate/falha.hbm.xml"/>
-      <mapping resource="hibernate/contrato.hbm.xml"/>
       <mapping resource="hibernate/pessoa.hbm.xml"/>
 </session-factory>
 </hibernate-configuration>
