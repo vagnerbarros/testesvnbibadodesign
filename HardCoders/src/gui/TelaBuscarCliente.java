@@ -1,43 +1,58 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.ParseException;
+import java.util.List;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-import java.awt.SystemColor;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
-public class TelaBuscarCliente extends JDialog {
+import util.Constantes;
+import util.Sessao;
+import entidades.Cliente;
+import entidades.Endereco;
+import entidades.Telefone;
+import fachada.Fachada;
+
+public class TelaBuscarCliente extends JDialog implements ActionListener, KeyListener, MouseListener{
 
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
-	private JTextField textField;
+	private JFormattedTextField txtBusca;
 	private JPanel panel_1;
+	private JComboBox comboBoxBusca;
+	private JButton btnConfirmar;
+	private JButton btnCancelar;
+	private TelaRealizarVenda telaVenda;
 
-	public TelaBuscarCliente(java.awt.Frame parent, boolean modal){
+	public TelaBuscarCliente(java.awt.Frame parent, boolean modal, TelaRealizarVenda telaVenda){
 		super(parent, modal);
+		this.telaVenda = telaVenda;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaBuscarCliente.class.getResource("/gui/imagens/icone.png")));
 		setTitle("Localizar Cliente .:.");
 	    IniciarJDialog();
@@ -81,71 +96,65 @@ public class TelaBuscarCliente extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"Nome", "CPF", "Situa\u00E7\u00E3o"
+		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome/Razão Social", "CPF/CNPJ", "Tipo"}
+				) {
+			Class[] types = new Class [] {Cliente.class, java.lang.String.class, java.lang.String.class};
+			boolean[] canEdit = new boolean [] {false, false, false};
+
+			public Class getColumnClass(int columnIndex) {
+				return types [columnIndex];
 			}
-		));
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit [columnIndex];
+			}
+		});
 		scrollPane.setViewportView(table);
 		
-		JButton btnCadastrarNovo = new JButton("Cadastrar Novo");
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		this.montaTabelaCliente(new Cliente());
+
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(this);
 		
 		JPanel panel = new JPanel();
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		MaskFormatter mascaraBusca = criarMascara("****************************************************************************************************");
+		mascaraBusca.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
+		mascaraBusca.setPlaceholder("");
+		txtBusca = new JFormattedTextField(mascaraBusca);
+		txtBusca.setFocusLostBehavior(JFormattedTextField.PERSIST);
+		txtBusca.addMouseListener(this);
+		txtBusca.addKeyListener(this);
+		txtBusca.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nome", "Endere\u00E7o", "Telefone"}));
+		comboBoxBusca = new JComboBox();
+		carregarCombo(comboBoxBusca);
+		comboBoxBusca.addActionListener(this);
 		
-		JRadioButton rdbtnPessoaJurdica = new JRadioButton("Pessoa Jur\u00EDdica");
-		rdbtnPessoaJurdica.setBackground(SystemColor.control);
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(this);
 		
-		JButton btnUtilizarSelecionado = new JButton("Confirmar");
-		btnUtilizarSelecionado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JRadioButton rdbtnPessoaFsica = new JRadioButton("Pessoa F\u00EDsica");
-		
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(rdbtnPessoaJurdica);
-		bg.add(rdbtnPessoaFsica);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(10)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(rdbtnPessoaFsica, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(rdbtnPessoaJurdica, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap()
+					.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(7)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(rdbtnPessoaFsica)
-						.addComponent(rdbtnPessoaJurdica))
-					.addGap(7)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(22)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(18, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
@@ -155,8 +164,7 @@ public class TelaBuscarCliente extends JDialog {
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(10)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addComponent(btnCadastrarNovo, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
+					.addGap(125))
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(10)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 695, GroupLayout.PREFERRED_SIZE))
@@ -164,26 +172,219 @@ public class TelaBuscarCliente extends JDialog {
 					.addGap(520)
 					.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 					.addGap(7)
-					.addComponent(btnUtilizarSelecionado, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+					.addComponent(btnConfirmar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
 					.addGap(11)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(52)
-							.addComponent(btnCadastrarNovo)))
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
 					.addGap(11)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
 					.addGap(8)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnCancelar)
-						.addComponent(btnUtilizarSelecionado)))
+						.addComponent(btnConfirmar)))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 
 	}
+	
+	private void montaTabelaCliente(Cliente c) {
+
+		Fachada fachada = Fachada.getInstancia();
+		c.setId_empresa(Sessao.getEmpresa().getId());
+		List<Cliente> listaClientes = fachada.buscaLikeCliente(c);
+		String colunas[] = { "Nome/Razão Social", "CPF/CNPJ", "Tipo"};
+		Object linhas[][] = new Object[listaClientes.size()][colunas.length];
+
+		if (listaClientes.isEmpty()) {
+			table.setModel(new DefaultTableModel(null, colunas));
+		} else {
+			for (int i = 0; i < listaClientes.size(); i++) {
+
+				linhas[i][0] = listaClientes.get(i);
+				linhas[i][1] = listaClientes.get(i).getCpfOrCnpj();
+				linhas[i][2] = listaClientes.get(i).getTipo();
+			}
+		}
+
+		table.setModel(new DefaultTableModel(linhas, colunas) {
+			Class[] types = new Class[] { Cliente.class, java.lang.String.class, java.lang.String.class};
+			boolean[] canEdit = new boolean[] { false, false, false};
+
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+	}
+
+	private void montaTabelaEndereco(Endereco e) {
+
+		Fachada fachada = Fachada.getInstancia();
+		e.setId_empresa(Sessao.getEmpresa().getId());
+		List<Endereco> listaEnderecos = fachada.buscaLikeEndereco(e);
+		String colunas[] = { "Rua", "Rótulo"};
+		Object linhas[][] = new Object[listaEnderecos.size()][colunas.length];
+
+		if (listaEnderecos.isEmpty()) {
+			table.setModel(new DefaultTableModel(null, colunas));
+		} else {
+			for (int i = 0; i < listaEnderecos.size(); i++) {
+
+				linhas[i][0] = listaEnderecos.get(i);
+				linhas[i][1] = listaEnderecos.get(i).getRotulo();
+			}
+		}
+
+		table.setModel(new DefaultTableModel(linhas, colunas) {
+			Class[] types = new Class[] { Endereco.class, java.lang.String.class};
+			boolean[] canEdit = new boolean[] { false, false};
+
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+	}
+
+	private void montaTabelaTelefone(Telefone t) {
+
+		Fachada fachada = Fachada.getInstancia();
+		t.setId_empresa(Sessao.getEmpresa().getId());
+		List<Telefone> listaTelefones = fachada.buscaLikeTelefone(t);
+		String colunas[] = { "Telefone", "Rótulo"};
+		Object linhas[][] = new Object[listaTelefones.size()][colunas.length];
+
+		if (listaTelefones.isEmpty()) {
+			table.setModel(new DefaultTableModel(null, colunas));
+		} else {
+			for (int i = 0; i < listaTelefones.size(); i++) {
+
+				linhas[i][0] = listaTelefones.get(i);
+				linhas[i][1] = listaTelefones.get(i).getRotulo();
+			}
+		}
+
+		table.setModel(new DefaultTableModel(linhas, colunas) {
+			Class[] types = new Class[] { Telefone.class, java.lang.String.class};
+			boolean[] canEdit = new boolean[] { false, false};
+
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+	}
+	
+	private void carregarCombo(JComboBox combo){
+		if(combo.equals(this.comboBoxBusca)){
+			String [] rotulos = Constantes.getBuscaCliente();
+			for(String rotulo : rotulos){
+				comboBoxBusca.addItem(rotulo);
+			}
+		}
+	}
+	
+	private void buscar(){
+
+		if(this.comboBoxBusca.getSelectedItem().equals(Constantes.NOMERAZAO)){
+			Cliente c = new Cliente();
+			c.setNome(txtBusca.getText().trim());
+			this.montaTabelaCliente(c);
+		}
+		else if(this.comboBoxBusca.getSelectedItem().equals(Constantes.ENDERECO)){
+			Endereco e = new Endereco();
+			e.setRua(txtBusca.getText().trim());
+			this.montaTabelaEndereco(e);
+		}
+		else if(this.comboBoxBusca.getSelectedItem().equals(Constantes.TELEFONE)){
+			Telefone t = new Telefone();
+			t.setNumero(txtBusca.getText().trim());
+			this.montaTabelaTelefone(t);
+		}
+		else if(this.comboBoxBusca.getSelectedItem().equals(Constantes.CPFCNPJ)){
+			Cliente c = new Cliente();
+			c.setCpfOrCnpj(txtBusca.getText().trim());
+			this.montaTabelaCliente(c);
+		}
+	}
+	
+	public void keyReleased(KeyEvent evt){
+		if(evt.getKeyCode() != 10){
+			buscar();
+		}
+	}
+	
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
+	}
+	
+	public void actionPerformed(ActionEvent evt) {
+		
+		JComponent elemento = (JComponent) evt.getSource();
+		if(elemento.equals(this.comboBoxBusca)){
+			txtBusca.setText("");
+			buscar();
+		}
+		else if(elemento.equals(btnConfirmar)){
+			int linha = table.getSelectedRow();
+			if(linha != -1){
+				Long id_cliente = idClienteSelecionado(linha);
+				telaVenda.retornarResultado(id_cliente);
+				this.setVisible(false);
+			}
+		}
+		else if(elemento.equals(btnCancelar)){
+			this.setVisible(false);
+		}
+	}
+	
+	private Long idClienteSelecionado(int linha){
+		Long retorno = null;
+		if(comboBoxBusca.getSelectedItem().equals(Constantes.NOMERAZAO)){
+			retorno = ((Cliente)table.getModel().getValueAt(linha, 0)).getId_pessoa();
+		}
+		else if(comboBoxBusca.getSelectedItem().equals(Constantes.TELEFONE)){
+			retorno = ((Telefone)table.getModel().getValueAt(linha, 0)).getId_pessoa();
+		}
+		else if(comboBoxBusca.getSelectedItem().equals(Constantes.ENDERECO)){
+			retorno = ((Endereco)table.getModel().getValueAt(linha, 0)).getId_pessoa();
+		}
+		else if(comboBoxBusca.getSelectedItem().equals(Constantes.CPFCNPJ)){
+			retorno = ((Cliente)table.getModel().getValueAt(linha, 0)).getId_pessoa();
+		}
+		return retorno;
+	}
+	
+	private MaskFormatter criarMascara(String formato){
+		try {
+			MaskFormatter mascara = new MaskFormatter(formato);
+			return mascara;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void keyPressed(KeyEvent arg0) {}
+	public void keyTyped(KeyEvent arg0) {}
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
 }

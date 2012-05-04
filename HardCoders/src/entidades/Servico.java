@@ -53,7 +53,7 @@ public class Servico implements IEntidades<Servico>{
 	}
 	public boolean equals(Object obj){
 		Servico s = (Servico) obj;
-		if(this.id_empresa.compareTo(s.getId_empresa()) == 0 && this.nome.equals(s.getNome())){
+		if(this.id_empresa.compareTo(s.getId_empresa()) == 0 && this.nome.equalsIgnoreCase(s.getNome())){
 			return true;
 		}
 		else{
