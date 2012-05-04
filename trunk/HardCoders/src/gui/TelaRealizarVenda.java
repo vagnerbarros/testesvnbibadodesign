@@ -430,7 +430,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 
 		JComponent elemento = (JComponent) evt.getSource();
 		if(elemento.equals(this.lupaCliente)){
-			TelaBuscarCliente tbc = new TelaBuscarCliente(new javax.swing.JFrame(), true);
+			TelaBuscarCliente tbc = new TelaBuscarCliente(new javax.swing.JFrame(), true, this);
 			tbc.setVisible(true);
 		}
 		else if(elemento.equals(this.listaCpfOrCnpj)){
@@ -453,6 +453,25 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 				limparServico();
 			}
 		}
+	}
+	
+	protected void retornarResultado(Long id_cliente){
+		Cliente c = new Cliente();
+		c.setId_pessoa(id_cliente);
+		Fachada fachada = Fachada.getInstancia();
+		List<Cliente> lista = fachada.buscarCliente(c);
+		clienteSelecionado = lista.get(0);
+		if(clienteSelecionado.getTipo().equals(Constantes.PF)){
+			rdbtnCpf.setSelected(true);
+			rdbtnCnpj.setSelected(false);
+		}
+		else if(clienteSelecionado.getTipo().equals(Constantes.PJ)){
+			rdbtnCpf.setSelected(false);
+			rdbtnCnpj.setSelected(true);
+		}
+		txtCpfOrCnpj.setText(clienteSelecionado.getCpfOrCnpj());
+		txtCpfOrCnpj.setEditable(false);
+		txtNome.setText(clienteSelecionado.getNome());
 	}
 
 	private void buscaCpfOrCnpj(Cliente c){
