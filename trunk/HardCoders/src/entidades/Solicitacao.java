@@ -17,6 +17,7 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 	private Long id_servico;
 	private Date data_inicial;
 	private Date data_final;
+	private Long id_empresa;
 	private String ativo;
 	
 	public Solicitacao(){
@@ -44,9 +45,6 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 	public String nomeTabela() {
 		return tabela;
 	}
-	public String getAtivo() {
-		return ativo;
-	}
 	public Date getData_inicial() {
 		return data_inicial;
 	}
@@ -59,6 +57,15 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 	public void setData_final(Date data_final) {
 		this.data_final = data_final;
 	}
+	public Long getId_empresa() {
+		return id_empresa;
+	}
+	public void setId_empresa(Long id_empresa) {
+		this.id_empresa = id_empresa;
+	}
+	public String getAtivo() {
+		return ativo;
+	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
@@ -67,12 +74,13 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 		retorno.setAtivo(Constantes.ATIVO);
 		retorno.setId_cliente(this.id_cliente);
 		retorno.setId_servico(this.id_servico);
+		retorno.setId_empresa(this.id_empresa);
 		return retorno;
 	}
 	
 	public boolean equals(Object obj){
 		Solicitacao s = (Solicitacao) obj;
-		if(this.id_cliente.equals(s.getId_cliente()) && this.id_servico.equals(s.getId_servico())){
+		if(this.id_cliente.equals(s.getId_cliente()) && this.id_servico.equals(s.getId_servico()) && this.id_empresa.equals(s.getId_empresa())){
 			return true;
 		}
 		else{
@@ -98,6 +106,9 @@ public class Solicitacao implements IEntidades<Solicitacao>{
 		}
 		if(this.data_final != null){
 			mapa.put("data_final", this.data_final);
+		}
+		if(this.id_empresa != null){
+			mapa.put("id_empresa", this.id_empresa);
 		}
 		if(this.ativo != null){
 			mapa.put("ativo", this.ativo);

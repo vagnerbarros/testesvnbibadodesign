@@ -17,6 +17,8 @@
 	  
 	  <property name="data_final" type="date" column="data_final"/>
 	  
+	  <property name="id_empresa" type="long" column="id_empresa"/>
+	  
 	  <property name="ativo" type="string" column="ativo" length="1"/>
 	  
    </class>

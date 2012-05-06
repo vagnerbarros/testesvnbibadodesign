@@ -288,4 +288,7 @@ public class Fachada {
 	public List<Solicitacao> buscarSolicitacao(Solicitacao s){
 		return this.cadSolicitacacao.buscar(s);
 	}
+	public List<Solicitacao> buscaIntervaloData(Solicitacao s){
+		return this.cadSolicitacacao.buscaLike(s);
+	}
 }

@@ -6,37 +6,56 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Calendar;
+import java.text.ParseException;
 import java.util.Date;
-import java.util.TimeZone;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+
+import util.Sessao;
 
 import com.toedter.calendar.JDateChooser;
 
-public class TelaContratosVencer extends JPanel implements PropertyChangeListener, ActionListener{
+import entidades.Cliente;
+import entidades.Servico;
+import entidades.Solicitacao;
+import fachada.Fachada;
+
+public class TelaContratosVencer extends JPanel implements PropertyChangeListener, ActionListener, KeyListener, MouseListener{
 	private JDateChooser txtDataInicial;
 	private JDateChooser txtDataFinal;
-	private JTextField txtNomeServico;
+	private JFormattedTextField txtNomeServico;
 	private JTable table;
 	private JButton btnDetalhar;
+	private Map<Long, Cliente> clientes;
+	private Map<Long, Servico> servicos;
 
 	public TelaContratosVencer() {
 
+		clientes = new Hashtable<Long, Cliente>();
+		servicos = new Hashtable<Long, Servico>();
+		carregarClientes();
+		carregarServicos(new Servico());
 		setBackground(Color.WHITE);
 
 		// A partir daqui comandos para que o elemento JPanel redimensione o seu tamanho de acordo
@@ -154,9 +173,17 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		lblNomeDoServio.setBounds(10, 28, 97, 14);
 		panel_2.add(lblNomeDoServio);
 
-		txtNomeServico = new JTextField();
+		txtNomeServico = new JFormattedTextField();
+		MaskFormatter mascaraNome = criarMascara("****************************************************************************************************");
+		mascaraNome.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?");
+		mascaraNome.setPlaceholder("");
+		txtNomeServico = new JFormattedTextField(mascaraNome);
+		txtNomeServico.setFocusLostBehavior(JFormattedTextField.PERSIST);
+		txtNomeServico.addKeyListener(this);
 		txtNomeServico.setColumns(10);
 		txtNomeServico.setBounds(117, 26, 242, 20);
+		txtNomeServico.addMouseListener(this);
+		txtNomeServico.setEditable(false);
 		panel_2.add(txtNomeServico);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -172,12 +199,14 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 						{null, null, null, null},
 				},
 				new String[] {
-						"Nome do Cliente", "Servi\u00E7o", "Data Inicial", "Data Final"
+						"Nome do Cliente", "Serviço", "Data Inicial", "Data Final"
 				}
 				));
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		scrollPane.setViewportView(table);
+		
+		montaTabela(new Solicitacao());
 
 		btnDetalhar = new JButton("Detalhar");
 		btnDetalhar.addActionListener(this);
@@ -185,6 +214,62 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		panel.add(btnDetalhar);
 
 		this.setLayout(layout);
+	}
+	
+	private void carregarClientes(){
+		
+		Fachada fachada = Fachada.getInstancia();
+		Cliente busca = new Cliente();
+		busca.setId_empresa(Sessao.getEmpresa().getId());
+		List<Cliente> listaClientes = fachada.buscarCliente(busca);
+		for(Cliente c : listaClientes){
+			clientes.put(c.getId_pessoa(), c);
+		}
+	}
+	
+	private void carregarServicos(Servico busca){
+		
+		servicos.clear();
+		Fachada fachada = Fachada.getInstancia();
+		busca.setId_empresa(Sessao.getEmpresa().getId());
+		List<Servico> listaServicos = fachada.buscaLikeServico(busca);
+		for(Servico s : listaServicos){
+			servicos.put(s.getId(), s);
+		}
+	}
+	
+	private void montaTabela(Solicitacao s) {
+
+		Fachada fachada = Fachada.getInstancia();
+		s.setId_empresa(Sessao.getEmpresa().getId());
+		List<Solicitacao> listaSolicitacoes = fachada.buscaIntervaloData(s);
+		String colunas[] = { "Nome do Cliente", "Serviço", "Data Inicial", "Data Final"};
+		Object linhas[][] = new Object[listaSolicitacoes.size()][colunas.length];
+
+		if (listaSolicitacoes.isEmpty()) {
+			table.setModel(new DefaultTableModel(null, colunas));
+		} else {
+			for (int i = 0; i < listaSolicitacoes.size(); i++) {
+
+				linhas[i][0] = clientes.get(listaSolicitacoes.get(i).getId_cliente());
+				linhas[i][1] = servicos.get(listaSolicitacoes.get(i).getId_servico());
+				linhas[i][2] = listaSolicitacoes.get(i).getData_inicial();
+				linhas[i][3] = listaSolicitacoes.get(i).getData_final();
+			}
+		}
+
+		table.setModel(new DefaultTableModel(linhas, colunas) {
+			Class[] types = new Class[] { Cliente.class, Servico.class, Date.class, Date.class};
+			boolean[] canEdit = new boolean[] { false, false, false, false};
+
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -194,23 +279,57 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		JDateChooser data = (JDateChooser) evt.getSource();
 		
 		if(dataInicial != null && data.equals(txtDataInicial)){
-			System.out.println("data inicial");
+		
 			txtDataFinal.setMinSelectableDate(dataInicial);
 			txtDataFinal.setEnabled(true);
 			txtDataFinal.getDateEditor().setEnabled(false);
 		}
 		else if(dataFinal != null && data.equals(txtDataFinal)){
-			System.out.println("data final");
-		}
-		if(dataInicial != null){
-			int dia1 = txtDataInicial.getCalendar().get(Calendar.DAY_OF_MONTH);
-			int mes1 = txtDataInicial.getCalendar().get(Calendar.MONTH);
-			int ano1 = txtDataInicial.getCalendar().get(Calendar.YEAR);
-			System.out.println(dia1+"/"+(mes1+1)+"/"+ano1);
+			txtNomeServico.setEditable(true);
+			buscar();
 		}
 	}
-	public void actionPerformed(ActionEvent e) {
+	
+	private void buscar(){
+		
+		Solicitacao s = new Solicitacao();
+		s.setData_inicial(txtDataInicial.getCalendar().getTime());
+		s.setData_final(txtDataFinal.getCalendar().getTime());
+		montaTabela(s);
+	}
+	
+	public void actionPerformed(ActionEvent evt) {
 
+	}
+	
+	public void keyReleased(KeyEvent evt) {
+		
+		JComponent elemento = (JComponent) evt.getSource();
+		if(elemento.equals(txtNomeServico)){
+			Servico s = new Servico();
+			s.setNome(txtNomeServico.getText().trim());
+			carregarServicos(s);
+			buscar();
+		}
+	}
+	
+	private MaskFormatter criarMascara(String formato){
+		
+		try {
+			MaskFormatter mascara = new MaskFormatter(formato);
+			return mascara;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+	
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
 	}
 
 	public void mouseClicked(MouseEvent evt) {}
