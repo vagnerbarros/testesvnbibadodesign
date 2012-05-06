@@ -38,6 +38,8 @@ import entidades.Servico;
 import entidades.Solicitacao;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
 
 public class TelaRealizarVenda extends JPanel implements ActionListener, KeyListener, MouseListener{
 
@@ -100,6 +102,8 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		panel.setBackground(new Color(167, 196, 210));
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setOpaque(false);
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		modeloServico = new DefaultListModel();
 
@@ -235,21 +239,18 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		listaCpfOrCnpj.setBounds(123, 53, 180, 44);
 		panel_2.add(this.listaCpfOrCnpj);
 
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCliente.setBounds(14, 11, 46, 14);
-		panel_2.add(lblCliente);
-
 		lblNome = new JLabel("Nome do Cliente:");
 		lblNome.setBounds(20, 67, 93, 14);
 		panel_2.add(lblNome);
 
 		rdbtnCpf = new JRadioButton("CPF");
+		rdbtnCpf.setOpaque(false);
 		rdbtnCpf.addActionListener(this);
 		rdbtnCpf.setBounds(14, 32, 46, 23);
 		panel_2.add(rdbtnCpf);
 
 		rdbtnCnpj = new JRadioButton("CNPJ");
+		rdbtnCnpj.setOpaque(false);
 		rdbtnCnpj.addActionListener(this);
 		rdbtnCnpj.setBounds(62, 32, 51, 23);
 		panel_2.add(rdbtnCnpj);
@@ -267,6 +268,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		bg.add(rdbtnCpf);
 
 		txtNome = new JTextField();
+		txtNome.setOpaque(false);
 		txtNome.setEditable(false);
 		txtNome.setBounds(121, 64, 301, 20);
 		panel_2.add(txtNome);
@@ -302,12 +304,16 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 				s.setAtivo(Constantes.ATIVO);
 				s.setId_servico(servicoSelecionado.getId());
 				s.setId_cliente(clienteSelecionado.getId_pessoa());
+				s.setId_empresa(Sessao.getEmpresa().getId());
 				Calendar calend = Calendar.getInstance();
 				s.setData_inicial(calend.getTime());
 				calend.set(Calendar.MONTH, calend.get(Calendar.MONTH) + (Integer)spinner.getModel().getValue());
 				s.setData_final(calend.getTime());
 				try {
 					fachada.cadastrarSolicitacao(s);
+					JOptionPane.showMessageDialog(null, "Venda realizada com sucesso.");
+					limparCliente();
+					limparServico();
 				} catch (EntidadeJaExisteException e) {
 					JOptionPane.showMessageDialog(null, "Este Cliente já possui solicitação deste servico");
 				}
