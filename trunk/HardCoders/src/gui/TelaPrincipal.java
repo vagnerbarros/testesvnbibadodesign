@@ -23,11 +23,12 @@ public class TelaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public static void main(String[] args) {
+	public TelaPrincipal() {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
+					
 					// Chamar o estilo do Frame INICIO
 					for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 						if ("Windows".equals(info.getName())) {
@@ -36,17 +37,12 @@ public class TelaPrincipal extends JFrame {
 						}
 					}
 					// Chamar o estilo do Frame FIM
-
-					TelaPrincipal frame = new TelaPrincipal();
-					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
-
-	public TelaPrincipal() {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaPrincipal.class.getResource("/gui/imagens/icone.png")));
 
@@ -218,6 +214,11 @@ public class TelaPrincipal extends JFrame {
 		BarraMenu.add(mnReclamaes);
 
 		JMenuItem mntmRegistrarReclamao = new JMenuItem("       Registrar Reclama\u00E7\u00E3o   ");
+		mntmRegistrarReclamao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorGui.abrirTelaRegistrarReclamacao();
+			}
+		});
 		mntmRegistrarReclamao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/reclamacaoIco.png")));
 		mntmRegistrarReclamao.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		mnReclamaes.add(mntmRegistrarReclamao);
