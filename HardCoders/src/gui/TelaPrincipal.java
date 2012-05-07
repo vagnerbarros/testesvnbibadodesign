@@ -17,18 +17,27 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import util.Constantes;
+import util.Sessao;
+
 import java.awt.Toolkit;
 
 public class TelaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JMenuItem menuCadClientes;
+	private JMenuItem menuCadFuncionarios;
+	private JMenuItem menuCadServicos;
+	private JMenuItem menuCadEmpresas;
+	private JMenuItem menuCadReclamacoes;
 
 	public TelaPrincipal() {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					// Chamar o estilo do Frame INICIO
 					for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 						if ("Windows".equals(info.getName())) {
@@ -37,7 +46,7 @@ public class TelaPrincipal extends JFrame {
 						}
 					}
 					// Chamar o estilo do Frame FIM
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,7 +123,7 @@ public class TelaPrincipal extends JFrame {
 		MenuCadastro.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		BarraMenu.add(MenuCadastro);
 
-		JMenuItem menuCadClientes = new JMenuItem("    Clientes   ");
+		menuCadClientes = new JMenuItem("    Clientes   ");
 		menuCadClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controladorGui.abrirTelaCadCliente();
@@ -127,7 +136,7 @@ public class TelaPrincipal extends JFrame {
 		menuCadClientes.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		MenuCadastro.add(menuCadClientes);
 
-		JMenuItem menuCadFuncionarios = new JMenuItem("    Funcion\u00E1rios   ");
+		menuCadFuncionarios = new JMenuItem("    Funcion\u00E1rios   ");
 		menuCadFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controladorGui.abrirTelaCadFuncionarios();
@@ -142,7 +151,7 @@ public class TelaPrincipal extends JFrame {
 		JSeparator separator = new JSeparator();
 		MenuCadastro.add(separator);
 
-		JMenuItem menuCadServicos = new JMenuItem("    Servi\u00E7os   ");
+		menuCadServicos = new JMenuItem("    Servi\u00E7os   ");
 		menuCadServicos.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/servicosIco.png")));
 		menuCadServicos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -154,7 +163,7 @@ public class TelaPrincipal extends JFrame {
 		menuCadServicos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
 		MenuCadastro.add(menuCadServicos);
 
-		JMenuItem menuCadEmpresas = new JMenuItem("    Empresas   ");
+		menuCadEmpresas = new JMenuItem("    Empresas   ");
 		menuCadEmpresas.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/empresasIco.png")));
 		menuCadEmpresas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -169,7 +178,7 @@ public class TelaPrincipal extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		MenuCadastro.add(separator_1);
 
-		JMenuItem menuCadReclamacoes = new JMenuItem("    Reclama\u00E7\u00F5es   ");
+		menuCadReclamacoes = new JMenuItem("    Reclama\u00E7\u00F5es   ");
 		menuCadReclamacoes.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/reclamacaoIco.png")));
 		menuCadReclamacoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,5 +231,26 @@ public class TelaPrincipal extends JFrame {
 		mntmRegistrarReclamao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/reclamacaoIco.png")));
 		mntmRegistrarReclamao.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		mnReclamaes.add(mntmRegistrarReclamao);
+		
+		verificarPerfil();
+	}
+	
+	private void verificarPerfil(){
+		
+		String cargo = Sessao.getFuncionario().getCargo();
+		if(cargo.equals(Constantes.GERENTE)){
+			this.menuCadClientes.setEnabled(true);
+			this.menuCadEmpresas.setEnabled(true);
+			this.menuCadFuncionarios.setEnabled(true);
+			this.menuCadReclamacoes.setEnabled(true);
+			this.menuCadServicos.setEnabled(true);
+		}
+		else if(cargo.equals(Constantes.FUNCIONARIO)){
+			this.menuCadClientes.setEnabled(true);
+			this.menuCadEmpresas.setEnabled(false);
+			this.menuCadFuncionarios.setEnabled(false);
+			this.menuCadReclamacoes.setEnabled(false);
+			this.menuCadServicos.setEnabled(false);
+		}
 	}
 }
