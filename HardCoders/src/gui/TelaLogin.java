@@ -162,9 +162,10 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 				}
 				else{
 					dispose();
-					TelaPrincipal.main(null);
 					Sessao.setFuncionario(list.get(0));
 					Sessao.setEmpresa(emp);
+					TelaPrincipal telaPrincipal = new TelaPrincipal();
+					telaPrincipal.setVisible(true);
 				}
 			}
 			else{

@@ -17,11 +17,25 @@ public class ControladorGui {
 	
 	private TelaRealizarVenda telaVenda;
 	
+	private TelaRegistrarReclamacao telaRegistrarReclamacao;
 	
 	public ControladorGui(Container p){
 		contentPane = p;
 	}
 
+	public void abrirTelaRegistrarReclamacao(){
+
+		fecharTodas();
+
+		if(telaRegistrarReclamacao == null){
+			telaRegistrarReclamacao = new TelaRegistrarReclamacao();
+			contentPane.add(telaRegistrarReclamacao, BorderLayout.CENTER);
+		}
+		
+		contentPane.setComponentZOrder(telaRegistrarReclamacao, 0);
+		telaRegistrarReclamacao.setVisible(true);
+	}
+	
 	public void abrirTelaRealVenda(){
 
 		fecharTodas();
@@ -162,6 +176,12 @@ public class ControladorGui {
 			telaVenda.setVisible(false);
 			contentPane.remove(telaVenda);
 			telaVenda = null;
+		}
+		
+		if(telaRegistrarReclamacao != null) {
+			telaRegistrarReclamacao.setVisible(false);
+			contentPane.remove(telaRegistrarReclamacao);
+			telaRegistrarReclamacao = null;
 		}
 		
 		System.gc();
