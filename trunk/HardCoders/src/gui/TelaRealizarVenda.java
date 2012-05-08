@@ -24,8 +24,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
@@ -40,6 +38,7 @@ import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.JComboBox;
 
 public class TelaRealizarVenda extends JPanel implements ActionListener, KeyListener, MouseListener{
 
@@ -58,9 +57,9 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 	private List<Cliente> listaClientes;
 	private List<Servico> servicos;
 	private JButton btnConfirmar;
-	private JSpinner spinner;
 	private Servico servicoSelecionado = null;
 	private Cliente clienteSelecionado = null;
+	private JComboBox comboBoxMeses;
 
 	public TelaRealizarVenda() {
 		setBackground(Color.WHITE);
@@ -220,14 +219,12 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		lblMeses.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblMeses.setBounds(252, 64, 63, 14);
 		panel_4.add(lblMeses);
+		
+		comboBoxMeses = new JComboBox();
+		iniciarCombo(comboBoxMeses);
+		comboBoxMeses.setBounds(202, 61, 40, 20);
+		panel_4.add(comboBoxMeses);
 
-		SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 72, 1);
-		spinner = new JSpinner(model);
-		JSpinner.DefaultEditor editor = ((DefaultEditor) spinner.getEditor());
-		editor.getTextField().setEditable(false);
-		editor.getTextField().setEnabled(true);
-		spinner.setBounds(202, 61, 40, 20);
-		panel_4.add(spinner);
 		panel_2.setLayout(null);
 		listaCpfOrCnpj = new JList(this.modeloCpfOrCnpj);
 		listaCpfOrCnpj.addMouseListener(this);
@@ -307,7 +304,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 				s.setId_empresa(Sessao.getEmpresa().getId());
 				Calendar calend = Calendar.getInstance();
 				s.setData_inicial(calend.getTime());
-				calend.set(Calendar.MONTH, calend.get(Calendar.MONTH) + (Integer)spinner.getModel().getValue());
+				calend.set(Calendar.MONTH, calend.get(Calendar.MONTH) + (Integer)comboBoxMeses.getSelectedItem());
 				s.setData_final(calend.getTime());
 				try {
 					fachada.cadastrarSolicitacao(s);
@@ -461,7 +458,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		}
 	}
 	
-	protected void retornarResultado(Long id_cliente){
+	protected void retornarResultadoCliente(Long id_cliente){
 		Cliente c = new Cliente();
 		c.setId_pessoa(id_cliente);
 		Fachada fachada = Fachada.getInstancia();
@@ -470,10 +467,12 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		if(clienteSelecionado.getTipo().equals(Constantes.PF)){
 			rdbtnCpf.setSelected(true);
 			rdbtnCnpj.setSelected(false);
+			lblNome.setText("Nome do Cliente:");
 		}
 		else if(clienteSelecionado.getTipo().equals(Constantes.PJ)){
 			rdbtnCpf.setSelected(false);
 			rdbtnCnpj.setSelected(true);
+			lblNome.setText("Razão Social:");
 		}
 		txtCpfOrCnpj.setText(clienteSelecionado.getCpfOrCnpj());
 		txtCpfOrCnpj.setEditable(false);
@@ -509,6 +508,12 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		}
 		else{
 			listaServico.setVisible(false);
+		}
+	}
+	
+	private void iniciarCombo(JComboBox combo){
+		for(int i = 1; i <= 36; i++){
+			combo.addItem(i);
 		}
 	}
 

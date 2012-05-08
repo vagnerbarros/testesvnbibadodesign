@@ -37,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
+import util.NivelAcesso;
 import util.Sessao;
 import entidades.Reclamacao;
 import exception.EntidadeJaExisteException;
@@ -53,7 +54,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
 	private Border bordaPadrao;
-	private JButton btnEditar;
+	private JButton btnVisualizar;
 	private JButton btnRemover;
 
 	public TelaCadastroReclamacoes() {
@@ -204,10 +205,11 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_2.setBackground(SystemColor.control);
 
-		btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(this);
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.addActionListener(this);
 
 		btnRemover = new JButton("Remover");
+		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -218,7 +220,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 						.addComponent(lblTiposDeReclamao)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 							.addGroup(gl_panel_1.createSequentialGroup()
-								.addComponent(btnEditar)
+								.addComponent(btnVisualizar)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(btnRemover))
 							.addComponent(panel_2, 0, 0, Short.MAX_VALUE)
@@ -236,7 +238,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditar)
+						.addComponent(btnVisualizar)
 						.addComponent(btnRemover))
 					.addContainerGap())
 		);
@@ -358,7 +360,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			this.txtBusca.setText("");
 			this.buscar();
 		}
-		else if(elemento.equals(this.btnEditar)){
+		else if(elemento.equals(this.btnVisualizar)){
 
 		}
 		else if(elemento.equals(this.btnRemover)){

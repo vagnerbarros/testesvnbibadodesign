@@ -48,11 +48,11 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 	private JComboBox comboBoxBusca;
 	private JButton btnConfirmar;
 	private JButton btnCancelar;
-	private TelaRealizarVenda telaVenda;
+	private JPanel tela;
 
-	public TelaBuscarCliente(java.awt.Frame parent, boolean modal, TelaRealizarVenda telaVenda){
+	public TelaBuscarCliente(java.awt.Frame parent, boolean modal, JPanel tela){
 		super(parent, modal);
-		this.telaVenda = telaVenda;
+		this.tela = tela;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaBuscarCliente.class.getResource("/gui/imagens/icone.png")));
 		setTitle("Localizar Cliente .:.");
 	    IniciarJDialog();
@@ -345,7 +345,12 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 			int linha = table.getSelectedRow();
 			if(linha != -1){
 				Long id_cliente = idClienteSelecionado(linha);
-				telaVenda.retornarResultado(id_cliente);
+				if(this.tela instanceof TelaRealizarVenda){
+					((TelaRealizarVenda)tela).retornarResultadoCliente(id_cliente);
+				}
+				else if(this.tela instanceof TelaRegistrarReclamacao){
+					((TelaRegistrarReclamacao)tela).retornarResultadoCliente(id_cliente);
+				}
 				this.setVisible(false);
 			}
 		}

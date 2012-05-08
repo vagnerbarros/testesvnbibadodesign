@@ -36,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
+import util.NivelAcesso;
 import util.Sessao;
 import entidades.Empresa;
 import entidades.Funcionario;
@@ -49,7 +50,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 	private JTable table;
 	private JButton botaoCadastrar;
 	private JTabbedPane tabbedPane;
-	private JButton btnEditar;
+	private JButton btnVisualizar;
 	private JButton btnRemover;
 	private Border bordaPadrao;
 
@@ -243,10 +244,11 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		JScrollPane scrollPane = new JScrollPane();
 
 		btnRemover = new JButton("Remover");
+		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
 
-		btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(this);
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.addActionListener(this);
 		
 		JLabel lblEmpresasCadastrados = new JLabel("Empresas Cadastradas");
 		lblEmpresasCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -259,7 +261,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 652, Short.MAX_VALUE)
 						.addComponent(lblEmpresasCadastrados, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(btnEditar)
+							.addComponent(btnVisualizar)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnRemover))
 						.addComponent(scrollPane))
@@ -276,7 +278,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditar)
+						.addComponent(btnVisualizar)
 						.addComponent(btnRemover))
 					.addContainerGap(58, Short.MAX_VALUE))
 		);
@@ -321,7 +323,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 				cadastrar();
 			}
 		}
-		else if(elemento.equals(this.btnEditar)){
+		else if(elemento.equals(this.btnVisualizar)){
 
 			editarSelecionado();
 		}
