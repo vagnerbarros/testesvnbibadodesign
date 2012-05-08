@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -9,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.font.TextLayout.CaretPolicy;
 import java.text.ParseException;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -29,11 +31,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.CaretEvent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Caret;
 import javax.swing.text.MaskFormatter;
 import util.Constantes;
+import util.NivelAcesso;
 import util.Sessao;
 import entidades.Servico;
 import exception.EntidadeJaExisteException;
@@ -46,7 +51,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private JFormattedTextField txtBusca;
 	private JTable table;
 	private JButton botaoCadastrar;
-	private JButton btnEditar;
+	private JButton btnVisualizar;
 	private JButton btnRemover;
 	private JTabbedPane tabbedPane;
 	private JComboBox comboBoxBusca;
@@ -94,29 +99,29 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+				layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 1293, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 1293, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-					.addContainerGap(127, Short.MAX_VALUE)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+						.addContainerGap(958, Short.MAX_VALUE)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+						.addGroup(layout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())
+				);
 		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
+				layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-		);
+						.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 564, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+				);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -148,7 +153,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		panel_2.add(lblValorPadro);
 
 		MaskFormatter mascaraValor = criarMascara("********");
-		mascaraValor.setValidCharacters("1234567890.");
+		mascaraValor.setValidCharacters("1234567890");
 		mascaraValor.setPlaceholder("");
 		txtValor = new JFormattedTextField(mascaraValor);
 		txtValor.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -156,6 +161,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtValor.setBackground(Color.WHITE);
 		txtValor.setBounds(99, 68, 89, 20);
 		txtValor.addMouseListener(this);
+		txtValor.addKeyListener(this);
 		panel_2.add(txtValor);
 
 		botaoCadastrar = new JButton("Cadastrar");
@@ -164,25 +170,25 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		panel_2.add(botaoCadastrar);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+				gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(840, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(840, Short.MAX_VALUE))
+				);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+				gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(270, Short.MAX_VALUE))
-		);
-		
+						.addContainerGap()
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(270, Short.MAX_VALUE))
+				);
+
 		JLabel lblEx = new JLabel("Ex.: 00.00");
 		lblEx.setFont(new Font("Dialog", Font.ITALIC, 11));
 		lblEx.setBounds(198, 70, 66, 14);
 		panel_2.add(lblEx);
-		
+
 		JLabel lblCadastrarNovoServio = new JLabel("Cadastrar Novo Servi\u00E7o");
 		lblCadastrarNovoServio.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCadastrarNovoServio.setBounds(10, 11, 142, 17);
@@ -203,7 +209,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		comboBoxBusca = new JComboBox();
 		iniciarCombo(comboBoxBusca);
 		comboBoxBusca.addActionListener(this);
-		
+
 		MaskFormatter mascaraBusca = criarMascara("*********************************************************************************");
 		mascaraBusca.setInvalidCharacters("!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraBusca.setPlaceholder("");
@@ -213,80 +219,81 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		txtBusca.setColumns(10);
 		txtBusca.setBackground(Color.WHITE);
 		txtBusca.addMouseListener(this);
-		
+
 		this.bordaPadrao = txtBusca.getBorder();
 
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(69, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(69, Short.MAX_VALUE))
+				);
 		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addGap(13)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addGap(15)
-							.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(33, Short.MAX_VALUE))
-		);
+						.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_3.createSequentialGroup()
+										.addGap(13)
+										.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel_3.createSequentialGroup()
+												.addGap(15)
+												.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+														.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+														.addContainerGap(33, Short.MAX_VALUE))
+				);
 		panel_3.setLayout(gl_panel_3);
 
 		JLabel lblServiosCadastrados = new JLabel("Servi\u00E7os Cadastrados");
 		lblServiosCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JScrollPane scrollPane = new JScrollPane();
-		
-		btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(this);
-		
+
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.addActionListener(this);
+
 		btnRemover = new JButton("Remover");
+		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-					.addGap(14)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(btnEditar)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemover)
-							.addContainerGap())
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
-								.addComponent(lblServiosCadastrados, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
-							.addGap(555))))
-		);
+						.addGap(14)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+										.addComponent(btnVisualizar)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnRemover)
+										.addContainerGap())
+										.addGroup(gl_panel_1.createSequentialGroup()
+												.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+														.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+														.addComponent(lblServiosCadastrados, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+														.addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
+														.addGap(555))))
+				);
 		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditar)
-						.addComponent(btnRemover))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+						.addGap(11)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnVisualizar)
+								.addComponent(btnRemover))
+								.addContainerGap())
+				);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object [][] {}, new String [] {"Nome", "Valor"}
@@ -304,9 +311,9 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		});
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
-		
+
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		this.montaTabela(new Servico());
 
 		this.setLayout(layout);
@@ -349,7 +356,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 
 		JComponent elemento = (JComponent) evt.getSource();
 		normalizarCampos();
-		
+
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
 				cadastrar();
@@ -362,15 +369,15 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		else if(elemento.equals(this.btnRemover)){
 			removerServico();
 		}
-		else if(elemento.equals(this.btnEditar)){
-			
+		else if(elemento.equals(this.btnVisualizar)){
+
 		}
 	}
-	
+
 	private void removerServico(){
-		
+
 		int linha = table.getSelectedRow();
-		
+
 		if(linha != -1){
 			Object[] options = { "OK", "Cancelar" };
 			int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja remover?", "Alerta !!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -410,7 +417,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	}
 
 	private boolean camposValidos(){
-		
+
 		boolean valido = true;
 
 		if(txtNome.getText().trim().equals("")){
@@ -426,11 +433,11 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		}
 		return valido;
 	}
-	
+
 	private void pintarBorda(JFormattedTextField campo){
 		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
 	}
-	
+
 	private void normalizarCampos(){
 		txtNome.setBorder(bordaPadrao);
 		txtValor.setBorder(bordaPadrao);
@@ -453,11 +460,18 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	}
 
 	public void keyReleased(KeyEvent evt) {
-		if(evt.getKeyCode() != 10){
-			buscar();
+		JComponent elemento = (JComponent) evt.getSource();
+		if(elemento.equals(txtBusca)){
+			if(evt.getKeyCode() != 10){
+				buscar();
+			}
+		}
+		else if(elemento.equals(txtValor)){
+			String text = txtValor.getText().trim();
+			
 		}
 	}
-	
+
 	private void buscar(){
 
 		Servico s = new Servico();
@@ -479,9 +493,9 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		}
 		this.montaTabela(s);
 	}
-	
+
 	private MaskFormatter criarMascara(String formato){
-		
+
 		try {
 			MaskFormatter mascara = new MaskFormatter(formato);
 			return mascara;
@@ -494,11 +508,11 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	public void mousePressed(MouseEvent evt) {
 		ajudarCursor((JFormattedTextField)evt.getSource());
 	}
-	
+
 	private void ajudarCursor(JFormattedTextField campo){
 		campo.setCaretPosition(campo.getText().trim().length());
 	}
-	
+
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
 	public void mouseClicked(MouseEvent arg0) {}

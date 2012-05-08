@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +27,11 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -40,6 +43,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import util.Constantes;
+import util.NivelAcesso;
 import util.Sessao;
 import util.Validacao;
 import entidades.Endereco;
@@ -56,13 +60,14 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	private JFormattedTextField txtCep;
 	private JFormattedTextField txtBairro;
 	private JFormattedTextField txtLogin;
-	private JFormattedTextField txtSenha;
 	private JFormattedTextField txtTelefone;
 	private JFormattedTextField txtEndereco;
 	private JFormattedTextField txtComplemento;
 	private JFormattedTextField txtNumero;
 	private JFormattedTextField txtCidade;
 	private JFormattedTextField txtBusca;
+	private JPasswordField txtSenha;
+	private JPasswordField txtConfSenha;
 	private JTable table;
 	private JComboBox comboBoxEstado;
 	private JComboBox comboBoxTelefone;
@@ -358,7 +363,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		lblLogin.setHorizontalAlignment(SwingConstants.LEFT);
 		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtLogin = new JFormattedTextField(mascaraLogin);
-		txtLogin.setBounds(68, 37, 187, 20);
+		txtLogin.setBounds(68, 37, 180, 20);
 		panel_4.add(txtLogin);
 		txtLogin.addMouseListener(this);
 		txtLogin.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -369,11 +374,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		panel_4.add(lblSenha);
 		lblSenha.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtSenha = new JFormattedTextField(mascaraSenha);
-		txtSenha.setBounds(68, 68, 187, 20);
+		txtSenha = new JPasswordField();
+		txtSenha.setBounds(68, 68, 180, 20);
 		panel_4.add(txtSenha);
-		txtSenha.addMouseListener(this);
-		txtSenha.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtSenha.setColumns(10);
 
 		JLabel lblCargo = new JLabel("Cargo:");
@@ -386,6 +389,15 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		comboBoxCargo.setBounds(343, 37, 99, 20);
 		panel_4.add(comboBoxCargo);
 		iniciarCombo(comboBoxCargo);
+		
+		JLabel lblConfSenha = new JLabel("Conf. Senha:");
+		lblConfSenha.setBounds(265, 71, 69, 14);
+		panel_4.add(lblConfSenha);
+		
+		txtConfSenha = new JPasswordField();
+		txtConfSenha.setColumns(10);
+		txtConfSenha.setBounds(342, 68, 180, 20);
+		panel_4.add(txtConfSenha);
 
 		this.bordaPadrao = txtCidade.getBorder();
 
@@ -435,6 +447,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		JScrollPane scrollPane = new JScrollPane();
 
 		btnRemover = new JButton("Remover");
+		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
 
 		btnEditar = new JButton("Editar");
@@ -572,6 +585,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtLogin.setText(null);
 		txtNome.setText(null);
 		txtSenha.setText(null);
+		txtConfSenha.setText(null);
 		txtTelefone.setText(null);
 		txtComplemento.setText(null);
 		txtNumero.setText(null);
@@ -587,7 +601,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		String login = txtLogin.getText().trim();
 		String nome = txtNome.getText().trim();
-		String senha = txtSenha.getText().trim();
+		String senha = new String(txtSenha.getPassword());
 		String cpf = txtCpf.getText();
 		String cargo = (String) comboBoxCargo.getSelectedItem();
 		String bairro = txtBairro.getText().trim();
@@ -596,10 +610,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		String rua = txtEndereco.getText().trim();
 		String numero = txtNumero.getText().trim();
 		String complemento = txtComplemento.getText().trim();
-		String telefone = txtTelefone.getText();
 		String estado = (String) comboBoxEstado.getSelectedItem();
-		String rotuloTel = (String) comboBoxTelefone.getSelectedItem();
-
 		Fachada fachada = Fachada.getInstancia();
 
 		try {
@@ -683,7 +694,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			this.limparCadastro();
 		}
 		else if(elemento.equals(this.btnCadastro)){
-			if(camposPreenchidos() && camposValidos()){
+			if(camposPreenchidos() && camposValidos() && senhaConfirmacaoIguais()){
 				this.cadastrar();
 			}
 		}
@@ -704,6 +715,26 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		else if(elemento.equals(btnEditar)){
 
 		}
+	}
+	
+	private boolean senhaConfirmacaoIguais(){
+		boolean iguais = true;
+		char [] pw = txtSenha.getPassword();
+		char [] conf = txtConfSenha.getPassword();
+
+		if (conf.length != pw.length) {
+			iguais = false;
+			JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem");
+		} else {
+			if(Arrays.equals(conf, pw)){
+				iguais = true;
+			}
+			else{
+				iguais = false;
+				JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem");
+			}
+		}
+		return iguais;
 	}
 
 	private void removerFuncionario(){
@@ -774,6 +805,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		txtLogin.setBorder(bordaPadrao);
 		txtNome.setBorder(bordaPadrao);
 		txtSenha.setBorder(bordaPadrao);
+		txtConfSenha.setBorder(bordaPadrao);
 	}
 
 	private boolean camposPreenchidos(){
@@ -792,9 +824,13 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			valido = false;
 			pintarBorda(txtNome);
 		}
-		if(txtSenha.getText().trim().equals("")){
+		if(txtSenha.getPassword().length == 0){
 			valido = false;
 			pintarBorda(txtSenha);
+		}
+		if(txtConfSenha.getPassword().length == 0){
+			valido = false;
+			pintarBorda(txtConfSenha);
 		}
 
 		if(!valido){
@@ -812,7 +848,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		return valido;
 	}
 
-	private void pintarBorda(JFormattedTextField campo){
+	private void pintarBorda(JTextField campo){
 		campo.setBorder(BorderFactory.createLineBorder(new Color(255, 0, 0)));
 	}
 

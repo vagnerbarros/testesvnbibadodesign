@@ -50,9 +50,9 @@ public class TesteHibernate {
 		
 		Funcionario f = new Funcionario();
 		f.setId_pessoa(id_pessoa);
-		f.setLogin("vagner");
+		f.setLogin("1");
 		f.setCargo(Constantes.GERENTE);
-		f.setSenha("12345");
+		f.setSenha("1");
 		f.setNome("Vagner Barros Pereira");
 		f.setCpf("050.000.990-60");
 		f.setAtivo(Constantes.ATIVO);

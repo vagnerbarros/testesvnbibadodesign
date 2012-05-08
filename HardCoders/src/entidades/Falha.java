@@ -3,6 +3,8 @@ package entidades;
 import java.util.Hashtable;
 import java.util.Map;
 
+import util.Constantes;
+
 import interfaces.IEntidades;
 
 
@@ -13,6 +15,7 @@ public class Falha implements IEntidades<Falha>{
 	private Long id_cliente;
 	private Long id_reclamacao;
 	private Long id_servico;
+	private Long id_empresa;
 	private String ativo;
 	
 	public Falha(){
@@ -48,12 +51,26 @@ public class Falha implements IEntidades<Falha>{
 	public String nomeTabela() {
 		return tabela;
 	}
+	public Long getId_empresa() {
+		return id_empresa;
+	}
+	public void setId_empresa(Long id_empresa) {
+		this.id_empresa = id_empresa;
+	}
 	public String getAtivo() {
 		return ativo;
 	}
-
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public boolean equals(Object obj){
+		Falha f = (Falha) obj;
+		if(this.id_cliente.equals(f.getId_cliente()) && this.id_empresa.equals(f.getId_empresa()) && this.id_reclamacao.equals(f.getId_reclamacao()) && this.id_servico.equals(f.getId_servico())){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public Map<String, Object> getHashMap() {
@@ -72,6 +89,9 @@ public class Falha implements IEntidades<Falha>{
 		if(this.id_servico != null){
 			mapa.put("id_servico", this.id_servico);
 		}
+		if(this.id_empresa != null){
+			mapa.put("id_empresa", this.id_empresa);
+		}
 		if(this.ativo != null){
 			mapa.put("ativo", this.ativo);
 		}
@@ -79,9 +99,13 @@ public class Falha implements IEntidades<Falha>{
 		return mapa;
 	}
 
-	@Override
 	public Falha getCamposChave() {
-		// TODO Auto-generated method stub
-		return null;
+		Falha retorno = new Falha();
+		retorno.setAtivo(Constantes.ATIVO);
+		retorno.setId_cliente(this.id_cliente);
+		retorno.setId_empresa(this.id_empresa);
+		retorno.setId_reclamacao(this.id_reclamacao);
+		retorno.setId_servico(this.id_servico);
+		return retorno;
 	}
 }

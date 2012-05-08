@@ -39,6 +39,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import util.Constantes;
+import util.NivelAcesso;
 import util.Sessao;
 import util.Validacao;
 import entidades.Cliente;
@@ -82,7 +83,6 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 	private Border bordaPadrao;
 	private JTabbedPane tabbedPane;
 	private JButton btnRemover;
-	private JButton btnEditar;
 	private JButton btnVisualizar;
 	private JButton btnLimpar;
 	private JLabel lblClientesCadastrados;
@@ -569,12 +569,9 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 				);
 		panel_2.setLayout(gl_panel_2);
 
-		btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(this);
-
 		btnRemover = new JButton("Remover");
+		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
-
 
 		btnVisualizar = new JButton("Visualizar");
 		btnVisualizar.addActionListener(this);
@@ -583,42 +580,39 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		lblClientesCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblClientesCadastrados, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel_1.createSequentialGroup()
-										.addComponent(btnEditar)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnRemover)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnVisualizar))
-										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-										.addComponent(panel_2, 0, 0, Short.MAX_VALUE))
-										.addContainerGap(322, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblClientesCadastrados, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+							.addComponent(btnRemover)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnVisualizar))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+						.addComponent(panel_2, 0, 0, Short.MAX_VALUE))
+					.addContainerGap(308, Short.MAX_VALUE))
+		);
 		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblClientesCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnRemover)
-								.addComponent(btnVisualizar)
-								.addComponent(btnEditar))
-								.addContainerGap())
-				);
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblClientesCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnVisualizar)
+						.addComponent(btnRemover))
+					.addContainerGap())
+		);
 		panel_1.setLayout(gl_panel_1);
 
 		this.setLayout(layout);
 	}
-
+	
 	private void montaTabelaCliente(Cliente c) {
 
 		Fachada fachada = Fachada.getInstancia();
@@ -1012,9 +1006,6 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 					cadastrar(2);
 				}
 			}
-		}
-		else if(elemento.equals(this.btnEditar)){
-
 		}
 		else if(elemento.equals(this.btnRemover)){
 			verificarTipoRemocao();
