@@ -98,7 +98,6 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 		getContentPane().add(login_txt);
 		login_txt.setColumns(10);
 
-		MaskFormatter mascaraPw = criarMascara("********************");
 		senha_txt = new JPasswordField();
 		senha_txt.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		senha_txt.addKeyListener(this);

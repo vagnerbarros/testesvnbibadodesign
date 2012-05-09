@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -10,9 +9,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.font.TextLayout.CaretPolicy;
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -31,12 +32,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.CaretEvent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.Caret;
 import javax.swing.text.MaskFormatter;
+
 import util.Constantes;
 import util.NivelAcesso;
 import util.Sessao;
@@ -56,9 +56,11 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private JTabbedPane tabbedPane;
 	private JComboBox comboBoxBusca;
 	private Border bordaPadrao;
+	private Format formato;
 
 	public TelaCadastroServicos() {
 
+		formato = new DecimalFormat("0.00");
 		setBackground(Color.WHITE);
 
 		// A partir daqui comandos para que o elemento JPanel redimensione o seu tamanho de acordo
@@ -153,7 +155,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		panel_2.add(lblValorPadro);
 
 		MaskFormatter mascaraValor = criarMascara("********");
-		mascaraValor.setValidCharacters("1234567890");
+		mascaraValor.setValidCharacters("1234567890.");
 		mascaraValor.setPlaceholder("");
 		txtValor = new JFormattedTextField(mascaraValor);
 		txtValor.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -334,7 +336,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			for (int i = 0; i < listaServicos.size(); i++) {
 
 				linhas[i][0] = listaServicos.get(i);
-				linhas[i][1] = listaServicos.get(i).getValor().toString();
+				linhas[i][1] = formato.format(listaServicos.get(i).getValor());
 			}
 		}
 
@@ -467,8 +469,17 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			}
 		}
 		else if(elemento.equals(txtValor)){
-			String text = txtValor.getText().trim();
-			
+			String texto = txtValor.getText().trim();
+			int cont = 0;
+			for(int i = 0; i < texto.length(); i++){
+				if(texto.charAt(i) == '.'){
+					cont++;
+				}
+			}
+			if(cont > 1){
+				JOptionPane.showMessageDialog(null, "Formato inválido");
+				txtValor.setText("");
+			}
 		}
 	}
 

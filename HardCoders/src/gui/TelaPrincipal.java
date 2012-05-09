@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,6 +32,7 @@ public class TelaPrincipal extends JFrame {
 	private JMenuItem menuCadServicos;
 	private JMenuItem menuCadEmpresas;
 	private JMenuItem menuCadReclamacoes;
+	private JMenuItem menuDeslogar;
 
 	public TelaPrincipal() {
 		
@@ -232,6 +234,23 @@ public class TelaPrincipal extends JFrame {
 		mntmRegistrarReclamao.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		mnReclamaes.add(mntmRegistrarReclamao);
 		
+		JMenu mnSair = new JMenu("Sair");
+		BarraMenu.add(mnSair);
+		
+		menuDeslogar = new JMenuItem("Deslogar");
+		menuDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorGui.fecharTodas();
+				Sessao.deslogar();
+				// verificar se pode fazer isso sem prejudicar o sistema
+				setVisible(false);
+				TelaLogin login = new TelaLogin();
+				login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				login.setVisible(true);
+			}
+		});
+		mnSair.add(menuDeslogar);
+		
 		verificarPerfil();
 	}
 	
@@ -244,6 +263,7 @@ public class TelaPrincipal extends JFrame {
 			this.menuCadFuncionarios.setEnabled(true);
 			this.menuCadReclamacoes.setEnabled(true);
 			this.menuCadServicos.setEnabled(true);
+			this.menuDeslogar.setEnabled(true);
 		}
 		else if(cargo.equals(Constantes.FUNCIONARIO)){
 			this.menuCadClientes.setEnabled(true);
@@ -251,6 +271,7 @@ public class TelaPrincipal extends JFrame {
 			this.menuCadFuncionarios.setEnabled(false);
 			this.menuCadReclamacoes.setEnabled(false);
 			this.menuCadServicos.setEnabled(false);
+			this.menuDeslogar.setEnabled(true);
 		}
 	}
 }
