@@ -122,6 +122,7 @@ public class TelaPrincipal extends JFrame {
 		setJMenuBar(BarraMenu);
 
 		JMenu MenuCadastro = new JMenu("Cadastro");
+		MenuCadastro.setForeground(Color.BLACK);
 		MenuCadastro.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		BarraMenu.add(MenuCadastro);
 
@@ -193,6 +194,7 @@ public class TelaPrincipal extends JFrame {
 		MenuCadastro.add(menuCadReclamacoes);
 
 		JMenu mnContratos = new JMenu("Contratos");
+		mnContratos.setForeground(Color.BLACK);
 		mnContratos.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		BarraMenu.add(mnContratos);
 
@@ -207,6 +209,7 @@ public class TelaPrincipal extends JFrame {
 		mnContratos.add(mntmContratosVencer);
 
 		JMenu mnVendas = new JMenu("Vendas");
+		mnVendas.setForeground(Color.BLACK);
 		mnVendas.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		BarraMenu.add(mnVendas);
 
@@ -221,6 +224,7 @@ public class TelaPrincipal extends JFrame {
 		mnVendas.add(mntmRealizarVenda);
 
 		JMenu mnReclamaes = new JMenu("Reclama\u00E7\u00F5es");
+		mnReclamaes.setForeground(Color.BLACK);
 		mnReclamaes.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		BarraMenu.add(mnReclamaes);
 
@@ -235,6 +239,8 @@ public class TelaPrincipal extends JFrame {
 		mnReclamaes.add(mntmRegistrarReclamao);
 		
 		JMenu mnSair = new JMenu("Sair");
+		mnSair.setForeground(Color.BLACK);
+		mnSair.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		BarraMenu.add(mnSair);
 		
 		menuDeslogar = new JMenuItem("Deslogar");
