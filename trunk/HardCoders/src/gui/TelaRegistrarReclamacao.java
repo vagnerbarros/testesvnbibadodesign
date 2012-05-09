@@ -142,7 +142,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(10)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 475, GroupLayout.PREFERRED_SIZE)
@@ -150,13 +150,13 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 475, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(379, Short.MAX_VALUE))
+					.addContainerGap(184, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnConfirmar)
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 475, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(379, Short.MAX_VALUE))
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 475, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnConfirmar))
+					.addContainerGap(184, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -167,10 +167,10 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addGap(32)
 					.addComponent(btnConfirmar)
-					.addContainerGap(98, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		txtCpfOrCnpj = new JTextField();
@@ -190,6 +190,8 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		
 		modeloCliente = new DefaultListModel();
 		listaCliente = new JList(modeloCliente);
+		listaCliente.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		listaCliente.setBackground(SystemColor.menu);
 		listaCliente.addKeyListener(this);
 		listaCliente.addMouseListener(this);
 		listaCliente.setBounds(txtCpfOrCnpj.getX(), txtCpfOrCnpj.getY() + txtCpfOrCnpj.getHeight(), txtCpfOrCnpj.getWidth(), 50);
@@ -200,7 +202,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		listaReclamacao = new JList(modeloReclamacao);
 		listaReclamacao.addKeyListener(this);
 		listaReclamacao.addMouseListener(this);
-		listaReclamacao.setBounds(txtCodigo.getX(), txtCodigo.getY() + txtCodigo.getHeight(), txtCodigo.getWidth(), 50);
+		listaReclamacao.setBounds(128, 54, 142, 18);
 		inicializarListas(listaReclamacao);
 		panel_3.add(listaReclamacao);
 		
@@ -346,7 +348,8 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 			tbc.setVisible(true);
 		}
 		else if(elemento.equals(lupaReclamacao)){
-			//chamar a tela de buscar reclamacao
+			TelaBuscarReclamacao tbr = new TelaBuscarReclamacao(new javax.swing.JFrame(), true, this);
+			tbr.setVisible(true);
 		}
 		else if(elemento.equals(txtServico)){
 			if(evt.getClickCount() == Constantes.QUANT_CLICKS){
