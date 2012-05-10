@@ -426,6 +426,9 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 					r.setId_empresa(Sessao.getEmpresa().getId());
 					buscaReclamacao(r);
 				}
+				else{
+					this.listaReclamacao.setVisible(false);
+				}
 			}
 		}
 		else if(elemento.equals(txtServico)){
@@ -517,6 +520,12 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		txtCpfOrCnpj.setText(clienteSelecionado.getCpfOrCnpj());
 		txtCpfOrCnpj.setEditable(false);
 		txtNome.setText(clienteSelecionado.getNome());
+	}
+	
+	protected void retornarResultadoReclamacao(Reclamacao r){
+		this.reclamacaoSelecionada = r;
+		txtCodigo.setText(r.getCodigo());
+		txtCodigo.setEditable(false);
 	}
 	
 	private void buscaServico(Servico s){
