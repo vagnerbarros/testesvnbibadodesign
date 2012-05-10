@@ -77,7 +77,7 @@ public class Funcionario implements IEntidades<Funcionario>{
 	}
 	public boolean equals(Object obj){
 		Funcionario f = (Funcionario) obj;
-		boolean login = this.login.equals(f.getLogin());
+		boolean login = this.login.equalsIgnoreCase(f.getLogin());
 		boolean emp = this.id_empresa.compareTo(f.getId_empresa()) == 0;
 		boolean cpf = this.cpf.equals(f.getCpf());
 		if((login && emp) || (cpf && emp) || (cpf && login && emp)){

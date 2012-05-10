@@ -64,7 +64,6 @@ public class Servico implements IEntidades<Servico>{
 		Servico retorno = new Servico();
 		retorno.setAtivo(this.ativo);
 		retorno.setId_empresa(this.id_empresa);
-		retorno.setNome(this.nome);
 		return retorno;
 	}
 	
