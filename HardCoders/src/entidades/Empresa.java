@@ -39,7 +39,7 @@ public class Empresa implements IEntidades<Empresa>{
 	}
 	public boolean equals(Object obj){
 		Empresa e = (Empresa) obj;
-		if(this.nome.equals(e.getNome())){
+		if(this.nome.equalsIgnoreCase(e.getNome())){
 			return true;
 		}
 		else{
@@ -48,7 +48,6 @@ public class Empresa implements IEntidades<Empresa>{
 	}
 	public Empresa getCamposChave() {
 		Empresa retorno = new Empresa();
-		retorno.setNome(this.nome);
 		return retorno;
 	}
 	public String toString(){

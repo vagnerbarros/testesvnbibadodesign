@@ -54,7 +54,7 @@ public class Reclamacao implements IEntidades<Reclamacao>{
 	}
 	public boolean equals(Object obj){
 		Reclamacao r = (Reclamacao) obj;
-		if(this.codigo.equals(r.getCodigo())){
+		if(this.codigo.equalsIgnoreCase(r.getCodigo())){
 			return true;
 		}
 		else{

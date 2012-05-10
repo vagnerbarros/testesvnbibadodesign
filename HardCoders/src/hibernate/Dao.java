@@ -5,14 +5,12 @@ import interfaces.IEntidades;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-
 import util.Constantes;
 import util.HibernateUtility;
 import entidades.Solicitacao;
