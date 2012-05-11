@@ -295,12 +295,12 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 				f.setId_empresa(Sessao.getEmpresa().getId());
 				try {
 					fachada.cadastrarFalha(f);
-					JOptionPane.showMessageDialog(null, "Problema registrado com sucesso.");
+					JOptionPane.showMessageDialog(null, "Reclamação registrada com sucesso.");
 					limparCliente();
 					limparServico();
 					limparReclamacao();
 				} catch (EntidadeJaExisteException e) {
-					JOptionPane.showMessageDialog(null, "Este Cliente já realizou reclamação deste servico");
+					JOptionPane.showMessageDialog(null, "Este Cliente já registrou reclamação deste servico");
 				}
 			}
 			else{
