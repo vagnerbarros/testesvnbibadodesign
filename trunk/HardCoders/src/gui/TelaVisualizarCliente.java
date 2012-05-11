@@ -1,12 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import java.awt.Toolkit;
 import java.awt.Color;
@@ -14,16 +10,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JScrollPane;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JRadioButton;
 
 public class TelaVisualizarCliente extends JDialog {
 
@@ -86,7 +72,6 @@ public class TelaVisualizarCliente extends JDialog {
 		}
 		
 		public void IniciarJDialog(){
-		
 		
 			setBounds(100, 100, 729, 457);
 	}
