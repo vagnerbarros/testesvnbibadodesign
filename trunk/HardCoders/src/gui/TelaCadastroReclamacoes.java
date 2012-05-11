@@ -42,6 +42,8 @@ import util.Sessao;
 import entidades.Reclamacao;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
+import javax.swing.border.TitledBorder;
+import java.awt.Component;
 
 public class TelaCadastroReclamacoes extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
 
@@ -99,29 +101,26 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+			layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(425, Short.MAX_VALUE)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-						.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
-								.addContainerGap())
-				);
+					.addContainerGap(671, Short.MAX_VALUE)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
+		);
 		layout.setVerticalGroup(
-				layout.createParallelGroup(Alignment.LEADING)
+			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-				);
+					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+		);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -129,35 +128,36 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		tabbedPane.addTab("Cadastro", null, panel, null);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_3.setOpaque(false);
+		panel_3.setBorder(new TitledBorder(null, "Cadastrar Tipos de Reclama\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 447, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(544, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(273, Short.MAX_VALUE))
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(142, Short.MAX_VALUE))
 		);
 		panel_3.setLayout(null);
 
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 12, 48, 17);
+		lblCdigo.setBounds(10, 25, 48, 17);
 		panel_3.add(lblCdigo);
-		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		MaskFormatter mascaraCodigo = criarMascara("U####");
 		mascaraCodigo.setPlaceholder("");
 		txtCodigo = new JFormattedTextField(mascaraCodigo);
 		txtCodigo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCodigo.setBackground(Color.WHITE);
-		txtCodigo.setBounds(147, 11, 76, 20);
+		txtCodigo.setBounds(135, 24, 76, 20);
 		txtCodigo.addMouseListener(this);
 		panel_3.add(txtCodigo);
 		txtCodigo.setColumns(10);
@@ -169,27 +169,37 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtTipo = new JFormattedTextField(mascaraTipo);
 		txtTipo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtTipo.setBackground(Color.WHITE);
-		txtTipo.setBounds(147, 39, 296, 20);
+		txtTipo.setBounds(135, 55, 296, 20);
 		txtTipo.addMouseListener(this);
 		panel_3.add(txtTipo);
 		txtTipo.setColumns(10);
 		
 		JLabel lblTipoDeReclamao = new JLabel("Tipo de Reclama\u00E7\u00E3o:");
-		lblTipoDeReclamao.setBounds(10, 40, 127, 17);
+		lblTipoDeReclamao.setBounds(10, 56, 113, 17);
 		panel_3.add(lblTipoDeReclamao);
-		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		this.bordaPadrao = txtTipo.getBorder();
 
 		botaoLimpar = new JButton("Limpar");
 		botaoLimpar.addActionListener(this);
-		botaoLimpar.setBounds(255, 70, 89, 23);
+		botaoLimpar.setBounds(243, 81, 89, 23);
 		panel_3.add(botaoLimpar);
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
-		botaoCadastrar.setBounds(354, 69, 89, 23);
+		botaoCadastrar.setBounds(342, 81, 89, 23);
 		panel_3.add(botaoCadastrar);
+		
+		JLabel lblletraDepoisNmero = new JLabel("*Letra, depois n\u00FAmero:");
+		lblletraDepoisNmero.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblletraDepoisNmero.setBounds(221, 27, 111, 14);
+		panel_3.add(lblletraDepoisNmero);
+		
+		JLabel lblExA = new JLabel("EX: A12");
+		lblExA.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblExA.setBounds(341, 27, 81, 14);
+		panel_3.add(lblExA);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -198,14 +208,15 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 
 		JScrollPane scrollPane = new JScrollPane();
 
-		JLabel lblTiposDeReclamao = new JLabel("Tipos de Reclama\u00E7\u00E3o Cadastradas");
-		lblTiposDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel lblTiposDeReclamao = new JLabel("Tipos de Reclama\u00E7\u00F5es Cadastradas");
+		lblTiposDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_2.setOpaque(false);
+		panel_2.setBorder(new TitledBorder(null, "Filtrar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBackground(SystemColor.control);
 
-		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar = new JButton("Editar");
 		btnVisualizar.addActionListener(this);
 
 		btnRemover = new JButton("Remover");
@@ -217,34 +228,30 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 616, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 616, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblTiposDeReclamao)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_panel_1.createSequentialGroup()
-								.addComponent(btnVisualizar)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnRemover))
-							.addComponent(panel_2, 0, 0, Short.MAX_VALUE)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 616, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(355, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(btnRemover)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnVisualizar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(375, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(19)
+					.addContainerGap()
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblTiposDeReclamao)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnVisualizar)
 						.addComponent(btnRemover))
-					.addContainerGap())
+					.addGap(22))
 		);
-
-		JLabel lblFiltrar = new JLabel("Filtrar:");
-		lblFiltrar.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		comboBoxBusca = new JComboBox();
 		iniciarCombo(comboBoxBusca);
@@ -261,30 +268,23 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		txtBusca.setColumns(10);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-				gl_panel_2.createParallelGroup(Alignment.LEADING)
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(lblFiltrar, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(315, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(263, Short.MAX_VALUE))
+		);
 		gl_panel_2.setVerticalGroup(
-				gl_panel_2.createParallelGroup(Alignment.LEADING)
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-						.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_2.createSequentialGroup()
-										.addGap(13)
-										.addComponent(lblFiltrar, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panel_2.createSequentialGroup()
-												.addGap(15)
-												.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-														.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-														.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				);
+					.addGap(15)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panel_2.setLayout(gl_panel_2);
 
 		table = new JTable();

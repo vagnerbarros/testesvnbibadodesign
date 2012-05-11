@@ -39,6 +39,10 @@ import fachada.Fachada;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
+import javax.swing.border.BevelBorder;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
 
 public class TelaRealizarVenda extends JPanel implements ActionListener, KeyListener, MouseListener{
 
@@ -70,31 +74,21 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		JLabel lblRealizarVenda = new JLabel("Realizar Venda");
 		lblRealizarVenda.setForeground(Color.WHITE);
 		lblRealizarVenda.setFont(new Font("Tahoma", Font.PLAIN, 28));
-
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(TelaRealizarVenda.class.getResource("/gui/imagens/logoSup.png")));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(lblRealizarVenda, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 456, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_2)
-						.addContainerGap())
-				);
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+					.addGap(31)
+					.addComponent(lblRealizarVenda, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(579, Short.MAX_VALUE))
+		);
 		gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(lblNewLabel_2))
-										.addGroup(gl_panel_1.createSequentialGroup()
-												.addGap(43)
-												.addComponent(lblRealizarVenda, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
-												.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				);
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+					.addContainerGap(37, Short.MAX_VALUE)
+					.addComponent(lblRealizarVenda, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(33))
+		);
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel = new JPanel();
@@ -102,26 +96,25 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setOpaque(false);
-		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(153, 180, 209), 1, true), "Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		modeloServico = new DefaultListModel();
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setOpaque(false);
+		panel_3.setBorder(new TitledBorder(null, "Servi\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setLayout(null);
 		listaServico = new JList(this.modeloServico);
+		listaServico.setBackground(SystemColor.menu);
+		listaServico.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		listaServico.addMouseListener(this);
 		listaServico.addKeyListener(this);
 		listaServico.setVisible(false);
 		listaServico.setVisibleRowCount(3);
 		listaServico.setLayoutOrientation(JList.VERTICAL);
 		listaServico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaServico.setBounds(122, 54, 182, 47);
+		listaServico.setBounds(122, 41, 182, 41);
 		panel_3.add(listaServico);
-
-		JLabel lblServio = new JLabel("Servi\u00E7o");
-		lblServio.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblServio.setBounds(10, 11, 46, 14);
-		panel_3.add(lblServio);
 
 		modeloCpfOrCnpj = new DefaultListModel();
 
@@ -129,11 +122,11 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		txtServico.addKeyListener(this);
 		txtServico.addMouseListener(this);
 		txtServico.setColumns(10);
-		txtServico.setBounds(122, 34, 182, 20);
+		txtServico.setBounds(122, 20, 182, 20);
 		panel_3.add(txtServico);
 
 		JLabel lblNomeDoServio = new JLabel("Nome do Servi\u00E7o:");
-		lblNomeDoServio.setBounds(10, 37, 84, 14);
+		lblNomeDoServio.setBounds(10, 23, 84, 14);
 		panel_3.add(lblNomeDoServio);
 
 		JLabel label_2 = new JLabel("");
@@ -141,26 +134,19 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		panel_3.add(label_2);
 
 		JPanel panel_4 = new JPanel();
+		panel_4.setOpaque(false);
+		panel_4.setBorder(new TitledBorder(null, "Contrato", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setLayout(null);
-
-		JLabel lblContrato = new JLabel("Contrato");
-		lblContrato.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblContrato.setBounds(10, 11, 84, 14);
-		panel_4.add(lblContrato);
 
 		txtValor = new JTextField();
 		txtValor.setEditable(false);
 		txtValor.setColumns(10);
-		txtValor.setBounds(10, 61, 109, 20);
+		txtValor.setBounds(10, 48, 133, 20);
 		panel_4.add(txtValor);
 
 		JLabel lblValor = new JLabel("Valor:");
-		lblValor.setBounds(10, 36, 30, 14);
+		lblValor.setBounds(10, 23, 30, 14);
 		panel_4.add(lblValor);
-
-		JLabel label_5 = new JLabel("");
-		label_5.setBounds(314, 23, 30, 31);
-		panel_4.add(label_5);
 
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(TelaRealizarVenda.class.getResource("/gui/imagens/LogotipoHard.png")));
@@ -170,63 +156,59 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(544, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1)
+					.addGap(23))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel, GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-										.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-										.addComponent(btnConfirmar)
-										.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_1)))
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGap(0))
+						.addComponent(btnConfirmar)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(panel_2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+							.addComponent(panel_3, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+							.addComponent(panel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)))
+					.addContainerGap(386, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnConfirmar)
-							.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_1)
-							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnConfirmar)
+					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
 		);
 
 		JLabel lblPerodo = new JLabel("Per\u00EDodo:");
-		lblPerodo.setBounds(202, 36, 40, 14);
+		lblPerodo.setBounds(153, 23, 40, 14);
 		panel_4.add(lblPerodo);
 
 		JLabel lblMeses = new JLabel("Meses");
 		lblMeses.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblMeses.setBounds(252, 64, 63, 14);
+		lblMeses.setBounds(203, 51, 63, 14);
 		panel_4.add(lblMeses);
 		
 		comboBoxMeses = new JComboBox();
 		iniciarCombo(comboBoxMeses);
-		comboBoxMeses.setBounds(202, 61, 40, 20);
+		comboBoxMeses.setBounds(153, 48, 40, 20);
 		panel_4.add(comboBoxMeses);
 
 		panel_2.setLayout(null);
 		listaCpfOrCnpj = new JList(this.modeloCpfOrCnpj);
+		listaCpfOrCnpj.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listaCpfOrCnpj.setBackground(SystemColor.menu);
 		listaCpfOrCnpj.addMouseListener(this);
 		listaCpfOrCnpj.addKeyListener(this);
 		listaCpfOrCnpj.setVisible(false);
