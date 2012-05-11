@@ -394,10 +394,10 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		Fachada fachada = Fachada.getInstancia();
 		try {
 			fachada.cadastrarReclamacao(r);
-			JOptionPane.showMessageDialog(null, "Reclamação cadastrada com sucesso.");
+			JOptionPane.showMessageDialog(null, "Tipo de Reclamação cadastrada com sucesso.");
 			limparCadastro();
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, "Reclamação já existe.");
+			JOptionPane.showMessageDialog(null, "Tipo de Reclamação já existe.");
 		}
 	}
 
