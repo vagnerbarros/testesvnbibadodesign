@@ -40,6 +40,8 @@ import entidades.Cliente;
 import entidades.Servico;
 import entidades.Solicitacao;
 import fachada.Fachada;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 public class TelaContratosVencer extends JPanel implements PropertyChangeListener, ActionListener, KeyListener, MouseListener{
 	private JDateChooser txtDataInicial;
@@ -92,6 +94,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		label.setIcon(new ImageIcon(TelaCadastroCliente.class.getResource("/gui/imagens/LogotipoHard.png")));
 
 		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, null), "Filtrar", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		panel.setBackground(SystemColor.text);
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -121,18 +124,15 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 				);
 		panel.setLayout(null);
 
-		JLabel lblFiltar = new JLabel("Filtrar");
-		lblFiltar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblFiltar.setBounds(28, 11, 58, 14);
-		panel.add(lblFiltar);
-
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(28, 53, 369, 76);
+		panel_1.setOpaque(false);
+		panel_1.setBorder(new TitledBorder(null, "Per\u00EDodo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 22, 369, 76);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
 		JLabel lblDataInicial = new JLabel("Data Inicial:");
-		lblDataInicial.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblDataInicial.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblDataInicial.setBounds(10, 28, 65, 14);
 		panel_1.add(lblDataInicial);
 
@@ -143,7 +143,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		panel_1.add(txtDataInicial);
 
 		JLabel lblDataFinal = new JLabel("Data Final:");
-		lblDataFinal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblDataFinal.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblDataFinal.setBounds(198, 28, 65, 14);
 		panel_1.add(lblDataFinal);
 
@@ -153,23 +153,15 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		txtDataFinal.setBounds(273, 26, 86, 20);
 		panel_1.add(txtDataFinal);
 
-		JLabel lblPerodo = new JLabel("Per\u00EDodo");
-		lblPerodo.setFont(new Font("Tahoma", Font.ITALIC, 13));
-		lblPerodo.setBounds(28, 36, 46, 14);
-		panel.add(lblPerodo);
-
-		JLabel lblServio = new JLabel("Servi\u00E7o");
-		lblServio.setFont(new Font("Tahoma", Font.ITALIC, 13));
-		lblServio.setBounds(422, 36, 46, 14);
-		panel.add(lblServio);
-
 		JPanel panel_2 = new JPanel();
+		panel_2.setOpaque(false);
+		panel_2.setBorder(new TitledBorder(null, "Servi\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setLayout(null);
-		panel_2.setBounds(422, 53, 369, 76);
+		panel_2.setBounds(393, 22, 369, 76);
 		panel.add(panel_2);
 
 		JLabel lblNomeDoServio = new JLabel("Nome do Servi\u00E7o:");
-		lblNomeDoServio.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNomeDoServio.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNomeDoServio.setBounds(10, 28, 97, 14);
 		panel_2.add(lblNomeDoServio);
 
@@ -187,7 +179,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		panel_2.add(txtNomeServico);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(28, 140, 763, 155);
+		scrollPane.setBounds(10, 109, 752, 155);
 		panel.add(scrollPane);
 
 		table = new JTable();
@@ -210,7 +202,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 
 		btnDetalhar = new JButton("Detalhar");
 		btnDetalhar.addActionListener(this);
-		btnDetalhar.setBounds(28, 306, 89, 23);
+		btnDetalhar.setBounds(10, 275, 89, 23);
 		panel.add(btnDetalhar);
 
 		this.setLayout(layout);

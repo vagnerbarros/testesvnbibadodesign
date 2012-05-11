@@ -43,6 +43,7 @@ import entidades.Funcionario;
 import entidades.Pessoa;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
+import javax.swing.border.TitledBorder;
 
 public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
 	private JFormattedTextField txtNomeEmpresa;
@@ -97,24 +98,21 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
-				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
+				.addComponent(JPanelInferior, GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-					.addContainerGap(618, Short.MAX_VALUE)
+					.addContainerGap(706, Short.MAX_VALUE)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabbedPane)
-					.addContainerGap())
+				.addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(tabbedPane)
+					.addGap(18)
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
@@ -125,7 +123,8 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		tabbedPane.addTab("Cadastro", null, panel, null);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_2.setOpaque(false);
+		panel_2.setBorder(new TitledBorder(null, "Cadastrar Nova Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		JLabel lblNomeDaEmpresa = new JLabel("Nome da Empresa:");
 		lblNomeDaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -143,38 +142,29 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
-		
-		JLabel lblCadastrarNovaEmpresa = new JLabel("Cadastrar Nova Empresa");
-		lblCadastrarNovaEmpresa.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_2.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+						.addComponent(botaoCadastrar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel_2.createSequentialGroup()
 							.addComponent(lblNomeDaEmpresa)
-							.addGap(18)
-							.addComponent(txtNomeEmpresa, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblCadastrarNovaEmpresa))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-					.addContainerGap(371, Short.MAX_VALUE)
-					.addComponent(botaoCadastrar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(txtNomeEmpresa, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(18, Short.MAX_VALUE))
 		);
 		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblCadastrarNovaEmpresa)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNomeDaEmpresa)
 						.addComponent(txtNomeEmpresa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(botaoCadastrar)
-					.addGap(46))
+					.addGap(78))
 		);
 		panel_2.setLayout(gl_panel_2);
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -183,14 +173,14 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(532, Short.MAX_VALUE))
+					.addContainerGap(524, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(288, Short.MAX_VALUE))
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(300, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 
@@ -199,11 +189,9 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		tabbedPane.addTab("Listagem", null, panel_1, null);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_3.setOpaque(false);
+		panel_3.setBorder(new TitledBorder(null, "Filtrar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setBackground(SystemColor.menu);
-
-		JLabel lblFiltrar = new JLabel("Filtrar");
-		lblFiltrar.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		JLabel lblNome = new JLabel("Nome:");
 
@@ -219,25 +207,20 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(19)
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblFiltrar)
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(lblNome)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)))
-					.addGap(360))
+					.addContainerGap()
+					.addComponent(lblNome)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 328, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(61, Short.MAX_VALUE))
 		);
 		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(13, Short.MAX_VALUE)
-					.addComponent(lblFiltrar, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+			gl_panel_3.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNome)
 						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		panel_3.setLayout(gl_panel_3);
 
@@ -247,40 +230,40 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
 
-		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar = new JButton("Editar");
 		btnVisualizar.addActionListener(this);
 		
 		JLabel lblEmpresasCadastrados = new JLabel("Empresas Cadastradas");
-		lblEmpresasCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEmpresasCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 652, Short.MAX_VALUE)
 						.addComponent(lblEmpresasCadastrados, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+						.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(btnVisualizar)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemover))
-						.addComponent(scrollPane))
-					.addContainerGap(354, Short.MAX_VALUE))
+							.addComponent(btnRemover)
+							.addGap(8)
+							.addComponent(btnVisualizar)))
+					.addContainerGap(599, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblEmpresasCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnVisualizar)
 						.addComponent(btnRemover))
-					.addContainerGap(58, Short.MAX_VALUE))
+					.addContainerGap(59, Short.MAX_VALUE))
 		);
 
 		table = new JTable();
