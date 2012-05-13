@@ -82,6 +82,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 	private Border bordaPadrao;
 	private int comboTelefoneAtual;
 	private Map<String, String[]> telefones;
+	private Long idPessoaAtualizar;
 
 	public TelaCadastroFuncionarios() {
 
@@ -121,30 +122,30 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		label.setIcon(new ImageIcon(TelaCadastroCliente.class.getResource("/gui/imagens/LogotipoHard.png")));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addChangeListener(this);
+		
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.TRAILING)
+				layout.createParallelGroup(Alignment.TRAILING)
 				.addComponent(jPanelSuperior, GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
 				.addComponent(tabbedPane)
 				.addComponent(JPanelInferior, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-					.addContainerGap(574, Short.MAX_VALUE)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+						.addContainerGap(574, Short.MAX_VALUE)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				);
 		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
+				layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-					.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-		);
+						.addComponent(jPanelSuperior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(JPanelInferior, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+				);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -333,12 +334,12 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		panel_3.add(txtTelefone);
 		txtTelefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtTelefone.setColumns(10);
-		
-				JLabel lblComplemento = new JLabel("Complemento:");
-				lblComplemento.setBounds(271, 59, 69, 15);
-				panel_3.add(lblComplemento);
-				lblComplemento.setHorizontalAlignment(SwingConstants.LEFT);
-				lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 11));
+
+		JLabel lblComplemento = new JLabel("Complemento:");
+		lblComplemento.setBounds(271, 59, 69, 15);
+		panel_3.add(lblComplemento);
+		lblComplemento.setHorizontalAlignment(SwingConstants.LEFT);
+		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		comboBoxTelefone.addActionListener(this);
 
 		JPanel panel_4 = new JPanel();
@@ -380,11 +381,11 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		comboBoxCargo.setBounds(342, 21, 99, 20);
 		panel_4.add(comboBoxCargo);
 		iniciarCombo(comboBoxCargo);
-		
+
 		JLabel lblConfSenha = new JLabel("Conf. Senha:");
 		lblConfSenha.setBounds(274, 55, 69, 14);
 		panel_4.add(lblConfSenha);
-		
+
 		txtConfSenha = new JPasswordField();
 		txtConfSenha.setColumns(10);
 		txtConfSenha.setBounds(342, 52, 180, 20);
@@ -407,23 +408,23 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(286, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(286, Short.MAX_VALUE))
+				);
 		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(15)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(33, Short.MAX_VALUE))
-		);
+						.addGap(15)
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(comboBoxBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtBusca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(33, Short.MAX_VALUE))
+				);
 		panel_2.setLayout(gl_panel_2);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -439,34 +440,34 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		lblFuncionriosCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(btnRemover)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblFuncionriosCadastrados)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-						.addComponent(scrollPane))
-					.addContainerGap(410, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panel_1.createSequentialGroup()
+										.addComponent(btnRemover)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblFuncionriosCadastrados)
+										.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+										.addComponent(scrollPane))
+										.addContainerGap(410, Short.MAX_VALUE))
+				);
 		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblFuncionriosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnRemover)
-						.addComponent(btnEditar))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(lblFuncionriosCadastrados, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnRemover)
+								.addComponent(btnEditar))
+								.addContainerGap())
+				);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -488,6 +489,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		this.setLayout(layout);
 
+		tabbedPane.addChangeListener(this);
 	}
 
 	private void montaTabela(Funcionario f) {
@@ -644,7 +646,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		for(String rotulo : rotulos){
 			String numeroTelefone = telefones.get(rotulo)[0];
 			if(numeroTelefone.replace(" ", "").length() > 3){
-			
+
 				Telefone t = new Telefone();
 				t.setId_pessoa(id_pessoa);
 				t.setNumero(numeroTelefone);
@@ -661,6 +663,126 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		}
 	}
 
+	private void atualizar(){
+
+		Fachada fachada = Fachada.getInstancia();
+
+		Funcionario editado = new Funcionario();
+		editado.setId_pessoa(idPessoaAtualizar);
+		List<Funcionario> retorno = fachada.buscarFuncionario(editado);
+		editado = retorno.get(0);
+
+		String nome = this.txtNome.getText().trim();
+		String cpf = this.txtCpf.getText().trim();
+		String cargo = (String)this.comboBoxCargo.getSelectedItem();
+
+		editado.setNome(nome);
+		editado.setCpf(cpf);
+		editado.setCargo(cargo);
+
+		fachada.atualizarFuncionario(editado);
+		atualizarEnderecos();
+		atualizarTelefones();
+
+		JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso.");
+		limparCadastro();
+		idPessoaAtualizar = null;
+	}
+
+	private void atualizarTelefones() {
+
+		//dados de telefone
+		Fachada fachada = Fachada.getInstancia();
+		salvarCampos((String)comboBoxTelefone.getSelectedItem());
+		Set<String> rotulos = telefones.keySet();
+		Long id_empresa = Sessao.getEmpresa().getId();
+
+		for(String rotulo : rotulos){
+			String numeroTelefone = telefones.get(rotulo)[0];
+			if(numeroTelefone.replace(" ", "").length() > 3){
+
+				Telefone t = new Telefone();
+
+				Telefone busca = new Telefone();
+				busca.setId_empresa(id_empresa);
+				busca.setRotulo(rotulo);
+				busca.setId_pessoa(idPessoaAtualizar);
+				List<Telefone> tels = fachada.buscarTelefone(busca);
+				if(!tels.isEmpty()){
+					t = tels.get(0);
+				}
+				else{
+					t.setId_empresa(id_empresa);
+					t.setRotulo(rotulo);
+					t.setId_pessoa(idPessoaAtualizar);
+					t.setAtivo(Constantes.ATIVO);
+				}
+
+				t.setNumero(numeroTelefone);
+
+				if(t.getId() != null){
+					fachada.atualizarTelefone(t);
+				}
+				else{
+					try {
+						fachada.cadastrarTelefone(t);
+					} catch (EntidadeJaExisteException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+	private void atualizarEnderecos() {
+
+		Fachada fachada = Fachada.getInstancia();
+
+		String rua = txtEndereco.getText().trim();
+		String numero = txtNumero.getText().trim();
+		String bairro = txtBairro.getText().trim();
+		String cidade = txtCidade.getText().trim();
+		String cep = txtCep.getText().trim();
+		String estado = (String)comboBoxEstado.getSelectedItem();
+		String complemento = txtComplemento.getText().trim();
+
+		if(rua.length() > 0 || numero.length() > 0 || bairro.length() > 0 || cidade.length() > 0 || cep.replace(" ", "").length() > 2 || complemento.length() > 0){
+
+			Endereco e = new Endereco();
+
+			Endereco busca = new Endereco();
+			busca.setId_pessoa(idPessoaAtualizar);
+			List<Endereco> ends = fachada.buscarEndereco(busca);
+			if(!ends.isEmpty()){
+				e = ends.get(0);
+			}
+			else{
+				e.setId_pessoa(idPessoaAtualizar);
+				e.setId_empresa(Sessao.getEmpresa().getId());
+				e.setAtivo(Constantes.ATIVO);
+			}
+
+			e.setRua(rua);
+			e.setNumero(numero);
+			e.setComplemento(complemento);
+			e.setBairro(bairro);
+			e.setCidade(cidade);
+			e.setCep(cep);
+			e.setEstado(estado);
+
+			if(e.getId() != null){
+				fachada.atualizarEndereco(e);
+			}
+			else{
+				try {
+					fachada.cadastrarEndereco(e);
+				} catch (EntidadeJaExisteException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public void actionPerformed(ActionEvent evt) {
 
 		JComponent elemento = (JComponent) evt.getSource();
@@ -670,8 +792,15 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			this.limparCadastro();
 		}
 		else if(elemento.equals(this.btnCadastro)){
-			if(camposPreenchidos() && camposValidos() && senhaConfirmacaoIguais()){
-				this.cadastrar();
+			if(btnCadastro.getText().equals("Cadastrar")){
+				if(camposPreenchidos() && camposValidos() && senhaConfirmacaoIguais()){
+					this.cadastrar();
+				}
+			}
+			else if(btnCadastro.getText().equals("Atualizar")){
+				if(camposPreenchidos() && camposValidos()){
+					atualizar();
+				}
 			}
 		}
 		else if(elemento.equals(this.comboBoxBusca)){
@@ -686,10 +815,60 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			removerFuncionario();
 		}
 		else if(elemento.equals(btnEditar)){
-
+			int linha = table.getSelectedRow();
+			if(linha != -1){
+				tabbedPane.setSelectedIndex(0);
+				btnCadastro.setText("Atualizar");
+				idPessoaAtualizar = ((Funcionario)table.getModel().getValueAt(linha, 0)).getId_pessoa();
+				carregarInformacoesFuncionario();
+				carregarInformacoesEndereco();
+			}
 		}
 	}
-	
+
+	private void carregarInformacoesEndereco(){
+
+		Fachada fachada = Fachada.getInstancia();
+		Endereco busca = new Endereco();
+		busca.setId_pessoa(idPessoaAtualizar);
+		List<Endereco> lista = fachada.buscarEndereco(busca);
+		Endereco e = lista.get(0);
+		txtEndereco.setText(e.getRua());
+		txtNumero.setText(e.getNumero());
+		txtBairro.setText(e.getBairro());
+		txtCidade.setText(e.getCidade());
+		txtCep.setText(e.getCep());
+		comboBoxEstado.setSelectedIndex(Constantes.getPosicaoEstado(e.getEstado()));
+		txtComplemento.setText(e.getComplemento());
+	}
+
+	private void carregarInformacoesTelefone(){
+
+		Fachada fachada = Fachada.getInstancia();
+		Telefone busca = new Telefone();
+		busca.setId_pessoa(idPessoaAtualizar);
+		List<Telefone> lista = fachada.buscarTelefone(busca);
+
+		for(Telefone t : lista){
+			String [] campos = new String[1];
+			campos[0] = t.getNumero();
+			telefones.put(t.getRotulo(), campos);
+		}
+		restaurarCampos((String)comboBoxTelefone.getSelectedItem());
+	}
+
+	private void carregarInformacoesFuncionario(){
+
+		Fachada fachada = Fachada.getInstancia();
+		Funcionario busca = new Funcionario();
+		busca.setId_pessoa(idPessoaAtualizar);
+		List<Funcionario> lista = fachada.buscarFuncionario(busca);
+		Funcionario f = lista.get(0);
+
+		txtNome.setText(f.getNome());
+		txtCpf.setText(f.getCpf());
+	}
+
 	private boolean senhaConfirmacaoIguais(){
 		boolean iguais = true;
 		char [] pw = txtSenha.getPassword();
@@ -851,6 +1030,10 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Funcionario());
+		}
+		else if(this.tabbedPane.getSelectedIndex() == 0){
+			limparCadastro();
+			btnCadastro.setText("Cadastrar");
 		}
 	}
 
