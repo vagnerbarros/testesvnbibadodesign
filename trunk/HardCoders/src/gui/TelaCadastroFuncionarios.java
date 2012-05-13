@@ -680,7 +680,11 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		editado.setCpf(cpf);
 		editado.setCargo(cargo);
 
-		fachada.atualizarFuncionario(editado);
+		try {
+			fachada.atualizarFuncionario(editado);
+		} catch (EntidadeJaExisteException e) {
+			JOptionPane.showMessageDialog(null, "CPF pertence a outro funcionário.");
+		}
 		atualizarEnderecos();
 		atualizarTelefones();
 
@@ -721,13 +725,17 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 				t.setNumero(numeroTelefone);
 
 				if(t.getId() != null){
-					fachada.atualizarTelefone(t);
+					try {
+						fachada.atualizarTelefone(t);
+					} catch (EntidadeJaExisteException e) {
+						JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar telefone.");
+					}
 				}
 				else{
 					try {
 						fachada.cadastrarTelefone(t);
 					} catch (EntidadeJaExisteException e) {
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar telefone.");
 					}
 				}
 			}
@@ -771,13 +779,17 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			e.setEstado(estado);
 
 			if(e.getId() != null){
-				fachada.atualizarEndereco(e);
+				try {
+					fachada.atualizarEndereco(e);
+				} catch (EntidadeJaExisteException e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar endereço.");
+				}
 			}
 			else{
 				try {
 					fachada.cadastrarEndereco(e);
 				} catch (EntidadeJaExisteException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar endereço.");
 				}
 			}
 		}

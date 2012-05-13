@@ -35,8 +35,20 @@ public class Cadastro <T extends IEntidades<T>> {
 		this.repositorio.remover(rem);
 	}
 
-	public void atualizar(T atual){
-		this.repositorio.atuliazar(atual);
+	public void atualizar(T atual) throws EntidadeJaExisteException{
+		List<T> results = this.repositorio.buscar(atual.getCamposChave());
+		boolean podeAtualizar = true;
+		for(T elem : results){
+			if(atual.equals(elem)){
+				podeAtualizar = false;
+			}
+		}
+		if(podeAtualizar){
+			this.repositorio.atuliazar(atual);
+		}
+		else{
+			throw new EntidadeJaExisteException(atual + "já existe");
+		}
 	}
 
 	public List<T> listarTodos(T obj){

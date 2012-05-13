@@ -56,8 +56,9 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
 	private Border bordaPadrao;
-	private JButton btnVisualizar;
+	private JButton btnEditar;
 	private JButton btnRemover;
+	private Reclamacao reclamacaoEdicao;
 
 	public TelaCadastroReclamacoes() {
 
@@ -216,8 +217,8 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		panel_2.setBorder(new TitledBorder(null, "Filtrar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBackground(SystemColor.control);
 
-		btnVisualizar = new JButton("Editar");
-		btnVisualizar.addActionListener(this);
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(this);
 
 		btnRemover = new JButton("Remover");
 		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
@@ -234,7 +235,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addComponent(btnRemover)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnVisualizar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(375, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
@@ -248,7 +249,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnVisualizar)
+						.addComponent(btnEditar)
 						.addComponent(btnRemover))
 					.addGap(22))
 		);
@@ -342,6 +343,21 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			}
 		});
 	}
+	
+	private void atualizar(){
+		
+		Fachada fachada = Fachada.getInstancia();
+		reclamacaoEdicao.setCodigo(txtCodigo.getText().trim());
+		reclamacaoEdicao.setNome(txtTipo.getText().trim());
+		try {
+			fachada.atualizarReclamacao(reclamacaoEdicao);
+			JOptionPane.showMessageDialog(null, "Tipo de Reclamação atualizado.");
+			limparCadastro();
+			tabbedPane.setSelectedIndex(1);
+		} catch (EntidadeJaExisteException e) {
+			JOptionPane.showMessageDialog(null, "Tipo de Reclamação já existe.");
+		}
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 
@@ -350,7 +366,12 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
-				cadastrar();
+				if(botaoCadastrar.getText().equals("Cadastrar")){
+					cadastrar();
+				}
+				else if(botaoCadastrar.getText().equals("Atualizar")){
+					atualizar();
+				}
 			}
 		}
 		else if(elemento.equals(this.botaoLimpar)){
@@ -360,12 +381,24 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 			this.txtBusca.setText("");
 			this.buscar();
 		}
-		else if(elemento.equals(this.btnVisualizar)){
-
+		else if(elemento.equals(this.btnEditar)){
+			int linha = table.getSelectedRow();
+			if(linha != -1){
+				reclamacaoEdicao = (Reclamacao)table.getModel().getValueAt(linha, 0);
+				carregarReclamacao();
+			}
 		}
 		else if(elemento.equals(this.btnRemover)){
 			removerReclamacao();
 		}
+	}
+	
+	private void carregarReclamacao(){
+		
+		tabbedPane.setSelectedIndex(0);
+		botaoCadastrar.setText("Atualizar");
+		txtCodigo.setText(reclamacaoEdicao.getCodigo());
+		txtTipo.setText(reclamacaoEdicao.getNome());
 	}
 	
 	private void removerReclamacao(){
@@ -454,6 +487,8 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 
 		txtCodigo.setText(null);
 		txtTipo.setText(null);
+		botaoCadastrar.setText("Cadastrar");
+		reclamacaoEdicao = null;
 		txtCodigo.grabFocus();
 	}
 
