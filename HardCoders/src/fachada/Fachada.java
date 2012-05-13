@@ -83,7 +83,7 @@ public class Fachada {
 	public void removerCliente(Cliente c) {
 		this.cadCliente.remover(c);
 	}
-	public void atualizarCliente(Cliente c) {
+	public void atualizarCliente(Cliente c) throws EntidadeJaExisteException{
 		this.cadCliente.atualizar(c);
 	}
 	public List<Cliente> listarClientes(Cliente c){
@@ -103,7 +103,7 @@ public class Fachada {
 	public void removerFuncionario(Funcionario f){
 		this.cadFuncionario.remover(f);
 	}
-	public void atualizarFuncionario(Funcionario f){
+	public void atualizarFuncionario(Funcionario f) throws EntidadeJaExisteException{
 		this.cadFuncionario.atualizar(f);
 	}
 	public List<Funcionario> listarFuncionario(Funcionario f){
@@ -124,7 +124,7 @@ public class Fachada {
 	public void removerEmpresa(Empresa e){
 		this.cadEmpresa.remover(e);
 	}
-	public void atualizarEmpresa(Empresa e){
+	public void atualizarEmpresa(Empresa e) throws EntidadeJaExisteException{
 		this.cadEmpresa.atualizar(e);
 	}
 	public List<Empresa> listarEmpresas(Empresa e){
@@ -147,7 +147,7 @@ public class Fachada {
 	public void removerEndereco(Endereco e){
 		this.cadEndereco.remover(e);
 	}
-	public void atualizarEndereco(Endereco e){
+	public void atualizarEndereco(Endereco e) throws EntidadeJaExisteException{
 		this.cadEndereco.atualizar(e);
 	}
 	public List<Endereco> listarEnderecos(Endereco e){
@@ -170,7 +170,7 @@ public class Fachada {
 	public void removerFalha(Falha f){
 		this.cadFalha.remover(f);
 	}
-	public void atualizarFalha(Falha f){
+	public void atualizarFalha(Falha f) throws EntidadeJaExisteException{
 		this.cadFalha.atualizar(f);
 	}
 	public List<Falha> listarFalhas(Falha f){
@@ -190,7 +190,7 @@ public class Fachada {
 	public void removerReclamacao(Reclamacao r){
 		this.cadReclamacao.remover(r);
 	}
-	public void atualizarReclamacao(Reclamacao r){
+	public void atualizarReclamacao(Reclamacao r) throws EntidadeJaExisteException{
 		this.cadReclamacao.atualizar(r);
 	}
 	public List<Reclamacao> listarReclamacoes(Reclamacao r){
@@ -213,7 +213,7 @@ public class Fachada {
 	public void removerServico(Servico s){
 		this.cadServico.remover(s);
 	}
-	public void atualizarServico(Servico s){
+	public void atualizarServico(Servico s) throws EntidadeJaExisteException{
 		this.cadServico.atualizar(s);
 	}
 	public List<Servico> listarServicos(Servico s){
@@ -236,7 +236,7 @@ public class Fachada {
 	public void removerTelefone(Telefone t){
 		this.cadTelefone.remover(t);
 	}
-	public void atualizarTelefone(Telefone t){
+	public void atualizarTelefone(Telefone t) throws EntidadeJaExisteException{
 		this.cadTelefone.atualizar(t);
 	}
 	public List<Telefone> listarTelefones(Telefone t){
@@ -259,7 +259,7 @@ public class Fachada {
 	public void removerPessoa(Pessoa p){
 		this.cadPessoa.remover(p);
 	}
-	public void atualizarPessoa(Pessoa p){
+	public void atualizarPessoa(Pessoa p) throws EntidadeJaExisteException{
 		this.cadPessoa.atualizar(p);
 	}
 	public List<Pessoa> listarPessoa(Pessoa p){
@@ -279,7 +279,7 @@ public class Fachada {
 	public void removerSolicitacao(Solicitacao s){
 		this.cadSolicitacacao.remover(s);
 	}
-	public void atualizarSolicitacao(Solicitacao s){
+	public void atualizarSolicitacao(Solicitacao s) throws EntidadeJaExisteException{
 		this.cadSolicitacacao.atualizar(s);
 	}
 	public List<Solicitacao> listarSolicitacao(Solicitacao s){

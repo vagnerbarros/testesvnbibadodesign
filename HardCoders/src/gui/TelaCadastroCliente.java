@@ -764,13 +764,17 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 			c.setCpfOrCnpj(cpfOrCnpj);
 			c.setAtivo(Constantes.ATIVO);
 
-			fachada.atualizarCliente(c);
-			atualizarEnderecos();
-			atualizarTelefones();
-
-			JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso.");
-			limparCadastro();
-			idPessoaAtualizar = null;
+			try {
+				fachada.atualizarCliente(c);
+				atualizarEnderecos();
+				atualizarTelefones();
+				
+				JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso.");
+				limparCadastro();
+				idPessoaAtualizar = null;
+			} catch (EntidadeJaExisteException e) {
+				JOptionPane.showMessageDialog(null, "CPF/CNPJ pertence a outro cliente.");
+			}
 		}
 	}
 
@@ -806,13 +810,17 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 				t.setNumero(numeroTelefone);
 				
 				if(t.getId() != null){
-					fachada.atualizarTelefone(t);
+					try {
+						fachada.atualizarTelefone(t);
+					} catch (EntidadeJaExisteException e) {
+						JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar.");
+					}
 				}
 				else{
 					try {
 						fachada.cadastrarTelefone(t);
 					} catch (EntidadeJaExisteException e) {
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar.");
 					}
 				}
 			}
@@ -865,7 +873,11 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 				e.setEstado(estado);
 				
 				if(e.getId() != null){
-					fachada.atualizarEndereco(e);
+					try {
+						fachada.atualizarEndereco(e);
+					} catch (EntidadeJaExisteException e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar endereço");
+					}
 				}
 				else{
 					try {
@@ -946,6 +958,8 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		comboEnderecoAtual = 0;
 		comboTelefoneAtual = 0;
 		habilitarRadioButtons();
+		idPessoaAtualizar = null;
+		botaoCadastrar.setText("Cadastrar");
 	}
 
 	private void cadastrarTelefones(Long id_pessoa) throws EntidadeJaExisteException{
