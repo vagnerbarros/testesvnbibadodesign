@@ -122,7 +122,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		label.setIcon(new ImageIcon(TelaCadastroCliente.class.getResource("/gui/imagens/LogotipoHard.png")));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		
+
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
@@ -837,21 +837,23 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			}
 		}
 	}
-
+	
 	private void carregarInformacoesEndereco(){
 
 		Fachada fachada = Fachada.getInstancia();
 		Endereco busca = new Endereco();
 		busca.setId_pessoa(idPessoaAtualizar);
 		List<Endereco> lista = fachada.buscarEndereco(busca);
-		Endereco e = lista.get(0);
-		txtEndereco.setText(e.getRua());
-		txtNumero.setText(e.getNumero());
-		txtBairro.setText(e.getBairro());
-		txtCidade.setText(e.getCidade());
-		txtCep.setText(e.getCep());
-		comboBoxEstado.setSelectedIndex(Constantes.getPosicaoEstado(e.getEstado()));
-		txtComplemento.setText(e.getComplemento());
+		if(!lista.isEmpty()){
+			Endereco e = lista.get(0);
+			txtEndereco.setText(e.getRua());
+			txtNumero.setText(e.getNumero());
+			txtBairro.setText(e.getBairro());
+			txtCidade.setText(e.getCidade());
+			txtCep.setText(e.getCep());
+			comboBoxEstado.setSelectedIndex(Constantes.getPosicaoEstado(e.getEstado()));
+			txtComplemento.setText(e.getComplemento());
+		}
 	}
 
 	private void carregarInformacoesTelefone(){
@@ -879,6 +881,9 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		txtNome.setText(f.getNome());
 		txtCpf.setText(f.getCpf());
+		txtLogin.setText(f.getLogin());
+		txtSenha.setText(f.getSenha());
+		txtConfSenha.setText(f.getSenha());
 	}
 
 	private boolean senhaConfirmacaoIguais(){
@@ -1042,8 +1047,6 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Funcionario());
-		}
-		else if(this.tabbedPane.getSelectedIndex() == 0){
 			limparCadastro();
 			btnCadastro.setText("Cadastrar");
 		}
