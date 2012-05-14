@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -30,12 +29,10 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
-
 import util.Constantes;
 import util.NivelAcesso;
 import util.Sessao;
@@ -43,7 +40,6 @@ import entidades.Reclamacao;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
 import javax.swing.border.TitledBorder;
-import java.awt.Component;
 
 public class TelaCadastroReclamacoes extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
 
@@ -502,6 +498,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Reclamacao());
+			limparCadastro();
 		}
 	}
 
