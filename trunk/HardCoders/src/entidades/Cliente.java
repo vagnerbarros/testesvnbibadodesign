@@ -68,6 +68,9 @@ public class Cliente implements IEntidades<Cliente>{
 	public String toString(){
 		return this.nome;
 	}
+	public Long getId(){
+		return this.id_pessoa;
+	}
 	public boolean equals(Object obj){
 		Cliente c = (Cliente) obj;
 		if(this.cpfOrCnpj.equals(c.getCpfOrCnpj()) && this.id_empresa.compareTo(c.getId_empresa()) == 0){

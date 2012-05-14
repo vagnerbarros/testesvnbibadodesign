@@ -72,6 +72,9 @@ public class Funcionario implements IEntidades<Funcionario>{
 	public void setId_empresa(Long id_empresa) {
 		this.id_empresa = id_empresa;
 	}
+	public Long getId(){
+		return this.id_pessoa;
+	}
 	public String toString(){
 		return this.nome;
 	}

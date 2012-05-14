@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,7 @@ import entidades.Empresa;
 import entidades.Funcionario;
 import fachada.Fachada;
 
-public class TelaLogin extends JDialog implements ActionListener, KeyListener{
+public class TelaLogin extends JDialog implements ActionListener, KeyListener, MouseListener{
 	
 	private JFormattedTextField login_txt;
 	private JPasswordField senha_txt;
@@ -88,12 +90,14 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 		}
 
 		MaskFormatter mascaraLogin = criarMascara("********************");
+		mascaraLogin.setPlaceholder("");
 		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?");
 		login_txt = new JFormattedTextField(mascaraLogin);
 		login_txt.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		login_txt.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		login_txt.addActionListener(this);
 		login_txt.addKeyListener(this);
+		login_txt.addMouseListener(this);
 		login_txt.setBounds(163, 97, 166, 28);
 		getContentPane().add(login_txt);
 		login_txt.setColumns(10);
@@ -194,7 +198,18 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener{
 			return null;
 		}
 	}
+	
+	public void mousePressed(MouseEvent evt) {
+		ajudarCursor((JFormattedTextField)evt.getSource());
+	}
+	private void ajudarCursor(JFormattedTextField campo){
+		campo.setCaretPosition(campo.getText().trim().length());
+	}
 
 	public void keyReleased(KeyEvent arg0) {}
 	public void keyTyped(KeyEvent arg0) {}
+	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 }

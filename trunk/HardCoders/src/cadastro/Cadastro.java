@@ -39,7 +39,7 @@ public class Cadastro <T extends IEntidades<T>> {
 		List<T> results = this.repositorio.buscar(atual.getCamposChave());
 		boolean podeAtualizar = true;
 		for(T elem : results){
-			if(atual.equals(elem)){
+			if(atual.equals(elem) && !atual.getId().equals(elem.getId())){
 				podeAtualizar = false;
 			}
 		}
