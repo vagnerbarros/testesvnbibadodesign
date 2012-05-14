@@ -52,12 +52,13 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private JFormattedTextField txtBusca;
 	private JTable table;
 	private JButton botaoCadastrar;
-	private JButton btnVisualizar;
+	private JButton btnEditar;
 	private JButton btnRemover;
 	private JTabbedPane tabbedPane;
 	private JComboBox comboBoxBusca;
 	private Border bordaPadrao;
 	private Format formato;
+	private Servico servicoEditado;
 
 	public TelaCadastroServicos() {
 
@@ -98,7 +99,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		label.setIcon(new ImageIcon(TelaCadastroCliente.class.getResource("/gui/imagens/LogotipoHard.png")));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addChangeListener(this);
+		
 		//javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
@@ -244,8 +245,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 
 		JScrollPane scrollPane = new JScrollPane();
 
-		btnVisualizar = new JButton("Editar");
-		btnVisualizar.addActionListener(this);
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(this);
 
 		btnRemover = new JButton("Remover");
 		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
@@ -260,7 +261,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnRemover)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnVisualizar, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblServiosCadastrados, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
 						.addComponent(scrollPane, 0, 0, Short.MAX_VALUE))
@@ -278,7 +279,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnRemover)
-						.addComponent(btnVisualizar))
+						.addComponent(btnEditar))
 					.addGap(67))
 		);
 
@@ -302,6 +303,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		this.montaTabela(new Servico());
+		
+		tabbedPane.addChangeListener(this);
 
 		this.setLayout(layout);
 
@@ -338,6 +341,22 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			}
 		});
 	}
+	
+	private void atualizar(){
+		
+		servicoEditado.setNome(txtNome.getText().trim());
+		servicoEditado.setValor(Double.parseDouble(txtValor.getText().trim()));
+		
+		Fachada fachada = Fachada.getInstancia();
+		try {
+			fachada.atualizarServico(servicoEditado);
+			limparCadastro();
+			JOptionPane.showMessageDialog(null, "Serviço atualizado.");
+			tabbedPane.setSelectedIndex(1);
+		} catch (EntidadeJaExisteException e) {
+			JOptionPane.showMessageDialog(null, "Já existe um serviço com este nome.");
+		}
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 
@@ -346,7 +365,12 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
-				cadastrar();
+				if(botaoCadastrar.getText().equals("Cadastrar")){
+					cadastrar();
+				}
+				else if(botaoCadastrar.getText().equals("Atualizar")){
+					atualizar();
+				}
 			}
 		}
 		else if(elemento.equals(this.comboBoxBusca)){
@@ -356,9 +380,21 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		else if(elemento.equals(this.btnRemover)){
 			removerServico();
 		}
-		else if(elemento.equals(this.btnVisualizar)){
-
+		else if(elemento.equals(this.btnEditar)){
+			int linha = table.getSelectedRow();
+			if(linha != -1){
+				servicoEditado = (Servico)table.getModel().getValueAt(linha, 0);
+				carregarDadosServico();
+			}
 		}
+	}
+	
+	private void carregarDadosServico(){
+		
+		tabbedPane.setSelectedIndex(0);
+		botaoCadastrar.setText("Atualizar");
+		txtValor.setText(servicoEditado.getValor().toString());
+		txtNome.setText(servicoEditado.getNome());
 	}
 
 	private void removerServico(){
@@ -400,6 +436,8 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 	private void limparCadastro(){
 		txtNome.setText(null);
 		txtValor.setText(null);
+		servicoEditado = null;
+		botaoCadastrar.setText("Cadastrar");
 		txtNome.grabFocus();
 	}
 
@@ -434,6 +472,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Servico());
+			limparCadastro();
 		}
 	}
 

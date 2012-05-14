@@ -46,14 +46,16 @@ import fachada.Fachada;
 import javax.swing.border.TitledBorder;
 
 public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyListener, ChangeListener, MouseListener{
+	
 	private JFormattedTextField txtNomeEmpresa;
 	private JFormattedTextField txtBusca;
 	private JTable table;
 	private JButton botaoCadastrar;
 	private JTabbedPane tabbedPane;
-	private JButton btnVisualizar;
+	private JButton btnEditar;
 	private JButton btnRemover;
 	private Border bordaPadrao;
+	private Empresa empresaEditada;
 
 	public TelaCadastroEmpresa() {
 
@@ -230,8 +232,8 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		NivelAcesso.inicializarBotao(btnRemover, Sessao.getFuncionario().getCargo());
 		btnRemover.addActionListener(this);
 
-		btnVisualizar = new JButton("Editar");
-		btnVisualizar.addActionListener(this);
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(this);
 		
 		JLabel lblEmpresasCadastrados = new JLabel("Empresas Cadastradas");
 		lblEmpresasCadastrados.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -247,7 +249,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addComponent(btnRemover)
 							.addGap(8)
-							.addComponent(btnVisualizar)))
+							.addComponent(btnEditar)))
 					.addContainerGap(599, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
@@ -261,7 +263,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnVisualizar)
+						.addComponent(btnEditar)
 						.addComponent(btnRemover))
 					.addContainerGap(59, Short.MAX_VALUE))
 		);
@@ -295,6 +297,21 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		e.setNome(txtBusca.getText().trim());
 		montaTabela(e);
 	}
+	
+	private void atualizar(){
+		
+		empresaEditada.setNome(txtNomeEmpresa.getText().trim());
+		
+		Fachada fachada = Fachada.getInstancia();
+		try {
+			fachada.atualizarEmpresa(empresaEditada);
+			JOptionPane.showMessageDialog(null, "Empresa atualizada.");
+			limparCadastro();
+			tabbedPane.setSelectedIndex(1);
+		} catch (EntidadeJaExisteException e) {
+			JOptionPane.showMessageDialog(null, "Este nome de empresa já existe.");
+		}
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 
@@ -303,12 +320,21 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 
 		if(elemento.equals(this.botaoCadastrar)){
 			if(camposValidos()){
-				cadastrar();
+				if(botaoCadastrar.getText().equals("Cadastrar")){
+					cadastrar();
+				}
+				else if(botaoCadastrar.getText().equals("Atualizar")){
+					atualizar();
+				}
 			}
 		}
-		else if(elemento.equals(this.btnVisualizar)){
+		else if(elemento.equals(this.btnEditar)){
 
-			editarSelecionado();
+			int linha = table.getSelectedRow();
+			if(linha != -1){
+				empresaEditada = (Empresa)table.getModel().getValueAt(linha, 0);
+				editarSelecionado();
+			}
 		}
 		else if(elemento.equals(this.btnRemover)){
 
@@ -333,6 +359,9 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 
 	private void editarSelecionado(){
 
+		tabbedPane.setSelectedIndex(0);
+		txtNomeEmpresa.setText(empresaEditada.getNome());
+		botaoCadastrar.setText("Atualizar");
 	}
 
 	private void montaTabela(Empresa e) {
@@ -395,6 +424,8 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 	private void limparCadastro(){
 
 		txtNomeEmpresa.setText(null);
+		empresaEditada = null;
+		botaoCadastrar.setText("Cadastrar");
 		txtNomeEmpresa.grabFocus();
 	}
 
@@ -424,6 +455,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 
 		if(this.tabbedPane.getSelectedIndex() == 1){
 			this.montaTabela(new Empresa());
+			limparCadastro();
 		}
 	}
 

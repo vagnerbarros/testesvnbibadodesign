@@ -1075,7 +1075,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		boolean valido = true;
 		if(!Validacao.cpfValido(txtCpf.getText())){
 			valido = false;
-			JOptionPane.showMessageDialog(null, "CPJ inválido");
+			JOptionPane.showMessageDialog(null, "CPF inválido");
 		}
 		return valido;
 	}
@@ -1429,10 +1429,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		if(tabbedPane.getSelectedIndex() == 1){
 			comboBoxBusca.setSelectedIndex(0);
 			montaTabelaCliente(new Cliente());
-		}
-		else if(tabbedPane.getSelectedIndex() == 0){
 			limparCadastro();
-			botaoCadastrar.setText("Cadastrar");
 		}
 	}
 	public void keyReleased(KeyEvent evt){
