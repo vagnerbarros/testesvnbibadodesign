@@ -772,6 +772,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 				JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso.");
 				limparCadastro();
 				idPessoaAtualizar = null;
+				tabbedPane.setSelectedIndex(1);
 			} catch (EntidadeJaExisteException e) {
 				JOptionPane.showMessageDialog(null, "CPF/CNPJ pertence a outro cliente.");
 			}
@@ -1273,25 +1274,26 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 				Fachada fachada = Fachada.getInstancia();
 				Cliente c = (Cliente) table.getModel().getValueAt(linha, 0);
 
+				Long id_pessoa = c.getId_pessoa();
 				Pessoa p = new Pessoa();
-				p.setId(c.getId_pessoa());
+				p.setId(id_pessoa);
 				fachada.removerPessoa(p);
+				fachada.removerCliente(c);
 
 				Endereco e = new Endereco();
-				e.setId_pessoa(c.getId_pessoa());
+				e.setId_pessoa(id_pessoa);
 				List<Endereco> listaEnd = fachada.buscarEndereco(e);
 				for(Endereco elem : listaEnd){
 					fachada.removerEndereco(elem);
 				}
 
 				Telefone t = new Telefone();
-				t.setId_pessoa(c.getId_pessoa());
+				t.setId_pessoa(id_pessoa);
 				List<Telefone> listaTel = fachada.buscarTelefone(t);
 				for(Telefone tel : listaTel){
 					fachada.removerTelefone(tel);
 				}
 
-				fachada.removerCliente(c);
 				montaTabelaCliente(new Cliente());
 			}
 		}

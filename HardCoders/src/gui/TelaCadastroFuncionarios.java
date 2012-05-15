@@ -573,6 +573,8 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		comboTelefoneAtual = 0;
 		comboBoxCargo.setSelectedIndex(0);
 		comboBoxEstado.setSelectedIndex(0);
+		btnCadastro.setText("Cadastrar");
+		idPessoaAtualizar = null;
 	}
 
 	private void cadastrar(){
@@ -629,7 +631,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			cadastrarTelefones(id_pessoa);
 
 			this.limparCadastro();
-			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso.");
 		} catch (EntidadeJaExisteException e) {
 			JOptionPane.showMessageDialog(null, "Este Login ou CPF já existe.");
 		}
@@ -834,6 +836,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 				idPessoaAtualizar = ((Funcionario)table.getModel().getValueAt(linha, 0)).getId_pessoa();
 				carregarInformacoesFuncionario();
 				carregarInformacoesEndereco();
+				carregarInformacoesTelefone();
 			}
 		}
 	}
@@ -893,14 +896,14 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		if (conf.length != pw.length) {
 			iguais = false;
-			JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem");
+			JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem.");
 		} else {
 			if(Arrays.equals(conf, pw)){
 				iguais = true;
 			}
 			else{
 				iguais = false;
-				JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem");
+				JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem.");
 			}
 		}
 		return iguais;
@@ -1003,7 +1006,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		}
 
 		if(!valido){
-			JOptionPane.showMessageDialog(null, "Campos obrigatórios não preenchidos");
+			JOptionPane.showMessageDialog(null, "Campos obrigatórios não preenchidos.");
 		}
 		return valido;
 	}
@@ -1012,7 +1015,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		boolean valido = true;
 		if(!Validacao.cpfValido(txtCpf.getText())){
 			valido = false;
-			JOptionPane.showMessageDialog(null, "CPJ inválido");
+			JOptionPane.showMessageDialog(null, "CPF inválido.");
 		}
 		return valido;
 	}
