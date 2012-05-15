@@ -1,28 +1,49 @@
 package gui;
-import java.awt.Toolkit;
 import java.awt.Color;
-import javax.swing.JPanel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.UIManager;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
-public class TelaDetalhesDoContrato extends javax.swing.JDialog {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+import util.Sessao;
+import entidades.Cliente;
+import entidades.Servico;
+import entidades.Solicitacao;
+import exception.EntidadeJaExisteException;
+import fachada.Fachada;
 
-    public TelaDetalhesDoContrato(java.awt.Frame parent, boolean modal) {
+public class TelaDetalhesDoContrato extends javax.swing.JDialog implements ActionListener{
+	private JTextField txtNomeCliente;
+	private JTextField txtCpf;
+	private JTextField txtNomeServico;
+	private JTextField txtValor;
+	private JComboBox comboBoxMeses;
+	private JButton btnRenovar;
+	private Cliente cliente;
+	private Servico servico;
+	private TelaContratosVencer telaContratosVencer;
+
+    public TelaDetalhesDoContrato(java.awt.Frame parent, boolean modal, Cliente c, Servico s, TelaContratosVencer tela) {
     	super(parent, modal);
+    	this.cliente = c;
+    	this.servico = s;
+    	this.telaContratosVencer = tela;
     	getContentPane().setBackground(Color.WHITE);
     	setTitle("Detalhes do Contrato .:.");
     	setIconImage(Toolkit.getDefaultToolkit().getImage(TelaDetalhesDoContrato.class.getResource("/gui/imagens/icone.png")));
@@ -71,12 +92,14 @@ public class TelaDetalhesDoContrato extends javax.swing.JDialog {
         lblNomeDoServio.setBounds(22, 27, 102, 14);
         panel_3.add(lblNomeDoServio);
         
-        textField_5 = new JTextField();
-        textField_5.setColumns(10);
-        textField_5.setBounds(118, 24, 250, 20);
-        panel_3.add(textField_5);
+        txtNomeServico = new JTextField();
+        txtNomeServico.setEditable(false);
+        txtNomeServico.setColumns(10);
+        txtNomeServico.setBounds(118, 24, 250, 20);
+        panel_3.add(txtNomeServico);
         
-        JButton btnRenovar = new JButton("Renovar");
+        btnRenovar = new JButton("Renovar");
+        btnRenovar.addActionListener(this);
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -114,36 +137,28 @@ public class TelaDetalhesDoContrato extends javax.swing.JDialog {
         lblValor.setBounds(22, 62, 86, 14);
         panel_3.add(lblValor);
         
-        textField_6 = new JTextField();
-        textField_6.setBounds(118, 59, 86, 20);
-        panel_3.add(textField_6);
-        textField_6.setColumns(10);
+        txtValor = new JTextField();
+        txtValor.setEditable(false);
+        txtValor.setBounds(118, 59, 86, 20);
+        panel_3.add(txtValor);
+        txtValor.setColumns(10);
         
         JLabel lblRenovaoDeContrato = new JLabel("Renova\u00E7\u00E3o de Contrato");
         lblRenovaoDeContrato.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-        lblRenovaoDeContrato.setBounds(22, 96, 142, 14);
+        lblRenovaoDeContrato.setBounds(22, 106, 142, 14);
         panel_3.add(lblRenovaoDeContrato);
         
-        JLabel lblValor_1 = new JLabel("Novo valor:");
-        lblValor_1.setBounds(22, 131, 86, 14);
-        panel_3.add(lblValor_1);
-        
-        textField_7 = new JTextField();
-        textField_7.setBounds(118, 128, 86, 20);
-        panel_3.add(textField_7);
-        textField_7.setColumns(10);
-        
         JLabel lblPerodo = new JLabel("Per\u00EDodo:");
-        lblPerodo.setBounds(229, 131, 46, 14);
+        lblPerodo.setBounds(22, 131, 46, 14);
         panel_3.add(lblPerodo);
         
-        JComboBox comboBox_1 = new JComboBox();
-        comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"}));
-        comboBox_1.setBounds(285, 128, 46, 20);
-        panel_3.add(comboBox_1);
+        comboBoxMeses = new JComboBox();
+        inicializarComboBox();
+        comboBoxMeses.setBounds(78, 128, 46, 20);
+        panel_3.add(comboBoxMeses);
         
         JLabel lblMeses = new JLabel("Meses");
-        lblMeses.setBounds(341, 131, 46, 14);
+        lblMeses.setBounds(134, 131, 46, 14);
         panel_3.add(lblMeses);
         panel_1.setLayout(null);
         
@@ -151,20 +166,89 @@ public class TelaDetalhesDoContrato extends javax.swing.JDialog {
         lblNome.setBounds(22, 27, 85, 14);
         panel_1.add(lblNome);
         
-        textField = new JTextField();
-        textField.setBounds(117, 24, 249, 20);
-        panel_1.add(textField);
-        textField.setColumns(10);
+        txtNomeCliente = new JTextField();
+        txtNomeCliente.setEditable(false);
+        txtNomeCliente.setBounds(117, 24, 249, 20);
+        panel_1.add(txtNomeCliente);
+        txtNomeCliente.setColumns(10);
         
         JLabel lblCpf = new JLabel("CPF:");
         lblCpf.setBounds(389, 27, 38, 14);
         panel_1.add(lblCpf);
         
-        textField_1 = new JTextField();
-        textField_1.setBounds(437, 24, 161, 20);
-        panel_1.add(textField_1);
-        textField_1.setColumns(10);
+        txtCpf = new JTextField();
+        txtCpf.setEditable(false);
+        txtCpf.setBounds(437, 24, 161, 20);
+        panel_1.add(txtCpf);
+        txtCpf.setColumns(10);
         getContentPane().setLayout(layout);
+        
+        carregarCliente();
+        carregarServico();
 
     }
+    
+    private void carregarCliente(){
+    	
+    	if(this.cliente != null){
+    		txtNomeCliente.setText(cliente.getNome());
+    		txtCpf.setText(cliente.getCpfOrCnpj());
+    	}
+    	else{
+    		JOptionPane.showMessageDialog(null, "Cliente não informado");
+    		setVisible(false);
+    	}
+    }
+    
+    private void carregarServico(){
+    	
+    	if(this.servico != null){
+    		txtNomeServico.setText(servico.getNome());
+    		txtValor.setText(servico.getValor().toString());
+    	}
+    	else{
+    		JOptionPane.showMessageDialog(null, "Serviço não informado");
+    		setVisible(false);
+    	}
+    }
+    
+    private void inicializarComboBox(){
+    	for(int i = 1; i <= 36; i++){
+    		comboBoxMeses.addItem(i);
+    	}
+    }
+
+	public void actionPerformed(ActionEvent evt) {
+		
+		JComponent elemento = (JComponent) evt.getSource();
+		
+		if(elemento.equals(btnRenovar)){
+			if(servico != null && cliente != null){
+				Solicitacao solicitacao = new Solicitacao();
+				solicitacao.setId_cliente(cliente.getId());
+				solicitacao.setId_empresa(Sessao.getEmpresa().getId());
+				solicitacao.setId_servico(servico.getId());
+				Fachada fachada = Fachada.getInstancia();
+				List<Solicitacao> lista = fachada.buscarSolicitacao(solicitacao);
+				if(!lista.isEmpty()){
+					Solicitacao result = lista.get(0);
+					
+					result.setData_inicial(result.getData_final());
+					
+					Calendar calend = Calendar.getInstance();
+					calend.setTime(result.getData_final());
+					calend.set(Calendar.MONTH, calend.get(Calendar.MONTH) + (Integer)comboBoxMeses.getSelectedItem());
+					result.setData_final(calend.getTime());
+					
+					try {
+						fachada.atualizarSolicitacao(result);
+						JOptionPane.showMessageDialog(null, "Contrato Renovado com sucesso.");
+						this.telaContratosVencer.retornar();
+					} catch (EntidadeJaExisteException e) {
+						JOptionPane.showMessageDialog(null, "Erro ao tentar renovar contrato.");
+					}
+				}
+			}
+		}
+	}
 }

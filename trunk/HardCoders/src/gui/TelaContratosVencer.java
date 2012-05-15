@@ -25,6 +25,7 @@ import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -45,6 +46,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 public class TelaContratosVencer extends JPanel implements PropertyChangeListener, ActionListener, KeyListener, MouseListener{
+	
 	private JDateChooser txtDataInicial;
 	private JDateChooser txtDataFinal;
 	private JFormattedTextField txtNomeServico;
@@ -52,6 +54,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 	private JButton btnDetalhar;
 	private Map<Long, Cliente> clientes;
 	private Map<Long, Servico> servicos;
+	private TelaDetalhesDoContrato tdc;
 
 	public TelaContratosVencer() {
 
@@ -198,7 +201,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		scrollPane.setViewportView(table);
-		
+
 		montaTabela(new Solicitacao());
 
 		btnDetalhar = new JButton("Detalhar");
@@ -208,9 +211,9 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 
 		this.setLayout(layout);
 	}
-	
+
 	private void carregarClientes(){
-		
+
 		Fachada fachada = Fachada.getInstancia();
 		Cliente busca = new Cliente();
 		busca.setId_empresa(Sessao.getEmpresa().getId());
@@ -219,9 +222,9 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 			clientes.put(c.getId_pessoa(), c);
 		}
 	}
-	
+
 	private void carregarServicos(Servico busca){
-		
+
 		servicos.clear();
 		Fachada fachada = Fachada.getInstancia();
 		busca.setId_empresa(Sessao.getEmpresa().getId());
@@ -230,7 +233,7 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 			servicos.put(s.getId(), s);
 		}
 	}
-	
+
 	private void montaTabela(Solicitacao s) {
 
 		Fachada fachada = Fachada.getInstancia();
@@ -270,9 +273,9 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		Date dataInicial = txtDataInicial.getDate();
 		Date dataFinal = txtDataFinal.getDate();
 		JDateChooser data = (JDateChooser) evt.getSource();
-		
+
 		if(dataInicial != null && data.equals(txtDataInicial)){
-		
+
 			txtDataFinal.setMinSelectableDate(dataInicial);
 			txtDataFinal.setEnabled(true);
 			txtDataFinal.getDateEditor().setEnabled(false);
@@ -282,22 +285,50 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 			buscar();
 		}
 	}
-	
+
 	private void buscar(){
-		
+
 		Solicitacao s = new Solicitacao();
 		s.setData_inicial(txtDataInicial.getCalendar().getTime());
 		s.setData_final(txtDataFinal.getCalendar().getTime());
 		montaTabela(s);
 	}
-	
+
 	public void actionPerformed(ActionEvent evt) {
-		TelaDetalhesDoContrato tdc = new TelaDetalhesDoContrato(new javax.swing.JFrame(), true);
-		tdc.setVisible(true);
+
+		JComponent elemento = (JComponent) evt.getSource();
+		if(elemento.equals(btnDetalhar)){
+			int linha = table.getSelectedRow();
+			if(linha != -1){
+				
+				Cliente c = (Cliente)table.getModel().getValueAt(linha, 0);
+				Servico s = (Servico)table.getModel().getValueAt(linha, 1);
+				if(c != null){
+					if(s != null){
+						tdc = new TelaDetalhesDoContrato(new javax.swing.JFrame(), true, c, s, this);
+						tdc.setVisible(true);
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Serviço não informado");
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Cliente não informado");
+				}
+			}
+		}
 	}
 	
-	public void keyReleased(KeyEvent evt) {
+	protected void retornar(){
 		
+		buscar();
+		tdc.setVisible(false);
+		tdc = null;
+		System.gc();
+	}
+
+	public void keyReleased(KeyEvent evt) {
+
 		JComponent elemento = (JComponent) evt.getSource();
 		if(elemento.equals(txtNomeServico)){
 			Servico s = new Servico();
@@ -306,9 +337,9 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 			buscar();
 		}
 	}
-	
+
 	private MaskFormatter criarMascara(String formato){
-		
+
 		try {
 			MaskFormatter mascara = new MaskFormatter(formato);
 			return mascara;
@@ -317,11 +348,11 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 			return null;
 		}
 	}
-	
+
 	public void mousePressed(MouseEvent evt) {
 		ajudarCursor((JFormattedTextField)evt.getSource());
 	}
-	
+
 	private void ajudarCursor(JFormattedTextField campo){
 		campo.setCaretPosition(campo.getText().trim().length());
 	}
