@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -291,7 +292,8 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 	}
 	
 	public void actionPerformed(ActionEvent evt) {
-
+		TelaDetalhesDoContrato tdc = new TelaDetalhesDoContrato(new javax.swing.JFrame(), true);
+		tdc.setVisible(true);
 	}
 	
 	public void keyReleased(KeyEvent evt) {
