@@ -351,7 +351,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		try {
 			fachada.atualizarServico(servicoEditado);
 			limparCadastro();
-			JOptionPane.showMessageDialog(null, "Serviço atualizado.");
+			JOptionPane.showMessageDialog(null, "Serviço atualizado com sucesso.");
 			tabbedPane.setSelectedIndex(1);
 		} catch (EntidadeJaExisteException e) {
 			JOptionPane.showMessageDialog(null, "Já existe um serviço com este nome.");
@@ -454,7 +454,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 			pintarBorda(txtValor);
 		}
 		if(!valido){
-			JOptionPane.showMessageDialog(null, "Campos obrigatórios não preenchidos");
+			JOptionPane.showMessageDialog(null, "Campos obrigatórios não preenchidos.");
 		}
 		return valido;
 	}
@@ -501,7 +501,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 				}
 			}
 			if(cont > 1){
-				JOptionPane.showMessageDialog(null, "Formato inválido");
+				JOptionPane.showMessageDialog(null, "Formato inválido.");
 				txtValor.setText("");
 			}
 		}
@@ -521,7 +521,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 					s.setValor(v);
 				}
 				catch(Exception e){
-					JOptionPane.showMessageDialog(null, "A busca por valor deve conter números");
+					JOptionPane.showMessageDialog(null, "A busca por valor deve conter números.");
 					txtBusca.setText("");
 				}
 			}

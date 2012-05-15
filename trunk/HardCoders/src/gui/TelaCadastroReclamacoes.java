@@ -47,7 +47,6 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 	private JFormattedTextField txtTipo;
 	private JFormattedTextField txtBusca;
 	private JTable table;
-	private JButton botaoLimpar;
 	private JButton botaoCadastrar;
 	private JComboBox comboBoxBusca;
 	private JTabbedPane tabbedPane;
@@ -177,11 +176,6 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		lblTipoDeReclamao.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		this.bordaPadrao = txtTipo.getBorder();
-
-		botaoLimpar = new JButton("Limpar");
-		botaoLimpar.addActionListener(this);
-		botaoLimpar.setBounds(243, 81, 89, 23);
-		panel_3.add(botaoLimpar);
 
 		botaoCadastrar = new JButton("Cadastrar");
 		botaoCadastrar.addActionListener(this);
@@ -347,7 +341,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		reclamacaoEdicao.setNome(txtTipo.getText().trim());
 		try {
 			fachada.atualizarReclamacao(reclamacaoEdicao);
-			JOptionPane.showMessageDialog(null, "Tipo de Reclamação atualizado.");
+			JOptionPane.showMessageDialog(null, "Tipo de Reclamação atualizado com sucesso.");
 			limparCadastro();
 			tabbedPane.setSelectedIndex(1);
 		} catch (EntidadeJaExisteException e) {
@@ -369,9 +363,6 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 					atualizar();
 				}
 			}
-		}
-		else if(elemento.equals(this.botaoLimpar)){
-			limparCadastro();
 		}
 		else if(elemento.equals(this.comboBoxBusca)){
 			this.txtBusca.setText("");

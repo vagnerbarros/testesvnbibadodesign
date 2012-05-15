@@ -305,7 +305,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		Fachada fachada = Fachada.getInstancia();
 		try {
 			fachada.atualizarEmpresa(empresaEditada);
-			JOptionPane.showMessageDialog(null, "Empresa atualizada.");
+			JOptionPane.showMessageDialog(null, "Empresa atualizada com sucesso.");
 			limparCadastro();
 			tabbedPane.setSelectedIndex(1);
 		} catch (EntidadeJaExisteException e) {
