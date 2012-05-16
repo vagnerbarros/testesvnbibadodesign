@@ -694,6 +694,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso.");
 			limparCadastro();
 			idPessoaAtualizar = null;
+			tabbedPane.setSelectedIndex(1);
 		} catch (EntidadeJaExisteException e) {
 			JOptionPane.showMessageDialog(null, "CPF ou Login pertence a outro funcionário.");
 		}
