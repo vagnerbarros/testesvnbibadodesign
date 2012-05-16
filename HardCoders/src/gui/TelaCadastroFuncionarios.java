@@ -678,12 +678,13 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		String cpf = this.txtCpf.getText().trim();
 		String cargo = (String)this.comboBoxCargo.getSelectedItem();
 		String login = this.txtLogin.getText().trim();
+		String senha = new String(txtSenha.getPassword());
 
 		editado.setNome(nome);
 		editado.setCpf(cpf);
 		editado.setCargo(cargo);
 		editado.setLogin(login);
-		editado.setSenha(new String(txtSenha.getPassword().toString()));
+		editado.setSenha(senha);
 
 		try {
 			fachada.atualizarFuncionario(editado);
