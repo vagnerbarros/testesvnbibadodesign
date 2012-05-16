@@ -4,6 +4,9 @@ public class Constantes {
 	
 	//quantidade de clicks do mouse para ação
 	public static int QUANT_CLICKS = 2;
+	
+	//quantidade de itens listados na busca JList
+	public static int QUANT_ITENS_BUSCA = 2;
 
 	// cargos possíveis para funcionarios.
 	public static String GERENTE = "Gerente";

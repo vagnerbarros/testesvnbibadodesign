@@ -105,15 +105,15 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		panel_3.setBorder(new TitledBorder(null, "Servi\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setLayout(null);
 		listaServico = new JList(this.modeloServico);
+		listaServico.setVisibleRowCount(2);
 		listaServico.setBackground(SystemColor.menu);
 		listaServico.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		listaServico.addMouseListener(this);
 		listaServico.addKeyListener(this);
 		listaServico.setVisible(false);
-		listaServico.setVisibleRowCount(3);
 		listaServico.setLayoutOrientation(JList.VERTICAL);
 		listaServico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaServico.setBounds(122, 41, 182, 41);
+		listaServico.setBounds(122, 41, 182, 33);
 		panel_3.add(listaServico);
 
 		modeloCpfOrCnpj = new DefaultListModel();
@@ -207,15 +207,15 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 
 		panel_2.setLayout(null);
 		listaCpfOrCnpj = new JList(this.modeloCpfOrCnpj);
+		listaCpfOrCnpj.setVisibleRowCount(2);
 		listaCpfOrCnpj.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listaCpfOrCnpj.setBackground(SystemColor.menu);
 		listaCpfOrCnpj.addMouseListener(this);
 		listaCpfOrCnpj.addKeyListener(this);
 		listaCpfOrCnpj.setVisible(false);
-		listaCpfOrCnpj.setVisibleRowCount(3);
 		listaCpfOrCnpj.setLayoutOrientation(JList.VERTICAL);
 		listaCpfOrCnpj.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaCpfOrCnpj.setBounds(123, 53, 180, 44);
+		listaCpfOrCnpj.setBounds(123, 53, 180, 33);
 		panel_2.add(this.listaCpfOrCnpj);
 
 		lblNome = new JLabel("Nome do Cliente:");
@@ -467,7 +467,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		listaClientes = fachada.buscaLikeCliente(c);
 		if(!listaClientes.isEmpty()){
 			modeloCpfOrCnpj.removeAllElements();
-			for(int i = 0; i < listaClientes.size(); i++){
+			for(int i = 0; i < listaClientes.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
 				modeloCpfOrCnpj.add(i, listaClientes.get(i).getCpfOrCnpj());
 			}
 			listaCpfOrCnpj.setVisible(true);
@@ -483,7 +483,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		servicos = fachada.buscaLikeServico(s);
 		if(!servicos.isEmpty()){
 			modeloServico.removeAllElements();
-			for(int i = 0; i < servicos.size(); i++){
+			for(int i = 0; i < servicos.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
 				modeloServico.add(i, servicos.get(i).getNome());
 			}
 			listaServico.setVisible(true);
