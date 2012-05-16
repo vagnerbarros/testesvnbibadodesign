@@ -677,10 +677,13 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		String nome = this.txtNome.getText().trim();
 		String cpf = this.txtCpf.getText().trim();
 		String cargo = (String)this.comboBoxCargo.getSelectedItem();
+		String login = this.txtLogin.getText().trim();
 
 		editado.setNome(nome);
 		editado.setCpf(cpf);
 		editado.setCargo(cargo);
+		editado.setLogin(login);
+		editado.setSenha(new String(txtSenha.getPassword().toString()));
 
 		try {
 			fachada.atualizarFuncionario(editado);
@@ -691,7 +694,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 			limparCadastro();
 			idPessoaAtualizar = null;
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, "CPF pertence a outro funcionário.");
+			JOptionPane.showMessageDialog(null, "CPF ou Login pertence a outro funcionário.");
 		}
 	}
 
@@ -812,7 +815,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 				}
 			}
 			else if(btnCadastro.getText().equals("Atualizar")){
-				if(camposPreenchidos() && camposValidos()){
+				if(camposPreenchidos() && camposValidos() && senhaConfirmacaoIguais()){
 					atualizar();
 				}
 			}
