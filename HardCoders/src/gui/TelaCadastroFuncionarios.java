@@ -684,15 +684,15 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		try {
 			fachada.atualizarFuncionario(editado);
+			atualizarEnderecos();
+			atualizarTelefones();
+			
+			JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso.");
+			limparCadastro();
+			idPessoaAtualizar = null;
 		} catch (EntidadeJaExisteException e) {
 			JOptionPane.showMessageDialog(null, "CPF pertence a outro funcionário.");
 		}
-		atualizarEnderecos();
-		atualizarTelefones();
-
-		JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso.");
-		limparCadastro();
-		idPessoaAtualizar = null;
 	}
 
 	private void atualizarTelefones() {
@@ -884,6 +884,13 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		txtNome.setText(f.getNome());
 		txtCpf.setText(f.getCpf());
+		String cargo = f.getCargo();
+		if(cargo.equals(Constantes.FUNCIONARIO)){
+			comboBoxCargo.setSelectedIndex(0);
+		}
+		else if(cargo.equals(Constantes.GERENTE)){
+			comboBoxCargo.setSelectedIndex(1);
+		}
 		txtLogin.setText(f.getLogin());
 		txtSenha.setText(f.getSenha());
 		txtConfSenha.setText(f.getSenha());
