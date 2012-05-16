@@ -294,7 +294,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 					limparCliente();
 					limparServico();
 				} catch (EntidadeJaExisteException e) {
-					JOptionPane.showMessageDialog(null, "Este Cliente já possui solicitação deste servico");
+					JOptionPane.showMessageDialog(null, "Este cliente já possui solicitação deste serviço");
 				}
 			}
 			else{

@@ -242,7 +242,7 @@ public class TelaDetalhesDoContrato extends javax.swing.JDialog implements Actio
 					
 					try {
 						fachada.atualizarSolicitacao(result);
-						JOptionPane.showMessageDialog(null, "Contrato Renovado com sucesso.");
+						JOptionPane.showMessageDialog(null, "Contrato renovado com sucesso.");
 						this.telaContratosVencer.retornar();
 					} catch (EntidadeJaExisteException e) {
 						JOptionPane.showMessageDialog(null, "Erro ao tentar renovar contrato.");
