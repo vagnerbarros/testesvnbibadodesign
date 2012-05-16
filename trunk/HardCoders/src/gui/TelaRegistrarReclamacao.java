@@ -200,25 +200,27 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		listaServico = new JList(modeloServico);
 		listaServico.addKeyListener(this);
 		listaServico.addMouseListener(this);
-		listaServico.setBounds(128, 53, 142, 26);
+		listaServico.setBounds(128, 53, 142, 33);
 		inicializarListas(listaServico);
 		panel_2.add(listaServico);
 		
 		modeloCliente = new DefaultListModel();
 		listaCliente = new JList(modeloCliente);
+		listaCliente.setVisibleRowCount(2);
 		listaCliente.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		listaCliente.setBackground(SystemColor.menu);
 		listaCliente.addKeyListener(this);
 		listaCliente.addMouseListener(this);
-		listaCliente.setBounds(txtCpfOrCnpj.getX(), txtCpfOrCnpj.getY() + txtCpfOrCnpj.getHeight(), txtCpfOrCnpj.getWidth(), 50);
+		listaCliente.setBounds(txtCpfOrCnpj.getX(), txtCpfOrCnpj.getY() + txtCpfOrCnpj.getHeight(), 151, 33);
 		inicializarListas(listaCliente);
 		panel_1.add(listaCliente);
 		
 		modeloReclamacao = new DefaultListModel();
 		listaReclamacao = new JList(modeloReclamacao);
+		listaReclamacao.setVisibleRowCount(2);
 		listaReclamacao.addKeyListener(this);
 		listaReclamacao.addMouseListener(this);
-		listaReclamacao.setBounds(128, 54, 142, 18);
+		listaReclamacao.setBounds(128, 54, 142, 33);
 		inicializarListas(listaReclamacao);
 		panel_3.add(listaReclamacao);
 		
@@ -282,7 +284,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		lista.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lista.setLayoutOrientation(JList.VERTICAL);
-		lista.setVisibleRowCount(3);
+		lista.setVisibleRowCount(2);
 	}
 
 	public void actionPerformed(ActionEvent evt) {
@@ -550,7 +552,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		servicos = fachada.buscaLikeServico(s);
 		if(!servicos.isEmpty()){
 			modeloServico.removeAllElements();
-			for(int i = 0; i < servicos.size(); i++){
+			for(int i = 0; i < servicos.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
 				modeloServico.add(i, servicos.get(i).getNome());
 			}
 			listaServico.setVisible(true);
@@ -566,7 +568,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		clientes = fachada.buscaLikeCliente(c);
 		if(!clientes.isEmpty()){
 			modeloCliente.removeAllElements();
-			for(int i = 0; i < clientes.size(); i++){
+			for(int i = 0; i < clientes.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
 				modeloCliente.add(i, clientes.get(i).getCpfOrCnpj());
 			}
 			listaCliente.setVisible(true);
@@ -582,7 +584,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		reclamacoes = fachada.buscaLikeReclamacao(r);
 		if(!reclamacoes.isEmpty()){
 			modeloReclamacao.removeAllElements();
-			for(int i = 0; i < reclamacoes.size(); i++){
+			for(int i = 0; i < reclamacoes.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
 				modeloReclamacao.add(i, reclamacoes.get(i).getCodigo());
 			}
 			listaReclamacao.setVisible(true);
