@@ -264,20 +264,20 @@ public class TelaPrincipal extends JFrame {
 		
 		String cargo = Sessao.getFuncionario().getCargo();
 		if(cargo.equals(Constantes.GERENTE)){
-			this.menuCadClientes.setEnabled(true);
-			this.menuCadEmpresas.setEnabled(true);
-			this.menuCadFuncionarios.setEnabled(true);
-			this.menuCadReclamacoes.setEnabled(true);
-			this.menuCadServicos.setEnabled(true);
-			this.menuDeslogar.setEnabled(true);
+			this.menuCadClientes.setVisible(true);
+			this.menuCadEmpresas.setVisible(true);
+			this.menuCadFuncionarios.setVisible(true);
+			this.menuCadReclamacoes.setVisible(true);
+			this.menuCadServicos.setVisible(true);
+			this.menuDeslogar.setVisible(true);
 		}
 		else if(cargo.equals(Constantes.FUNCIONARIO)){
-			this.menuCadClientes.setEnabled(true);
-			this.menuCadEmpresas.setEnabled(false);
-			this.menuCadFuncionarios.setEnabled(false);
-			this.menuCadReclamacoes.setEnabled(false);
-			this.menuCadServicos.setEnabled(false);
-			this.menuDeslogar.setEnabled(true);
+			this.menuCadClientes.setVisible(true);
+			this.menuCadEmpresas.setVisible(false);
+			this.menuCadFuncionarios.setVisible(false);
+			this.menuCadReclamacoes.setVisible(false);
+			this.menuCadServicos.setVisible(false);
+			this.menuDeslogar.setVisible(true);
 		}
 	}
 }
