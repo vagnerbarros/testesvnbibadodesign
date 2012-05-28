@@ -152,12 +152,12 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		tabbedPane.addTab("Cadastro", null, panel, null);
 
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(229, 23, 43, 14);
+		lblNome.setBounds(20, 20, 43, 14);
 		lblNome.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(27, 23, 24, 15);
+		lblCpf.setBounds(442, 20, 24, 15);
 		lblCpf.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
@@ -168,7 +168,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		mascaraNome.setInvalidCharacters("1234567890!@#$%¨&*()\"'+=-_[]{}|?><");
 		mascaraNome.setPlaceholder("");
 		txtNome = new JFormattedTextField(mascaraNome);
-		txtNome.setBounds(278, 21, 335, 20);
+		txtNome.setBounds(73, 18, 359, 20);
 		txtNome.addMouseListener(this);
 		txtNome.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtNome.setColumns(10);
@@ -183,7 +183,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 		MaskFormatter mascaraCpf = criarMascara("###.###.###-##");
 		mascaraCpf.setPlaceholder("");
 		txtCpf = new JFormattedTextField(mascaraCpf);
-		txtCpf.setBounds(81, 21, 138, 20);
+		txtCpf.setBounds(476, 17, 138, 20);
 		txtCpf.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		txtCpf.setColumns(10);
 

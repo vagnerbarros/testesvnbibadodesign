@@ -26,6 +26,7 @@ import util.Sessao;
 import entidades.Empresa;
 import entidades.Funcionario;
 import fachada.Fachada;
+import javax.swing.SwingConstants;
 
 public class TelaLogin extends JDialog implements ActionListener, KeyListener, MouseListener{
 	
@@ -93,6 +94,7 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener, M
 		mascaraLogin.setPlaceholder("");
 		mascaraLogin.setInvalidCharacters(" !@#$%¨&*()\"'+=-_[]{}|?");
 		login_txt = new JFormattedTextField(mascaraLogin);
+		login_txt.setHorizontalAlignment(SwingConstants.LEFT);
 		login_txt.setFocusLostBehavior(JFormattedTextField.PERSIST);
 		login_txt.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		login_txt.addActionListener(this);
@@ -103,6 +105,7 @@ public class TelaLogin extends JDialog implements ActionListener, KeyListener, M
 		login_txt.setColumns(10);
 
 		senha_txt = new JPasswordField();
+		senha_txt.setHorizontalAlignment(SwingConstants.LEFT);
 		senha_txt.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		senha_txt.addKeyListener(this);
 		senha_txt.setBounds(164, 136, 165, 28);

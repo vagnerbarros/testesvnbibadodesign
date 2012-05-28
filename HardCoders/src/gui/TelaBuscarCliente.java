@@ -47,7 +47,6 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 	private JPanel panel_1;
 	private JComboBox comboBoxBusca;
 	private JButton btnConfirmar;
-	private JButton btnCancelar;
 	private JPanel tela;
 
 	public TelaBuscarCliente(java.awt.Frame parent, boolean modal, JPanel tela){
@@ -114,10 +113,6 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		this.montaTabelaCliente(new Cliente());
-
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(this);
 		
 		JPanel panel = new JPanel();
 		
@@ -169,9 +164,7 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 					.addGap(10)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 695, GroupLayout.PREFERRED_SIZE))
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(520)
-					.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addGap(7)
+					.addGap(616)
 					.addComponent(btnConfirmar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_contentPanel.setVerticalGroup(
@@ -183,9 +176,7 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 					.addGap(11)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
 					.addGap(8)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCancelar)
-						.addComponent(btnConfirmar)))
+					.addComponent(btnConfirmar))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 
@@ -354,9 +345,7 @@ public class TelaBuscarCliente extends JDialog implements ActionListener, KeyLis
 				this.setVisible(false);
 			}
 		}
-		else if(elemento.equals(btnCancelar)){
-			this.setVisible(false);
-		}
+		
 	}
 	
 	private Long idClienteSelecionado(int linha){

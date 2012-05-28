@@ -120,6 +120,39 @@ public class TelaPrincipal extends JFrame {
 
 		JMenuBar BarraMenu = new JMenuBar();
 		setJMenuBar(BarraMenu);
+		
+		JMenu mnSair = new JMenu("Sistema");
+		mnSair.setForeground(Color.BLACK);
+		mnSair.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
+		BarraMenu.add(mnSair);
+		
+		menuDeslogar = new JMenuItem("  Logout       ");
+		menuDeslogar.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/logout.png")));
+		menuDeslogar.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		menuDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorGui.fecharTodas();
+				Sessao.deslogar();
+				// verificar se pode fazer isso sem prejudicar o sistema
+				setVisible(false);
+				TelaLogin login = new TelaLogin();
+				login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				login.setVisible(true);
+			}
+		});
+		
+		JMenuItem mntmSobre = new JMenuItem("  Sobre       ");
+		mntmSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaSobre ts = new TelaSobre(new javax.swing.JFrame(), true);
+				ts.setVisible(true);
+			}
+		});
+		mntmSobre.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/icoSobre.png")));
+		mntmSobre.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		mntmSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+		mnSair.add(mntmSobre);
+		mnSair.add(menuDeslogar);
 
 		JMenu MenuCadastro = new JMenu("Cadastro");
 		MenuCadastro.setForeground(Color.BLACK);
@@ -135,7 +168,7 @@ public class TelaPrincipal extends JFrame {
 
 		menuCadClientes.setBackground(Color.WHITE);
 		menuCadClientes.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/clienteIco.png")));
-		menuCadClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+		menuCadClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
 		menuCadClientes.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		MenuCadastro.add(menuCadClientes);
 
@@ -147,7 +180,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		menuCadFuncionarios.setBackground(Color.WHITE);
 		menuCadFuncionarios.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/FuncionariosIco.png")));
-		menuCadFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+		menuCadFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
 		menuCadFuncionarios.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		MenuCadastro.add(menuCadFuncionarios);
 
@@ -163,7 +196,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		menuCadServicos.setBackground(Color.WHITE);
 		menuCadServicos.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		menuCadServicos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+		menuCadServicos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
 		MenuCadastro.add(menuCadServicos);
 
 		menuCadEmpresas = new JMenuItem("    Empresas   ");
@@ -175,7 +208,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		menuCadEmpresas.setBackground(Color.WHITE);
 		menuCadEmpresas.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		menuCadEmpresas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
+		menuCadEmpresas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
 		MenuCadastro.add(menuCadEmpresas);
 
 		JSeparator separator_1 = new JSeparator();
@@ -190,7 +223,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		menuCadReclamacoes.setBackground(Color.WHITE);
 		menuCadReclamacoes.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		menuCadReclamacoes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
+		menuCadReclamacoes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
 		MenuCadastro.add(menuCadReclamacoes);
 
 		JMenu mnContratos = new JMenu("Contratos");
@@ -206,6 +239,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mntmContratosVencer.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/contratoIco.png")));
 		mntmContratosVencer.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		mntmContratosVencer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
 		mnContratos.add(mntmContratosVencer);
 
 		JMenu mnVendas = new JMenu("Vendas");
@@ -221,6 +255,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mntmRealizarVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/dinheiroIco.png")));
 		mntmRealizarVenda.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		mntmRealizarVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
 		mnVendas.add(mntmRealizarVenda);
 
 		JMenu mnReclamaes = new JMenu("Reclama\u00E7\u00F5es");
@@ -236,26 +271,8 @@ public class TelaPrincipal extends JFrame {
 		});
 		mntmRegistrarReclamao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/gui/imagens/reclamacaoIco.png")));
 		mntmRegistrarReclamao.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		mntmRegistrarReclamao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
 		mnReclamaes.add(mntmRegistrarReclamao);
-		
-		JMenu mnSair = new JMenu("Sair");
-		mnSair.setForeground(Color.BLACK);
-		mnSair.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
-		BarraMenu.add(mnSair);
-		
-		menuDeslogar = new JMenuItem("Deslogar");
-		menuDeslogar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				controladorGui.fecharTodas();
-				Sessao.deslogar();
-				// verificar se pode fazer isso sem prejudicar o sistema
-				setVisible(false);
-				TelaLogin login = new TelaLogin();
-				login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				login.setVisible(true);
-			}
-		});
-		mnSair.add(menuDeslogar);
 		
 		verificarPerfil();
 	}
