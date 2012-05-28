@@ -16,12 +16,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
@@ -37,7 +39,6 @@ import entidades.Reclamacao;
 import entidades.Servico;
 import exception.EntidadeJaExisteException;
 import fachada.Fachada;
-import javax.swing.JButton;
 
 public class TelaRegistrarReclamacao extends JPanel implements ActionListener, MouseListener, KeyListener{
 	
@@ -54,6 +55,9 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 	private JList listaServico;
 	private JList listaCliente;
 	private JList listaReclamacao;
+	private JScrollPane scrollServico;
+	private JScrollPane scrollCliente;
+	private JScrollPane scrollReclamacao;
 	private DefaultListModel modeloServico;
 	private DefaultListModel modeloCliente;
 	private DefaultListModel modeloReclamacao;
@@ -200,29 +204,36 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		listaServico = new JList(modeloServico);
 		listaServico.addKeyListener(this);
 		listaServico.addMouseListener(this);
-		listaServico.setBounds(128, 53, 142, 33);
 		inicializarListas(listaServico);
-		panel_2.add(listaServico);
+		
+		scrollServico = new JScrollPane(listaServico);
+		scrollServico.setBounds(128, 53, 142, 33);
+		scrollServico.setVisible(false);
+		panel_2.add(scrollServico);
 		
 		modeloCliente = new DefaultListModel();
 		listaCliente = new JList(modeloCliente);
-		listaCliente.setVisibleRowCount(2);
 		listaCliente.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		listaCliente.setBackground(SystemColor.menu);
 		listaCliente.addKeyListener(this);
 		listaCliente.addMouseListener(this);
-		listaCliente.setBounds(txtCpfOrCnpj.getX(), txtCpfOrCnpj.getY() + txtCpfOrCnpj.getHeight(), 151, 33);
 		inicializarListas(listaCliente);
-		panel_1.add(listaCliente);
+		
+		scrollCliente = new JScrollPane(listaCliente);
+		scrollCliente.setBounds(txtCpfOrCnpj.getX(), txtCpfOrCnpj.getY() + txtCpfOrCnpj.getHeight(), 151, 33);
+		scrollCliente.setVisible(false);
+		panel_1.add(scrollCliente);
 		
 		modeloReclamacao = new DefaultListModel();
 		listaReclamacao = new JList(modeloReclamacao);
-		listaReclamacao.setVisibleRowCount(2);
 		listaReclamacao.addKeyListener(this);
 		listaReclamacao.addMouseListener(this);
-		listaReclamacao.setBounds(128, 54, 142, 33);
 		inicializarListas(listaReclamacao);
-		panel_3.add(listaReclamacao);
+		
+		scrollReclamacao = new JScrollPane(listaReclamacao);
+		scrollReclamacao.setBounds(128, 54, 142, 33);
+		scrollReclamacao.setVisible(false);
+		panel_3.add(scrollReclamacao);
 		
 		lupaReclamacao = new JLabel("");
 		lupaReclamacao.addMouseListener(this);
@@ -279,12 +290,10 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 	
 	private void inicializarListas(JList lista){
 		
-		lista.setVisible(false);
 		lista.setBackground(SystemColor.menu);
 		lista.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lista.setLayoutOrientation(JList.VERTICAL);
-		lista.setVisibleRowCount(2);
 	}
 
 	public void actionPerformed(ActionEvent evt) {
@@ -294,12 +303,14 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 			lblCpfCnpj.setText("CPF:");
 			limparCliente();
 			listaServico.setVisible(false);
+			scrollServico.setVisible(false);
 			lblNome.setText("Nome:");
 		}
 		else if(elemento.equals(rdbtnPessoaJurdica)){
 			lblCpfCnpj.setText("CNPJ:");
 			limparCliente();
 			listaServico.setVisible(false);
+			scrollServico.setVisible(false);
 			lblNome.setText("Razão Social:");
 		}
 		else if(elemento.equals(btnConfirmar)){
@@ -342,6 +353,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		txtCpfOrCnpj.setText("");
 		txtCpfOrCnpj.setEditable(true);
 		listaCliente.setVisible(false);
+		scrollCliente.setVisible(false);
 	}
 	
 	private void limparServico(){
@@ -349,6 +361,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		txtServico.setText("");
 		txtServico.setEditable(true);
 		listaServico.setVisible(false);
+		scrollServico.setVisible(false);
 	}
 	
 	private void limparReclamacao(){
@@ -356,6 +369,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		txtCodigo.setText("");
 		txtCodigo.setEditable(true);
 		listaReclamacao.setVisible(false);
+		scrollReclamacao.setVisible(false);
 	}
 
 	public void mouseClicked(MouseEvent evt) {
@@ -428,6 +442,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 				}
 				else{
 					this.listaCliente.setVisible(false);
+					scrollCliente.setVisible(false);
 				}
 			}
 		}
@@ -446,6 +461,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 				}
 				else{
 					this.listaReclamacao.setVisible(false);
+					scrollReclamacao.setVisible(false);
 				}
 			}
 		}
@@ -464,6 +480,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 				}
 				else{
 					listaServico.setVisible(false);
+					scrollServico.setVisible(false);
 				}
 			}
 		}
@@ -498,6 +515,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 	private void acaoSelecionarCpfCnpj(){
 		clienteSelecionado = clientes.get(listaCliente.getSelectedIndex());
 		listaCliente.setVisible(false);
+		scrollCliente.setVisible(false);
 		txtCpfOrCnpj.setEditable(false);
 		txtCpfOrCnpj.setText(clienteSelecionado.getCpfOrCnpj());
 		txtNome.setText(clienteSelecionado.getNome());
@@ -506,6 +524,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 	private void acaoSelecionarServico(){
 		servicoSelecionado = servicos.get(listaServico.getSelectedIndex());
 		listaServico.setVisible(false);
+		scrollServico.setVisible(false);
 		txtServico.setEditable(false);
 		txtServico.setText(servicoSelecionado.getNome());
 	}
@@ -513,6 +532,7 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 	private void acaoSelecionarReclamacao(){
 		reclamacaoSelecionada = reclamacoes.get(listaReclamacao.getSelectedIndex());
 		listaReclamacao.setVisible(false);
+		scrollReclamacao.setVisible(false);
 		txtCodigo.setEditable(false);
 		txtCodigo.setText(reclamacaoSelecionada.getCodigo());
 	}
@@ -552,13 +572,15 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		servicos = fachada.buscaLikeServico(s);
 		if(!servicos.isEmpty()){
 			modeloServico.removeAllElements();
-			for(int i = 0; i < servicos.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
+			for(int i = 0; i < servicos.size(); i++){
 				modeloServico.add(i, servicos.get(i).getNome());
 			}
 			listaServico.setVisible(true);
+			scrollServico.setVisible(true);
 		}
 		else{
 			listaServico.setVisible(false);
+			scrollServico.setVisible(false);
 		}
 	}
 	
@@ -568,13 +590,15 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		clientes = fachada.buscaLikeCliente(c);
 		if(!clientes.isEmpty()){
 			modeloCliente.removeAllElements();
-			for(int i = 0; i < clientes.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
+			for(int i = 0; i < clientes.size(); i++){
 				modeloCliente.add(i, clientes.get(i).getCpfOrCnpj());
 			}
 			listaCliente.setVisible(true);
+			scrollCliente.setVisible(true);
 		}
 		else{
 			listaCliente.setVisible(false);
+			scrollCliente.setVisible(false);
 		}
 	}
 	
@@ -584,13 +608,15 @@ public class TelaRegistrarReclamacao extends JPanel implements ActionListener, M
 		reclamacoes = fachada.buscaLikeReclamacao(r);
 		if(!reclamacoes.isEmpty()){
 			modeloReclamacao.removeAllElements();
-			for(int i = 0; i < reclamacoes.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
+			for(int i = 0; i < reclamacoes.size(); i++){
 				modeloReclamacao.add(i, reclamacoes.get(i).getCodigo());
 			}
 			listaReclamacao.setVisible(true);
+			scrollReclamacao.setVisible(true);
 		}
 		else{
 			listaReclamacao.setVisible(false);
+			scrollReclamacao.setVisible(false);
 		}
 	}
 	

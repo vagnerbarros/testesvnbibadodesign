@@ -24,6 +24,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
@@ -64,6 +65,8 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 	private Servico servicoSelecionado = null;
 	private Cliente clienteSelecionado = null;
 	private JComboBox comboBoxMeses;
+	private JScrollPane scrollServico;
+	private JScrollPane scrollCpf;
 
 	public TelaRealizarVenda() {
 		setBackground(Color.WHITE);
@@ -105,16 +108,19 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		panel_3.setBorder(new TitledBorder(null, "Servi\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setLayout(null);
 		listaServico = new JList(this.modeloServico);
-		listaServico.setVisibleRowCount(2);
 		listaServico.setBackground(SystemColor.menu);
+		listaServico.setVisible(false);
 		listaServico.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		listaServico.addMouseListener(this);
 		listaServico.addKeyListener(this);
-		listaServico.setVisible(false);
 		listaServico.setLayoutOrientation(JList.VERTICAL);
 		listaServico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaServico.setBounds(122, 41, 182, 33);
-		panel_3.add(listaServico);
+		
+		
+		scrollServico = new JScrollPane(listaServico);
+		scrollServico.setBounds(122, 41, 182, 33);
+		scrollServico.setVisible(false);
+		panel_3.add(scrollServico);
 
 		modeloCpfOrCnpj = new DefaultListModel();
 
@@ -215,8 +221,11 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		listaCpfOrCnpj.setVisible(false);
 		listaCpfOrCnpj.setLayoutOrientation(JList.VERTICAL);
 		listaCpfOrCnpj.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaCpfOrCnpj.setBounds(123, 53, 180, 33);
-		panel_2.add(this.listaCpfOrCnpj);
+		
+		scrollCpf = new JScrollPane(listaCpfOrCnpj);
+		scrollCpf.setVisible(false);
+		scrollCpf.setBounds(123, 53, 180, 33);
+		panel_2.add(scrollCpf);
 
 		lblNome = new JLabel("Nome do Cliente:");
 		lblNome.setBounds(20, 67, 93, 14);
@@ -269,11 +278,13 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		if(elemento.equals(rdbtnCnpj)){
 			limparCliente();
 			listaServico.setVisible(false);
+			scrollServico.setVisible(false);
 			lblNome.setText("Razão Social:");
 		}
 		else if(elemento.equals(rdbtnCpf)){
 			limparCliente();
 			listaServico.setVisible(false);
+			scrollServico.setVisible(false);
 			lblNome.setText("Nome do Cliente:");
 		}
 		else if(elemento.equals(btnConfirmar)){
@@ -309,6 +320,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		txtCpfOrCnpj.setText("");
 		txtCpfOrCnpj.setEditable(true);
 		listaCpfOrCnpj.setVisible(false);
+		scrollCpf.setVisible(false);
 	}
 	
 	private void limparServico(){
@@ -317,6 +329,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		txtValor.setText("");
 		txtServico.setEditable(true);
 		listaServico.setVisible(false);
+		scrollServico.setVisible(false);
 	}
 
 	public boolean camposPreenchidos(){
@@ -355,6 +368,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 				}
 				else{
 					this.listaCpfOrCnpj.setVisible(false);
+					scrollCpf.setVisible(false);
 				}
 			}
 		}
@@ -373,6 +387,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 				}
 				else{
 					listaServico.setVisible(false);
+					scrollServico.setVisible(false);
 				}
 			}
 		}
@@ -398,6 +413,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 	private void acaoSelecionarCpfCnpj(){
 		clienteSelecionado = listaClientes.get(listaCpfOrCnpj.getSelectedIndex());
 		listaCpfOrCnpj.setVisible(false);
+		scrollCpf.setVisible(false);
 		txtCpfOrCnpj.setEditable(false);
 		txtCpfOrCnpj.setText(clienteSelecionado.getCpfOrCnpj());
 		txtNome.setText(clienteSelecionado.getNome());
@@ -406,6 +422,7 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 	private void acaoSelecionarServico(){
 		servicoSelecionado = servicos.get(listaServico.getSelectedIndex());
 		listaServico.setVisible(false);
+		scrollServico.setVisible(false);
 		txtServico.setEditable(false);
 		txtServico.setText(servicoSelecionado.getNome());
 		txtValor.setText(servicoSelecionado.getValor().toString());
@@ -467,13 +484,15 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		listaClientes = fachada.buscaLikeCliente(c);
 		if(!listaClientes.isEmpty()){
 			modeloCpfOrCnpj.removeAllElements();
-			for(int i = 0; i < listaClientes.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
+			for(int i = 0; i < listaClientes.size(); i++){
 				modeloCpfOrCnpj.add(i, listaClientes.get(i).getCpfOrCnpj());
 			}
+			scrollCpf.setVisible(true);
 			listaCpfOrCnpj.setVisible(true);
 		}
 		else{
 			listaCpfOrCnpj.setVisible(false);
+			scrollCpf.setVisible(false);
 		}
 	}
 
@@ -483,13 +502,15 @@ public class TelaRealizarVenda extends JPanel implements ActionListener, KeyList
 		servicos = fachada.buscaLikeServico(s);
 		if(!servicos.isEmpty()){
 			modeloServico.removeAllElements();
-			for(int i = 0; i < servicos.size() && i < Constantes.QUANT_ITENS_BUSCA; i++){
+			for(int i = 0; i < servicos.size(); i++){
 				modeloServico.add(i, servicos.get(i).getNome());
 			}
 			listaServico.setVisible(true);
+			scrollServico.setVisible(true);
 		}
 		else{
 			listaServico.setVisible(false);
+			scrollServico.setVisible(false);
 		}
 	}
 	
