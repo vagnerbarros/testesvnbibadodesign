@@ -301,6 +301,7 @@ public class TelaCadastroServicos extends JPanel implements ActionListener, Chan
 		panel_1.setLayout(gl_panel_1);
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getTableHeader().setReorderingAllowed(false);
 
 		this.montaTabela(new Servico());
 		

@@ -485,6 +485,7 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		table.getTableHeader().setReorderingAllowed(false);
 		this.montaTabela(new Funcionario());
 
 		this.setLayout(layout);

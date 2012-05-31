@@ -285,6 +285,7 @@ public class TelaCadastroEmpresa extends JPanel implements ActionListener, KeyLi
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getTableHeader().setReorderingAllowed(false);
 		this.montaTabela(new Empresa());
 
 		this.setLayout(layout);

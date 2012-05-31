@@ -297,6 +297,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		panel_1.setLayout(gl_panel_1);
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getTableHeader().setReorderingAllowed(false);
 
 		this.montaTabela(new Reclamacao());
 
