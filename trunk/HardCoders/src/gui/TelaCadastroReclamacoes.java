@@ -292,6 +292,7 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 				return canEdit [columnIndex];
 			}
 		});
+		
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 
@@ -341,11 +342,11 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		reclamacaoEdicao.setNome(txtTipo.getText().trim());
 		try {
 			fachada.atualizarReclamacao(reclamacaoEdicao);
-			JOptionPane.showMessageDialog(null, "Tipo de Reclamação atualizado com sucesso.");
+			JOptionPane.showMessageDialog(null, "Tipo de reclamação atualizado com sucesso.");
 			limparCadastro();
 			tabbedPane.setSelectedIndex(1);
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, "Tipo de Reclamação já existe.");
+			JOptionPane.showMessageDialog(null, "Tipo de reclamação já existe.");
 		}
 	}
 
@@ -414,10 +415,10 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		Fachada fachada = Fachada.getInstancia();
 		try {
 			fachada.cadastrarReclamacao(r);
-			JOptionPane.showMessageDialog(null, "Tipo de Reclamação cadastrada com sucesso.");
+			JOptionPane.showMessageDialog(null, "Tipo de reclamação cadastrada com sucesso.");
 			limparCadastro();
 		} catch (EntidadeJaExisteException e) {
-			JOptionPane.showMessageDialog(null, "Tipo de Reclamação já existe.");
+			JOptionPane.showMessageDialog(null, "Tipo de reclamação já existe.");
 		}
 	}
 

@@ -908,14 +908,14 @@ public class TelaCadastroFuncionarios extends JPanel implements ActionListener, 
 
 		if (conf.length != pw.length) {
 			iguais = false;
-			JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem.");
+			JOptionPane.showMessageDialog(null, "As senhas não correspondem.");
 		} else {
 			if(Arrays.equals(conf, pw)){
 				iguais = true;
 			}
 			else{
 				iguais = false;
-				JOptionPane.showMessageDialog(null, "Senha e Confirmação não conferem.");
+				JOptionPane.showMessageDialog(null, "As senhas não correspondem.");
 			}
 		}
 		return iguais;
