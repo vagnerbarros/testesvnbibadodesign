@@ -201,6 +201,8 @@ public class TelaContratosVencer extends JPanel implements PropertyChangeListene
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		scrollPane.setViewportView(table);
+		
+		table.getTableHeader().setReorderingAllowed(false);
 
 		montaTabela(new Solicitacao());
 

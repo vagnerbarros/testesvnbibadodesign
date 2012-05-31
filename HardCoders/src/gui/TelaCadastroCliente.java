@@ -476,6 +476,7 @@ public class TelaCadastroCliente extends JPanel implements ActionListener, Mouse
 		scrollPane.setViewportView(table);
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getTableHeader().setReorderingAllowed(false);
 
 		this.montaTabelaCliente(new Cliente());
 
