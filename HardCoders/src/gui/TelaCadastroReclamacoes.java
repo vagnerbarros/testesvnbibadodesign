@@ -181,16 +181,6 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 		botaoCadastrar.addActionListener(this);
 		botaoCadastrar.setBounds(342, 81, 89, 23);
 		panel_3.add(botaoCadastrar);
-		
-		JLabel lblletraDepoisNmero = new JLabel("*Letra, depois n\u00FAmero:");
-		lblletraDepoisNmero.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		lblletraDepoisNmero.setBounds(221, 27, 111, 14);
-		panel_3.add(lblletraDepoisNmero);
-		
-		JLabel lblExA = new JLabel("EX: A12");
-		lblExA.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblExA.setBounds(341, 27, 81, 14);
-		panel_3.add(lblExA);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -292,7 +282,6 @@ public class TelaCadastroReclamacoes extends JPanel implements ActionListener, K
 				return canEdit [columnIndex];
 			}
 		});
-		
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 
